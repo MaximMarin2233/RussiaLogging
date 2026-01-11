@@ -5,8 +5,6 @@ import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 
 export const metadata: Metadata = {
-  title: "Project",
-  description: "Project...",
   icons: {
     icon: "/favicon.svg",
   },

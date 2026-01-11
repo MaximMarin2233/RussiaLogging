@@ -1,16 +1,13 @@
 import type { Metadata } from 'next'
 
-import Hero from '@/app/sections/Hero/Hero'
-
 export const metadata: Metadata = {
-  title: "Russia Dashboard",
+  title: "Russia Logs",
   description: "Project...",
 }
 
-export default function HomePage() {
+export default function Logs() {
   return (
     <div>
-      <Hero />
     </div>
   )
 }
