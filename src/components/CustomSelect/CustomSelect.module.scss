@@ -1,0 +1,63 @@
+.selectContainer {
+  position: relative;
+  width: 160px;
+}
+
+.selectHeader {
+  position: relative;
+  padding: 25px 44px 25px 15px;
+  background-color: #2F2F2F;
+  border: 1px solid #4F4F4F;
+  border-radius: 15px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #FFFFFF;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("/header/header-select-arrow.svg");
+  }
+}
+
+.selectList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #2F2F2F;
+  border: 1px solid #4F4F4F;
+  border-radius: 15px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.selectItem {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #FFFFFF;
+
+  &:hover {
+    background-color: #3F3F3F;
+  }
+}
+
+.selected {
+  font-weight: bold;
+  background-color: #4F4F4F;
+}

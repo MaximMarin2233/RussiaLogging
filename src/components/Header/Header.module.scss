@@ -34,6 +34,7 @@
   }
 
   &__content {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -41,6 +42,20 @@
     background-color: #191919;
     border-radius: 20px;
     padding: 19px 21px 19px 28px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 25px;
+      top: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url("/header/header-profile-bg.svg");
+      width: 303px;
+      height: 100%;
+      pointer-events: none;
+    }
   }
 
   &__logo-wrapper {
@@ -54,5 +69,39 @@
     font-size: 10.3814px;
     line-height: 85%;
     color: #FFFFFF;
+  }
+
+  &__profile-wrapper {
+    display: flex;
+    gap: 33px;
+  }
+
+  &__profile-content {
+    display: flex;
+    gap: 21px;
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+
+    >:first-child {
+      margin-right: 18px;
+    }
+  }
+
+  &__profile-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: #FFFFFF;
+
+    span {
+      font-weight: 700;
+      font-size: 12px;
+    }
   }
 }
