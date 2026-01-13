@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import Hero from '@/app/sections/Hero/Hero'
+import MainInf from '@/app/sections/MainInf/MainInf'
 
 export const metadata: Metadata = {
   title: "Russia Dashboard",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div>
-      <Hero />
+      <MainInf />
     </div>
   )
 }
