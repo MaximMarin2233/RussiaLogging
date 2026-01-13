@@ -15,6 +15,14 @@
 }
 
 @font-face {
+  font-family: 'Unbounded';
+  src: url('/fonts/Unbounded-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Manrope';
   src: url('/fonts/Manrope-Bold.woff2') format('woff2');
   font-weight: 700;
@@ -108,4 +116,11 @@ a {
   margin: 0 auto;
   padding: 0 var(--container-offset);
   max-width: var(--container-width);
+}
+
+.main-title {
+  font-weight: 500;
+  font-size: 24px;
+  color: #FFFFFF;
+  margin: 0;
 }

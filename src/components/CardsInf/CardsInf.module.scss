@@ -1,5 +1,9 @@
 .cards-inf {
-  padding: 37px 0;
+  padding: 37px 0 0;
+
+  &__title {
+    margin-bottom: 37px;
+  }
 
   &__list {
     display: grid;
@@ -15,23 +19,36 @@
     justify-content: space-between;
     gap: 15px;
     padding: 31px 24px 34px;
-    background: linear-gradient(123.26deg, #FF7D2C 0.93%, rgba(10, 10, 10, 0) 53.21%), #0F0700;
+    background: linear-gradient(123.26deg, rgba(255, 125, 44, 0.6) 0.93%, rgba(10, 10, 10, 0) 53.21%), #0F0700;
     border-radius: 14.7484px;
 
-    &::before {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 175px;
-      height: 169px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-image: url("/cards-inf/cards-inf-1.png");
-      pointer-events: none;
+    &--column {
+      justify-content: center;
+      gap: 20px;
     }
+
+    &--purple {
+      background: linear-gradient(123.26deg, rgba(192, 87, 253, 0.6) 0.93%, rgba(10, 10, 10, 0) 53.21%), #0A000F;
+    }
+
+    &--grey {
+      background: linear-gradient(123.26deg, #797979 0.93%, rgba(10, 10, 10, 0) 53.21%), #0D0D0D;
+    }
+  }
+
+  &__item-img {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  &__item-text {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.55);
   }
 
   &__item-title {
@@ -43,6 +60,13 @@
     margin: 0;
     width: 100%;
     max-width: 191px;
+  }
+
+  &__item-subtitle {
+    font-weight: 800;
+    font-size: 24px;
+    color: #FFFFFF;
+    margin: 0;
   }
 
   &__item-inf {
@@ -67,5 +91,25 @@
     font-weight: 800;
     font-size: 21px;
     color: #42F43D;
+
+    &--yellow {
+      color: #F4C93D;
+    }
+  }
+
+  &__item-val {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    span {
+      font-weight: 800;
+      font-size: 21px;
+      color: rgba(255, 255, 255, 0.53);
+    }
   }
 }
