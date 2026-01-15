@@ -1,0 +1,119 @@
+.products {
+  padding-top: 40px;
+
+  &__inf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 11px;
+  }
+
+  &__tab {
+    font-weight: 500;
+    font-size: 12px;
+    color: #FFFFFF;
+    padding: 16px 18px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+
+    &--active {
+      color: #000000;
+      background-color: #fff;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(0deg, #0A0A0A, #0A0A0A), rgba(38, 38, 38, 0.35);
+    border-radius: 14.7484px;
+    padding: 0 26px 0 22px;
+  }
+
+  &__item-column {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+
+    &--progress {
+      position: relative;
+      width: 148px;
+      height: 8px;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30%;
+        height: 100%;
+        background-color: #4FDD4A;
+        border-radius: 20px;
+      }
+    }
+
+    &--progress--yellow {
+      &::after {
+        background-color: #F4C93D;
+        width: 50%;
+      }
+    }
+
+    &--percent {
+      span {
+        font-weight: 500;
+        font-size: 12px;
+        color: #4FDD4A;
+      }
+    }
+
+    &--percent--yellow {
+      span {
+        color: #F4C93D;
+      }
+    }
+  }
+
+  &__item-column-inner {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+
+    &--gap {
+      gap: 71px;
+    }
+  }
+}
