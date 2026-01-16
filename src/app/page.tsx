@@ -4,6 +4,7 @@ import MainInf from '@/app/sections/MainInf/MainInf'
 import DonationAnalytics from '@/app/sections/DonationAnalytics/DonationAnalytics'
 import Products from '@/app/sections/Products/Products'
 import Categories from '@/app/sections/Categories/Categories'
+import Dynamics from '@/app/sections/Dynamics/Dynamics'
 
 export const metadata: Metadata = {
   title: "Russia Dashboard",
@@ -17,6 +18,7 @@ export default function HomePage() {
       <DonationAnalytics />
       <Products />
       <Categories />
+      <Dynamics />
     </div>
   )
 }
