@@ -16,6 +16,14 @@
 
 @font-face {
   font-family: 'Unbounded';
+  src: url('/fonts/Unbounded-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Unbounded';
   src: url('/fonts/Unbounded-ExtraBold.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
@@ -116,6 +124,12 @@ a {
   margin: 0 auto;
   padding: 0 var(--container-offset);
   max-width: var(--container-width);
+}
+
+.main-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .main-title {
