@@ -1,0 +1,40 @@
+.nav {
+  padding-top: 30px;
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  &__label {
+    position: relative;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  }
+
+  &__input {
+    display: block;
+    min-width: 277px;
+    padding: 23px 15px;
+    padding-right: 60px;
+    background: rgba(38, 38, 38, 0.35);
+    border-radius: 14.75px;
+    border: none;
+
+    &,
+    &::placeholder {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+}
