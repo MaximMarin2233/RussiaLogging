@@ -1,0 +1,124 @@
+.general {
+  &__characters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 37px;
+  }
+
+  &__character {
+    position: relative;
+    padding: 27px 21px 21px;
+    padding-left: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #060606;
+    border-radius: 14.75px;
+  }
+
+  &__character-img-wrapper {
+    display: flex;
+    align-items: flex-end;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+
+    img {
+      display: block;
+    }
+  }
+
+  &__character-label {
+    position: absolute;
+    left: 50%;
+    bottom: 19px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 7px 19px;
+    background: linear-gradient(141.28deg, #9C82F6 5.93%, #3F18C9 91.7%);
+    backdrop-filter: blur(12.45px);
+    border-radius: 5px;
+
+    span {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.54);
+    }
+  }
+
+  &__character-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__character-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  &__character-item-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.54);
+    min-width: 91px;
+
+    span {
+      font-weight: 500;
+      font-size: 13px;
+      color: #FFFFFF;
+    }
+  }
+
+  &__character-inf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  &__character-current {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    color: #FFFFFF;
+    padding: 13px 38px;
+    background-color: rgba(18, 18, 18, 0.83);
+    border-radius: 6.19565px;
+  }
+
+  &__character-online {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    color: #FFFFFF;
+  }
+
+  &__character-show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    background-color: rgba(146, 146, 146, 0.33);
+    backdrop-filter: blur(15.2851px);
+    border-radius: 6.83133px;
+  }
+}

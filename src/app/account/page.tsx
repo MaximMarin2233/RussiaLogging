@@ -1,16 +1,27 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { useState } from 'react'
 
 import navStyles from './sections/Nav/Nav.module.scss'
 
-export const metadata: Metadata = {
-  title: "Russia Account",
-  description: "Project...",
+import General from '@/app/account/sections/General/General'
+import Punishments from '@/app/account/sections/Punishments/Punishments'
+
+enum Tabs {
+  GENERAL = 'general',
+  PUNISHMENTS = 'punishments',
+  MONEY = 'money',
+  ACTIVITY = 'activity',
+  INVENTORY = 'inventory',
+  CARS = 'cars',
 }
 
 export default function Account() {
+  const [activeTab, setActiveTab] = useState<Tabs>(Tabs.GENERAL)
+
   return (
     <div>
-      <section className={navStyles['nav']}>
+      <section className={navStyles.nav}>
         <div className="container">
           <div className={navStyles['nav__title-wrapper']}>
             <div className={'main-title-wrapper'}>
@@ -34,8 +45,8 @@ export default function Account() {
             <label className={navStyles['nav__label']}>
               <input className={navStyles['nav__input']} placeholder='Поиск по никнейму' />
               <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="33" height="33" rx="10" fill="white" fill-opacity="0.1" />
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M16.9412 23.1176C15.4687 23.1176 14.1026 22.6685 12.9722 21.8995L11.2593 23.6123C10.7424 24.1292 9.90457 24.1292 9.38767 23.6123C8.87078 23.0954 8.87078 22.2576 9.38767 21.7407L11.1006 20.0278C10.3316 18.8973 9.88249 17.5312 9.88238 16.0588C9.88238 12.1557 13.0381 9 16.9412 9C20.8441 9.00019 24 12.1558 24 16.0588C23.9998 19.9616 20.844 23.1175 16.9412 23.1176ZM16.9412 11.6804C19.3638 11.6806 21.3196 13.6362 21.3196 16.0588C21.3194 18.4813 19.3637 20.437 16.9412 20.4372C14.5186 20.4372 12.5629 18.4814 12.5628 16.0588C12.5628 13.6361 14.5185 11.6804 16.9412 11.6804Z" fill="white" />
+                <rect width="33" height="33" rx="10" fill="white" fillOpacity="0.1" />
+                <path fillRule="evenodd" clipRule="evenodd" d="M16.9412 23.1176C15.4687 23.1176 14.1026 22.6685 12.9722 21.8995L11.2593 23.6123C10.7424 24.1292 9.90457 24.1292 9.38767 23.6123C8.87078 23.0954 8.87078 22.2576 9.38767 21.7407L11.1006 20.0278C10.3316 18.8973 9.88249 17.5312 9.88238 16.0588C9.88238 12.1557 13.0381 9 16.9412 9C20.8441 9.00019 24 12.1558 24 16.0588C23.9998 19.9616 20.844 23.1175 16.9412 23.1176ZM16.9412 11.6804C19.3638 11.6806 21.3196 13.6362 21.3196 16.0588C21.3194 18.4813 19.3637 20.437 16.9412 20.4372C14.5186 20.4372 12.5629 18.4814 12.5628 16.0588C12.5628 13.6361 14.5185 11.6804 16.9412 11.6804Z" fill="white" />
               </svg>
             </label>
           </div>
@@ -46,8 +57,8 @@ export default function Account() {
                 <img src="account-nav/account-nav-img.png" alt="" width={213} height={251} />
                 <div className={navStyles['nav__profile-img-label']}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="12" fill="#43FE0A" fill-opacity="0.1" />
-                    <circle cx="12" cy="12" r="9" fill="#80FF46" fill-opacity="0.1" />
+                    <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
+                    <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
                     <circle cx="12" cy="12" r="5" fill="#80FF46" />
                   </svg>
                   Онлайн
@@ -117,16 +128,60 @@ export default function Account() {
             </div>
           </div>
 
-          <div className={navStyles['nav__tabs']}>
-            <button className={`btn-reset ${navStyles['nav__tab']} ${navStyles['nav__tab--active']}`}>Общая информация</button>
-            <button className={`btn-reset ${navStyles['nav__tab']}`}>История наказаний</button>
-            <button className={`btn-reset ${navStyles['nav__tab']}`}>Денежные операции</button>
-            <button className={`btn-reset ${navStyles['nav__tab']}`}>Активность</button>
-            <button className={`btn-reset ${navStyles['nav__tab']}`}>Инвентарь</button>
-            <button className={`btn-reset ${navStyles['nav__tab']}`}>Автомобили</button>
+          <div className={navStyles.nav__tabs}>
+            <button
+              className={`btn-reset ${navStyles.nav__tab} ${activeTab === Tabs.GENERAL ? navStyles['nav__tab--active'] : ''
+                }`}
+              onClick={() => setActiveTab(Tabs.GENERAL)}
+            >
+              Общая информация
+            </button>
+
+            <button
+              className={`btn-reset ${navStyles.nav__tab} ${activeTab === Tabs.PUNISHMENTS ? navStyles['nav__tab--active'] : ''
+                }`}
+              onClick={() => setActiveTab(Tabs.PUNISHMENTS)}
+            >
+              История наказаний
+            </button>
+
+            <button
+              className={`btn-reset ${navStyles.nav__tab} ${activeTab === Tabs.MONEY ? navStyles['nav__tab--active'] : ''
+                }`}
+              onClick={() => setActiveTab(Tabs.MONEY)}
+            >
+              Денежные операции
+            </button>
+
+            <button
+              className={`btn-reset ${navStyles.nav__tab} ${activeTab === Tabs.ACTIVITY ? navStyles['nav__tab--active'] : ''
+                }`}
+              onClick={() => setActiveTab(Tabs.ACTIVITY)}
+            >
+              Активность
+            </button>
+
+            <button
+              className={`btn-reset ${navStyles.nav__tab} ${activeTab === Tabs.INVENTORY ? navStyles['nav__tab--active'] : ''
+                }`}
+              onClick={() => setActiveTab(Tabs.INVENTORY)}
+            >
+              Инвентарь
+            </button>
+
+            <button
+              className={`btn-reset ${navStyles.nav__tab} ${activeTab === Tabs.CARS ? navStyles['nav__tab--active'] : ''
+                }`}
+              onClick={() => setActiveTab(Tabs.CARS)}
+            >
+              Автомобили
+            </button>
           </div>
         </div>
       </section>
+
+      {activeTab === Tabs.GENERAL && <General />}
+      {activeTab === Tabs.PUNISHMENTS && <Punishments />}
     </div>
   )
 }
