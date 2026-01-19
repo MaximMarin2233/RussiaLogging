@@ -39,6 +39,92 @@ export default function Account() {
               </svg>
             </label>
           </div>
+
+          <div className={navStyles['nav__content']}>
+            <div className={navStyles['nav__profile']}>
+              <div className={navStyles['nav__profile-img-wrapper']}>
+                <img src="account-nav/account-nav-img.png" alt="" width={213} height={251} />
+                <div className={navStyles['nav__profile-img-label']}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" rx="12" fill="#43FE0A" fill-opacity="0.1" />
+                    <circle cx="12" cy="12" r="9" fill="#80FF46" fill-opacity="0.1" />
+                    <circle cx="12" cy="12" r="5" fill="#80FF46" />
+                  </svg>
+                  Онлайн
+                </div>
+              </div>
+              <ul className={`list-reset ${navStyles['nav__profile-list']}`}>
+                <li className={navStyles['nav__profile-item']}>
+                  <div className={navStyles['nav__profile-item-block']}>
+                    Игровое имя
+                    <span>Denny Walker</span>
+                  </div>
+                  <div className={navStyles['nav__profile-item-block']}>
+                    ID игрока
+                    <span>8348294</span>
+                  </div>
+                </li>
+                <li className={navStyles['nav__profile-item']}>
+                  <div className={navStyles['nav__profile-item-block']}>
+                    Сеанс
+                    <span>Играет на сервер #1</span>
+                  </div>
+                  <div className={navStyles['nav__profile-item-block']}>
+                    Регистрация
+                    <span>12/05/2025</span>
+                  </div>
+                </li>
+                <li className={navStyles['nav__profile-item']}>
+                  <div className={navStyles['nav__profile-item-block']}>
+                    IP адрес
+                    <span>94.180.130.179</span>
+                  </div>
+                  <div className={navStyles['nav__profile-item-block']}>
+                    Уровень
+                    <span>10 ( опыт: 33 )</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className={navStyles['nav__account']}>
+              <h3 className={navStyles['nav__account-title']}>
+                Управление <br />
+                аккаунтом
+              </h3>
+              <div className={navStyles['nav__account-btns']}>
+                <button className={`btn-reset ${navStyles['nav__account-btn']}`}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
+                    <path d="M7.52511 18.3333L12 13.9725L16.4749 18.3333L18 16.8471L12 11L6 16.8471L7.52511 18.3333Z" fill="white" />
+                  </svg>
+                  Забанить аккаунт
+                </button>
+                <button className={`btn-reset ${navStyles['nav__account-btn']}`}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
+                    <path d="M7.52511 18.3333L12 13.9725L16.4749 18.3333L18 16.8471L12 11L6 16.8471L7.52511 18.3333Z" fill="white" />
+                  </svg>
+                  Выдать предупреждение
+                </button>
+                <button className={`btn-reset ${navStyles['nav__account-btn']}`}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
+                    <path d="M7.52511 18.3333L12 13.9725L16.4749 18.3333L18 16.8471L12 11L6 16.8471L7.52511 18.3333Z" fill="white" />
+                  </svg>
+                  История логов
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className={navStyles['nav__tabs']}>
+            <button className={`btn-reset ${navStyles['nav__tab']} ${navStyles['nav__tab--active']}`}>Общая информация</button>
+            <button className={`btn-reset ${navStyles['nav__tab']}`}>История наказаний</button>
+            <button className={`btn-reset ${navStyles['nav__tab']}`}>Денежные операции</button>
+            <button className={`btn-reset ${navStyles['nav__tab']}`}>Активность</button>
+            <button className={`btn-reset ${navStyles['nav__tab']}`}>Инвентарь</button>
+            <button className={`btn-reset ${navStyles['nav__tab']}`}>Автомобили</button>
+          </div>
         </div>
       </section>
     </div>
