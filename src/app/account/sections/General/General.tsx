@@ -175,7 +175,69 @@ export default function General() {
             </div>
           </div>
         </div>
-        <div className={styles['general__finance']}></div>
+        <div className={styles['general__finance']}>
+          <div className={styles['general__finance-content']}>
+            <h2 className={`main-title`}>Финансы</h2>
+            <ul className={`list-reset ${styles['general__finance-list']}`}>
+              <li className={styles['general__finance-item']}>
+                <img src="general/general-finance-1.png" alt="" />
+                Наличные
+                <span>3.534.000 ₽</span>
+              </li>
+              <li className={styles['general__finance-item']}>
+                <img src="general/general-finance-2.png" alt="" />
+                Банк
+                <span>3.534.000 ₽</span>
+              </li>
+              <li className={`${styles['general__finance-item']} ${styles['general__finance-item--column']}`}>
+                <img src="general/general-finance-3.png" alt="" />
+                Всего
+                <span>33.534.000 ₽</span>
+              </li>
+            </ul>
+          </div>
+          <div className={styles['general__finance-etc']}>
+            <h2 className={styles['general__finance-etc-title']}>Дополнительная информация</h2>
+            <ul className={`list-reset ${styles['general__finance-list']}`}>
+              <li className={`${styles['general__finance-item']} ${styles['general__finance-item--grey']}`}>
+                <img src="general/general-finance-4.png" alt="" />
+                Семья
+                <span>1</span>
+              </li>
+              <li className={`${styles['general__finance-item']} ${styles['general__finance-item--grey']}`}>
+                <img src="general/general-finance-5.png" alt="" />
+                Телефон
+                <span>5300731</span>
+                <button className={`btn-reset ${styles['general__finance-item-btn']}`}>
+                  <svg width="37" height="40" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="36.8513" height="40" rx="8" fill="white" fill-opacity="0.1" />
+                    <path d="M14.5879 15.5251L19.3452 20L14.5879 24.4749L16.2092 26L22.5879 20L16.2092 14L14.5879 15.5251Z" fill="white" />
+                  </svg>
+                </button>
+              </li>
+              <li className={`${styles['general__finance-item']} ${styles['general__finance-item--grey']} ${styles['general__finance-item--smaller']}`}>
+                <img src="general/general-finance-6.png" alt="" />
+                Фракция
+                <span>Городская поликлиника</span>
+              </li>
+              <li className={`${styles['general__finance-item']} ${styles['general__finance-item--grey']}`}>
+                <img src="general/general-finance-7.png" alt="" />
+                Бизнесы
+                <span>2</span>
+                <button className={`btn-reset ${styles['general__finance-item-btn']}`}>
+                  <svg width="37" height="40" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="36.8513" height="40" rx="8" fill="white" fill-opacity="0.1" />
+                    <path d="M14.5879 15.5251L19.3452 20L14.5879 24.4749L16.2092 26L22.5879 20L16.2092 14L14.5879 15.5251Z" fill="white" />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className={styles['general__accounts']}>
+          <h2 className={`main-title ${styles['general__title']}`}>Привязанные аккаунты</h2>
+
+        </div>
       </div>
     </section>
   )
