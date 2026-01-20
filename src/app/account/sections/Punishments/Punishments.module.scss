@@ -1,1 +1,137 @@
-.punishments {}
+.punishments {
+  padding-bottom: 218px;
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  &__history {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+  }
+
+  &__etc {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  &__blocks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 34px;
+  }
+
+  &__block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 34px 105px 34px 110px;
+    background: linear-gradient(123.26deg, #4C4C4C 0.93%, rgba(10, 10, 10, 0) 53.21%), #0A0A0A;
+    border-radius: 14.7484px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.54);
+
+    span {
+      font-weight: 800;
+      font-size: 24px;
+      color: #FFFFFF;
+    }
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &__reasons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__reason {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 37px 32px 32px;
+    background-color: #060606;
+    border: 0.737418px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14.7484px;
+  }
+
+  &__reason-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  &__reason-header-label {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  &__reason-text {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-weight: 500;
+    font-size: 13px;
+    color: #FFFFFF;
+
+    span {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.26);
+    }
+  }
+
+  &__reason-mark {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: #FF4040;
+    padding: 20px;
+    background-color: rgba(254, 10, 10, 0.1);
+    border-radius: 10px;
+  }
+
+  &__reason-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 28px 22px;
+    background-color: #000000;
+    border-radius: 8px;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 41px;
+      background-color: #FF3030;
+      border-radius: 15px;
+    }
+  }
+}
