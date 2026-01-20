@@ -1,0 +1,84 @@
+.activity {
+  padding-bottom: 268px;
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  &__label {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 15px;
+  }
+
+  &__inf {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 29px;
+
+    h2 {
+      padding-left: 22px;
+      margin-bottom: 37px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    padding: 42px 22px 26px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-radius: 14.7484px;
+  }
+
+  &__actions-content {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.59);
+    padding: 23px 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+
+
+    span {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #FFFFFF;
+    }
+
+    &--stat {
+      font-size: 16px;
+      color: #FFFFFF;
+      justify-content: space-between;
+      gap: 15px;
+
+      span {
+        font-weight: 800;
+        font-size: 14px;
+        color: #FFFFFF;
+      }
+    }
+  }
+}

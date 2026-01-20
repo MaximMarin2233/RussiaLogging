@@ -6,6 +6,8 @@ import navStyles from './sections/Nav/Nav.module.scss'
 
 import General from '@/app/account/sections/General/General'
 import Punishments from '@/app/account/sections/Punishments/Punishments'
+import Money from '@/app/account/sections/Money/Money'
+import Activity from '@/app/account/sections/Activity/Activity'
 
 enum Tabs {
   GENERAL = 'general',
@@ -182,6 +184,8 @@ export default function Account() {
 
       {activeTab === Tabs.GENERAL && <General />}
       {activeTab === Tabs.PUNISHMENTS && <Punishments />}
+      {activeTab === Tabs.MONEY && <Money />}
+      {activeTab === Tabs.ACTIVITY && <Activity />}
     </div>
   )
 }
