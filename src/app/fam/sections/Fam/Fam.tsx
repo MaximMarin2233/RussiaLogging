@@ -11,7 +11,7 @@ export default function Fam() {
           <div className={styles['fam__content']}>
             <div className={styles['fam__inf']}>
               <svg width="86" height="86" viewBox="0 0 86 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="86" height="86" rx="20" fill="white" fill-opacity="0.16" />
+                <rect width="86" height="86" rx="20" fill="white" fillOpacity="0.16" />
                 <path d="M43 21C43 21 31.8571 24.75 31.8571 32.25H54.1429C54.1429 24.75 43 21 43 21ZM22.5714 24.75C22.5714 24.75 17 28.5 17 34.125V36H28.1429V34.125C28.1429 28.5 22.5714 24.75 22.5714 24.75ZM63.4286 24.75C63.4286 24.75 57.8571 28.5 57.8571 34.125V36H69V34.125C69 28.5 63.4286 24.75 63.4286 24.75ZM31.8571 36V43.5H28.1429V39.75H17V66H35.5714C35.5714 62.25 35.5714 54.75 43 54.75C50.4286 54.75 50.4286 62.25 50.4286 66H69V39.75H57.8571V43.5H54.1429V36H31.8571ZM37.4286 39.75C39.2857 39.75 39.2857 42.7135 39.2857 43.5V47.25H35.5714V43.5C35.5714 42.4989 35.5714 39.75 37.4286 39.75ZM48.5714 39.75C50.4286 39.75 50.4286 42.7135 50.4286 43.5V47.25H46.7143V43.5C46.7143 42.4989 46.7143 39.75 48.5714 39.75ZM22.5714 43.5C24.4745 43.5 24.4286 46.0323 24.4286 47.25V51H20.7143V47.25C20.7143 46.0323 20.7686 43.5 22.5714 43.5ZM63.4286 43.5C65.3316 43.5 65.2857 46.0323 65.2857 47.25V51H61.5714V47.25C61.5714 46.0323 61.6257 43.5 63.4286 43.5Z" fill="white" />
               </svg>
               <div className={styles['fam__inf-text']}>
@@ -37,8 +37,8 @@ export default function Fam() {
             </div>
             <div className={styles['fam__online']}>
               <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="38.7327" height="38.7327" rx="19.3663" fill="#43FE0A" fill-opacity="0.1" />
-                <circle cx="19.3666" cy="19.3656" r="14.5248" fill="#80FF46" fill-opacity="0.1" />
+                <rect width="38.7327" height="38.7327" rx="19.3663" fill="#43FE0A" fillOpacity="0.1" />
+                <circle cx="19.3666" cy="19.3656" r="14.5248" fill="#80FF46" fillOpacity="0.1" />
                 <circle cx="19.3672" cy="19.3662" r="8.06931" fill="#80FF46" />
               </svg>
               Активна
@@ -67,8 +67,8 @@ export default function Fam() {
               </div>
               <div className={styles['fam__card-online']}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fill-opacity="0.1" />
-                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fillOpacity="0.1" />
+                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="9.96632" cy="9.96729" r="4.15284" fill="#80FF46" />
                 </svg>
                 Онлайн
@@ -82,8 +82,8 @@ export default function Fam() {
               </div>
               <div className={styles['fam__card-online']}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fill-opacity="0.1" />
-                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fillOpacity="0.1" />
+                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="9.96632" cy="9.96729" r="4.15284" fill="#80FF46" />
                 </svg>
                 Онлайн
@@ -97,8 +97,8 @@ export default function Fam() {
               </div>
               <div className={styles['fam__card-online']}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fill-opacity="0.1" />
-                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fillOpacity="0.1" />
+                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="9.96632" cy="9.96729" r="4.15284" fill="#80FF46" />
                 </svg>
                 Онлайн
@@ -112,8 +112,8 @@ export default function Fam() {
               </div>
               <div className={styles['fam__card-online']}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fill-opacity="0.1" />
-                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fillOpacity="0.1" />
+                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="9.96632" cy="9.96729" r="4.15284" fill="#80FF46" />
                 </svg>
                 Онлайн
@@ -127,8 +127,8 @@ export default function Fam() {
               </div>
               <div className={styles['fam__card-online']}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fill-opacity="0.1" />
-                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fillOpacity="0.1" />
+                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="9.96632" cy="9.96729" r="4.15284" fill="#80FF46" />
                 </svg>
                 Онлайн
@@ -142,8 +142,8 @@ export default function Fam() {
               </div>
               <div className={styles['fam__card-online']}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fill-opacity="0.1" />
-                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fillOpacity="0.1" />
+                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="9.96632" cy="9.96729" r="4.15284" fill="#80FF46" />
                 </svg>
                 Онлайн
@@ -157,8 +157,8 @@ export default function Fam() {
               </div>
               <div className={styles['fam__card-online']}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fill-opacity="0.1" />
-                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fillOpacity="0.1" />
+                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="9.96632" cy="9.96729" r="4.15284" fill="#80FF46" />
                 </svg>
                 Онлайн
@@ -172,8 +172,8 @@ export default function Fam() {
               </div>
               <div className={styles['fam__card-online']}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fill-opacity="0.1" />
-                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="19.9336" height="19.9336" rx="9.96681" fill="#43FE0A" fillOpacity="0.1" />
+                  <ellipse cx="9.96632" cy="9.9673" rx="7.47511" ry="7.47511" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="9.96632" cy="9.96729" r="4.15284" fill="#80FF46" />
                 </svg>
                 Онлайн

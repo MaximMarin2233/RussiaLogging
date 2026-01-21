@@ -85,8 +85,8 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fill-opacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
+                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="12" cy="12" r="5" fill="#80FF46" />
                 </svg>
               </div>
@@ -119,8 +119,8 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fill-opacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
+                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="12" cy="12" r="5" fill="#80FF46" />
                 </svg>
               </div>
@@ -153,8 +153,8 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fill-opacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
+                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="12" cy="12" r="5" fill="#80FF46" />
                 </svg>
               </div>
@@ -187,8 +187,8 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fill-opacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
+                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="12" cy="12" r="5" fill="#80FF46" />
                 </svg>
               </div>
@@ -221,8 +221,8 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fill-opacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fill-opacity="0.1" />
+                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
+                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
                   <circle cx="12" cy="12" r="5" fill="#80FF46" />
                 </svg>
               </div>
