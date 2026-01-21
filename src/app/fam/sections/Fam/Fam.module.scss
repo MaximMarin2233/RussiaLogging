@@ -144,3 +144,28 @@
     border-radius: 6.64454px;
   }
 }
+
+@media (max-width: 1199.98px) {
+  .fam {
+    &__cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  .fam {
+    &__inf-list {
+      gap: 15px;
+    }
+
+    &__content {
+      padding: 20px;
+    }
+
+    &__cards {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+}

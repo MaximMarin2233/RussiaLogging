@@ -100,3 +100,11 @@
     border-radius: 15px;
   }
 }
+
+@media (max-width: 991.98px) {
+  .alerts {
+    &__card {
+      flex-direction: column;
+    }
+  }
+}

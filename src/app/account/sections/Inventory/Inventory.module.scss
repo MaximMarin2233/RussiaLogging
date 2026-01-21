@@ -56,6 +56,7 @@
   }
 
   &__slots {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: 7px;
@@ -138,5 +139,27 @@
     background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10.2px);
     border-radius: 15px;
+  }
+}
+
+
+@media (max-width: 1199.98px) {
+  .inventory {
+    &__cards {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  .inventory {
+    &__cards {
+      gap: 15px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &__nav {
+      flex-direction: column;
+    }
   }
 }

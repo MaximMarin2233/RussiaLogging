@@ -74,6 +74,7 @@
     padding: 14px 15px;
     background: linear-gradient(136.81deg, rgba(207, 207, 207, 0.1) 2.96%, rgba(89, 89, 89, 0) 100%);
     border-radius: 12px;
+    text-align: center;
   }
 
   &__item-inf-block-title {
@@ -134,5 +135,38 @@
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10.2px);
     border-radius: 15px;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .cars {
+    &__item {
+      flex-direction: column;
+      align-items: flex-start;
+
+      img {
+        width: 270px;
+        height: auto;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  .cars {
+    &__item {
+      padding-left: 21px;
+
+      img {
+        display: none;
+      }
+    }
+
+    &__item-inf-wrapper {
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 }

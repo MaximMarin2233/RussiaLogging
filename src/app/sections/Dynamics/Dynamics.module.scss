@@ -295,3 +295,15 @@
     color: #FFFFFF;
   }
 }
+
+@media (max-width: 1199.98px) {
+  .dynamics {
+    &__content-list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    &__content-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

@@ -164,3 +164,11 @@
     }
   }
 }
+
+@media (max-width: 1199.98px) {
+  .donation-analytics {
+    &__content {
+      grid-template-columns: 1fr;
+    }
+  }
+}

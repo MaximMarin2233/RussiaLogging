@@ -82,3 +82,11 @@
     }
   }
 }
+
+@media (max-width: 991.98px) {
+  .activity {
+    &__inf {
+      grid-template-columns: 1fr;
+    }
+  }
+}

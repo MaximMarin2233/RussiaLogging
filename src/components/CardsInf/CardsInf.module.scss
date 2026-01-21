@@ -49,9 +49,11 @@
   }
 
   &__item-text {
+    position: relative;
     font-family: 'Manrope', sans-serif;
     font-weight: 700;
     font-size: 14px;
+    position: relative;
     color: rgba(255, 255, 255, 0.55);
   }
 
@@ -71,6 +73,7 @@
     font-size: 24px;
     color: #FFFFFF;
     margin: 0;
+    position: relative;
   }
 
   &__item-inf {
@@ -114,6 +117,14 @@
       font-weight: 800;
       font-size: 21px;
       color: rgba(255, 255, 255, 0.53);
+    }
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .cards-inf {
+    &__list {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }

@@ -92,7 +92,7 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  Подробнее
+                  <span>Подробнее</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
                   </svg>
@@ -126,7 +126,8 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  Подробнее
+                  <span>Подробнее</span>
+
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
                   </svg>
@@ -160,7 +161,7 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  Подробнее
+                  <span>Подробнее</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
                   </svg>
@@ -194,7 +195,7 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  Подробнее
+                  <span>Подробнее</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
                   </svg>
@@ -228,7 +229,7 @@ export default function Admins() {
               </div>
               <div className={styles['admins__table-column']}>
                 <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  Подробнее
+                  <span>Подробнее</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
                   </svg>

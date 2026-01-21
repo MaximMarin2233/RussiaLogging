@@ -105,3 +105,37 @@
     }
   }
 }
+
+@media (max-width: 1399.98px) {
+  .header {
+    &__list {
+      padding: 0;
+    }
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .header {
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      justify-items: center;
+    }
+
+    &__link {
+      min-width: 200px;
+
+      br {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  .header {
+    &__content {
+      flex-direction: column;
+    }
+  }
+}

@@ -186,3 +186,37 @@
     }
   }
 }
+
+@media (max-width: 1199.98px) {
+  .nav {
+
+    &__account-title {
+      br {
+        display: none;
+      }
+    }
+
+    &__account-btns {
+      flex-direction: column;
+    }
+
+    &__content {
+      grid-template-columns: 1fr;
+    }
+
+    &__profile-item-block {
+      flex-direction: initial;
+      align-items: flex-end;
+      min-width: 213px;
+    }
+
+    &__profile-img-wrapper {
+      display: flex;
+      align-items: flex-end;
+
+      img {
+        object-fit: contain;
+      }
+    }
+  }
+}

@@ -135,3 +135,11 @@
     }
   }
 }
+
+@media (max-width: 1399.98px) {
+  .punishments {
+    &__content {
+      grid-template-columns: 1fr;
+    }
+  }
+}
