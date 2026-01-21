@@ -1,0 +1,80 @@
+.businesses {
+  padding-top: 37px;
+  padding-bottom: 200px;
+
+  &__filters {
+    padding: 20px 18px;
+    padding-left: 26px;
+    background: initial !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-image: url("/businesses/businesses-filters-bg.svg") !important;
+    margin-bottom: 54px;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  &__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 19px 25px;
+    background: linear-gradient(123.26deg, #4C4C4C 0.93%, rgba(10, 10, 10, 0) 53.21%), #0A0A0A;
+    border-radius: 14.7484px;
+  }
+
+  &__card-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 11px;
+  }
+
+  &__card-label {
+    font-weight: 500;
+    font-size: 8.83019px;
+    color: #FFFFFF;
+    background: linear-gradient(141.28deg, #F68282 5.93%, #C91818 91.7%), linear-gradient(141.28deg, #9C82F6 5.93%, #3F18C9 91.7%), rgba(255, 255, 255, 0.1);
+    border-radius: 7.35849px;
+    padding: 12px 10px;
+  }
+
+  &__card-title {
+    font-weight: 800;
+    font-size: 16px;
+    color: #FFFFFF;
+  }
+
+  &__card-descr {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFFFFF;
+  }
+
+  &__card-id {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.54);
+  }
+
+  &__card-btn {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #FFFFFF;
+    padding: 14px 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+  }
+}
