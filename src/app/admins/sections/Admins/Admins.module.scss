@@ -1,0 +1,130 @@
+.admins {
+  padding-top: 30px;
+  padding-bottom: 210px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 24px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+
+    span {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.54);
+    }
+  }
+
+  &__title-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #FFFFFF;
+    padding: 18px 15px;
+    background: linear-gradient(141.28deg, #4CB4FF 5.93%, #00406E 91.7%);
+    backdrop-filter: blur(10.2px);
+    border-radius: 15px;
+  }
+
+  &__filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px;
+    padding-left: 26px;
+    background: linear-gradient(0deg, rgba(25, 25, 25, 0.23), rgba(25, 25, 25, 0.23)), linear-gradient(269.71deg, #040404 0.13%, #111111 99.34%);
+    border-radius: 14.75px;
+  }
+
+  &__filters-title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+
+  &__filters-selects {
+    display: flex;
+    gap: 15px;
+  }
+
+  &__filters-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+  }
+
+  &__table {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__table-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 0 28px 9px;
+  }
+
+  &__table-header-column {
+    font-weight: 500;
+    font-size: 14px;
+    color: #FFFFFF;
+  }
+
+  &__table-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: start;
+    align-items: center;
+    padding: 18px 17px 18px 28px;
+    background-color: #0A0A0A;
+    border-radius: 14.7484px;
+  }
+
+  &__table-column {
+    font-weight: 500;
+    font-size: 12px;
+    color: #FFFFFF;
+  }
+
+  &__table-column-label {
+    font-weight: 500;
+    font-size: 12px;
+    color: #FFFFFF;
+    padding: 16px 15px;
+    background: linear-gradient(141.28deg, #9C82F6 5.93%, #3F18C9 91.7%), rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+
+  &__table-column-btn {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #FFFFFF;
+    padding: 8px 17px;
+    background: rgba(146, 146, 146, 0.33);
+    border-radius: 8px;
+  }
+}

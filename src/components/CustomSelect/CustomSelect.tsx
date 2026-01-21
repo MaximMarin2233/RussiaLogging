@@ -11,12 +11,14 @@ interface CustomSelectProps {
   options: Option[]
   value?: string
   onChange?: (value: string) => void
+  className?: string // ← добавили
 }
 
 export default function CustomSelect({
   options,
   value,
   onChange,
+  className,
 }: CustomSelectProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState<string>(value || options[0]?.value)
@@ -26,12 +28,15 @@ export default function CustomSelect({
   const handleSelect = (val: string) => {
     setSelected(val)
     setIsOpen(false)
-    if (onChange) onChange(val)
+    onChange?.(val)
   }
 
   return (
     <div className={styles.selectContainer}>
-      <div className={styles.selectHeader} onClick={toggleOpen}>
+      <div
+        className={`${styles.selectHeader} ${className ?? ''}`}
+        onClick={toggleOpen}
+      >
         {options.find((o) => o.value === selected)?.label}
       </div>
 
@@ -40,7 +45,8 @@ export default function CustomSelect({
           {options.map((opt) => (
             <li
               key={opt.value}
-              className={`${styles.selectItem} ${selected === opt.value ? styles.selected : ''}`}
+              className={`${styles.selectItem} ${selected === opt.value ? styles.selected : ''
+                }`}
               onClick={() => handleSelect(opt.value)}
             >
               {opt.label}

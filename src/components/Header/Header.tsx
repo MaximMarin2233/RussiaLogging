@@ -86,8 +86,8 @@ export default function Header() {
             </li>
             <li>
               <Link
-                href="/logs"
-                className={`${styles.header__link} ${pathname === '/logs2' ? styles['header__link--active'] : ''
+                href="/admins"
+                className={`${styles.header__link} ${pathname === '/admins' ? styles['header__link--active'] : ''
                   }`}
               >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,8 +109,8 @@ export default function Header() {
             </li>
             <li>
               <Link
-                href="/logs"
-                className={`${styles.header__link} ${pathname === '/logs2' ? styles['header__link--active'] : ''
+                href="/helpers"
+                className={`${styles.header__link} ${pathname === '/helpers' ? styles['header__link--active'] : ''
                   }`}
               >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
