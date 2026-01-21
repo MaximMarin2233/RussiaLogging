@@ -49,8 +49,8 @@ export default function Punishments() {
                   <path d="M18.1567 22.7462C18.1125 23.9096 18.5438 25.5191 19.1627 26.5004C19.2506 26.6459 19.3462 26.7536 19.367 26.7481C19.45 26.7258 19.7486 26.13 19.8383 25.817C19.9839 25.2978 19.9752 24.9666 19.8018 24.3195C19.6284 23.6724 19.4704 23.3812 19.0846 23.0044C18.8505 22.7781 18.294 22.4115 18.211 22.4337C18.1902 22.4393 18.1613 22.5804 18.1567 22.7462Z" fill="#FFB7B7" />
                   <defs>
                     <linearGradient id="paint0_linear_462_5099" x1="2.37288" y1="2.37288" x2="32.5424" y2="40" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#FF4C4C" />
-                      <stop offset="1" stop-color="#920202" />
+                      <stop stopColor="#FF4C4C" />
+                      <stop offset="1" stopColor="#920202" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -69,7 +69,7 @@ export default function Punishments() {
             </div>
             <div className={styles['punishments__reason-content']}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="7" fill="#FE0A0A" fill-opacity="0.1" />
+                <rect width="24" height="24" rx="7" fill="#FE0A0A" fillOpacity="0.1" />
                 <path d="M17.22 11.2201C17.6508 11.2201 18 11.5693 18 12.0001C18 12.4309 17.6508 12.7801 17.22 12.7801L6.78 12.7801C6.34922 12.7801 6 12.4309 6 12.0001C6 11.5693 6.34922 11.2201 6.78 11.2201L17.22 11.2201Z" fill="#F43D3D" />
                 <path d="M12.78 17.22C12.78 17.6508 12.4308 18 12 18C11.5692 18 11.22 17.6508 11.22 17.22L11.22 6.78C11.22 6.34922 11.5692 6 12 6C12.4308 6 12.78 6.34922 12.78 6.78L12.78 17.22Z" fill="#F43D3D" />
               </svg>
@@ -91,8 +91,8 @@ export default function Punishments() {
                   <path d="M18.1567 22.7462C18.1125 23.9096 18.5438 25.5191 19.1627 26.5004C19.2506 26.6459 19.3462 26.7536 19.367 26.7481C19.45 26.7258 19.7486 26.13 19.8383 25.817C19.9839 25.2978 19.9752 24.9666 19.8018 24.3195C19.6284 23.6724 19.4704 23.3812 19.0846 23.0044C18.8505 22.7781 18.294 22.4115 18.211 22.4337C18.1902 22.4393 18.1613 22.5804 18.1567 22.7462Z" fill="#FFB7B7" />
                   <defs>
                     <linearGradient id="paint0_linear_462_5099" x1="2.37288" y1="2.37288" x2="32.5424" y2="40" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#FF4C4C" />
-                      <stop offset="1" stop-color="#920202" />
+                      <stop stopColor="#FF4C4C" />
+                      <stop offset="1" stopColor="#920202" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -111,7 +111,7 @@ export default function Punishments() {
             </div>
             <div className={styles['punishments__reason-content']}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="7" fill="#FE0A0A" fill-opacity="0.1" />
+                <rect width="24" height="24" rx="7" fill="#FE0A0A" fillOpacity="0.1" />
                 <path d="M17.22 11.2201C17.6508 11.2201 18 11.5693 18 12.0001C18 12.4309 17.6508 12.7801 17.22 12.7801L6.78 12.7801C6.34922 12.7801 6 12.4309 6 12.0001C6 11.5693 6.34922 11.2201 6.78 11.2201L17.22 11.2201Z" fill="#F43D3D" />
                 <path d="M12.78 17.22C12.78 17.6508 12.4308 18 12 18C11.5692 18 11.22 17.6508 11.22 17.22L11.22 6.78C11.22 6.34922 11.5692 6 12 6C12.4308 6 12.78 6.34922 12.78 6.78L12.78 17.22Z" fill="#F43D3D" />
               </svg>
@@ -133,8 +133,8 @@ export default function Punishments() {
                   <path d="M18.1567 22.7462C18.1125 23.9096 18.5438 25.5191 19.1627 26.5004C19.2506 26.6459 19.3462 26.7536 19.367 26.7481C19.45 26.7258 19.7486 26.13 19.8383 25.817C19.9839 25.2978 19.9752 24.9666 19.8018 24.3195C19.6284 23.6724 19.4704 23.3812 19.0846 23.0044C18.8505 22.7781 18.294 22.4115 18.211 22.4337C18.1902 22.4393 18.1613 22.5804 18.1567 22.7462Z" fill="#FFB7B7" />
                   <defs>
                     <linearGradient id="paint0_linear_462_5099" x1="2.37288" y1="2.37288" x2="32.5424" y2="40" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#FF4C4C" />
-                      <stop offset="1" stop-color="#920202" />
+                      <stop stopColor="#FF4C4C" />
+                      <stop offset="1" stopColor="#920202" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -153,7 +153,7 @@ export default function Punishments() {
             </div>
             <div className={styles['punishments__reason-content']}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="7" fill="#FE0A0A" fill-opacity="0.1" />
+                <rect width="24" height="24" rx="7" fill="#FE0A0A" fillOpacity="0.1" />
                 <path d="M17.22 11.2201C17.6508 11.2201 18 11.5693 18 12.0001C18 12.4309 17.6508 12.7801 17.22 12.7801L6.78 12.7801C6.34922 12.7801 6 12.4309 6 12.0001C6 11.5693 6.34922 11.2201 6.78 11.2201L17.22 11.2201Z" fill="#F43D3D" />
                 <path d="M12.78 17.22C12.78 17.6508 12.4308 18 12 18C11.5692 18 11.22 17.6508 11.22 17.22L11.22 6.78C11.22 6.34922 11.5692 6 12 6C12.4308 6 12.78 6.34922 12.78 6.78L12.78 17.22Z" fill="#F43D3D" />
               </svg>

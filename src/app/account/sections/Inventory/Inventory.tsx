@@ -19,20 +19,20 @@ export default function Inventory() {
                   <path d="M4.52872 7.17246L12.2507 11.0335L15.1644 9.57658L7.57371 5.23908L7.48636 5.28493C5.97129 6.08 5.08069 6.54736 4.52872 7.17246Z" fill="url(#paint3_linear_485_1576)" />
                   <defs>
                     <linearGradient id="paint0_linear_485_1576" x1="12.4935" y1="-21.3603" x2="22.0855" y2="23.6824" gradientUnits="userSpaceOnUse">
-                      <stop offset="0.44698" stop-color="#A8A8A8" />
-                      <stop offset="1" stop-color="#3C3C3C" />
+                      <stop offset="0.44698" stopColor="#A8A8A8" />
+                      <stop offset="1" stopColor="#3C3C3C" />
                     </linearGradient>
                     <linearGradient id="paint1_linear_485_1576" x1="12.4935" y1="-21.3603" x2="22.0855" y2="23.6824" gradientUnits="userSpaceOnUse">
-                      <stop offset="0.44698" stop-color="#A8A8A8" />
-                      <stop offset="1" stop-color="#3C3C3C" />
+                      <stop offset="0.44698" stopColor="#A8A8A8" />
+                      <stop offset="1" stopColor="#3C3C3C" />
                     </linearGradient>
                     <linearGradient id="paint2_linear_485_1576" x1="12.4935" y1="-21.3603" x2="22.0855" y2="23.6824" gradientUnits="userSpaceOnUse">
-                      <stop offset="0.44698" stop-color="#A8A8A8" />
-                      <stop offset="1" stop-color="#3C3C3C" />
+                      <stop offset="0.44698" stopColor="#A8A8A8" />
+                      <stop offset="1" stopColor="#3C3C3C" />
                     </linearGradient>
                     <linearGradient id="paint3_linear_485_1576" x1="12.4935" y1="-21.3603" x2="22.0855" y2="23.6824" gradientUnits="userSpaceOnUse">
-                      <stop offset="0.44698" stop-color="#A8A8A8" />
-                      <stop offset="1" stop-color="#3C3C3C" />
+                      <stop offset="0.44698" stopColor="#A8A8A8" />
+                      <stop offset="1" stopColor="#3C3C3C" />
                     </linearGradient>
                   </defs>
                 </svg>
