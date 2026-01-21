@@ -8,6 +8,8 @@ import General from '@/app/account/sections/General/General'
 import Punishments from '@/app/account/sections/Punishments/Punishments'
 import Money from '@/app/account/sections/Money/Money'
 import Activity from '@/app/account/sections/Activity/Activity'
+import Inventory from '@/app/account/sections/Inventory/Inventory'
+import Cars from '@/app/account/sections/Cars/Cars'
 
 enum Tabs {
   GENERAL = 'general',
@@ -186,6 +188,8 @@ export default function Account() {
       {activeTab === Tabs.PUNISHMENTS && <Punishments />}
       {activeTab === Tabs.MONEY && <Money />}
       {activeTab === Tabs.ACTIVITY && <Activity />}
+      {activeTab === Tabs.INVENTORY && <Inventory />}
+      {activeTab === Tabs.CARS && <Cars />}
     </div>
   )
 }
