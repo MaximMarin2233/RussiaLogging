@@ -1,7 +1,28 @@
 import styles from './DonationAnalytics.module.scss'
 import cardsInfStyles from '@/components/CardsInf/CardsInf.module.scss'
 
-export default function MainInf() {
+type Stats = {
+  rub: number
+  usd: number
+  rcGiven: number
+  rcSpent: number
+  rcBalance: number
+}
+
+export default async function MainInf() {
+  const res = await fetch('http://localhost:3000/api/donation-analytics', {
+    cache: 'no-store'
+  })
+
+  const stats: Stats = await res.json()
+
+  const formatNumber = (num: number | string) => {
+    const n = typeof num === 'string' ? parseFloat(num) : num
+    return Math.floor(n)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  }
+
   return (
     <section className={cardsInfStyles['cards-inf']}>
       <div className="container">
@@ -11,25 +32,27 @@ export default function MainInf() {
           <li className={`${cardsInfStyles['cards-inf__item']} ${cardsInfStyles['cards-inf__item--column']} ${cardsInfStyles['cards-inf__item--purple']}`}>
             <img className={cardsInfStyles['cards-inf__item-img']} src="donation-analytics/donation-analytics-1.png" alt="" aria-hidden={true} />
             <div className={`${cardsInfStyles['cards-inf__item-text']}`}>Всего выполнено</div>
-            <h3 className={`${cardsInfStyles['cards-inf__item-subtitle']}`}>1.450.000 ₽</h3>
+            <h3 className={`${cardsInfStyles['cards-inf__item-subtitle']}`}>
+              {formatNumber(stats.rub)} ₽
+            </h3>
             <div className={`${cardsInfStyles['cards-inf__item-text']}`}>За текущий месяц</div>
           </li>
           <li className={`${cardsInfStyles['cards-inf__item']} ${cardsInfStyles['cards-inf__item--column']} ${cardsInfStyles['cards-inf__item--purple']}`}>
             <img className={cardsInfStyles['cards-inf__item-img']} src="donation-analytics/donation-analytics-2.png" alt="" aria-hidden={true} />
             <div className={`${cardsInfStyles['cards-inf__item-text']}`}>Всего RC выдано</div>
-            <h3 className={`${cardsInfStyles['cards-inf__item-subtitle']}`}>3.534.000 RC</h3>
+            <h3 className={`${cardsInfStyles['cards-inf__item-subtitle']}`}>{formatNumber(stats.rcGiven)} RC</h3>
             <div className={`${cardsInfStyles['cards-inf__item-text']}`}>С учетом акция (+30)</div>
           </li>
           <li className={`${cardsInfStyles['cards-inf__item']} ${cardsInfStyles['cards-inf__item--column']} ${cardsInfStyles['cards-inf__item--purple']}`}>
             <img className={cardsInfStyles['cards-inf__item-img']} src="donation-analytics/donation-analytics-3.png" alt="" aria-hidden={true} />
             <div className={`${cardsInfStyles['cards-inf__item-text']}`}>RC потрачено</div>
-            <h3 className={`${cardsInfStyles['cards-inf__item-subtitle']}`}>1.334.000 RC</h3>
+            <h3 className={`${cardsInfStyles['cards-inf__item-subtitle']}`}>{formatNumber(stats.rcSpent)} RC</h3>
             <div className={`${cardsInfStyles['cards-inf__item-text']}`}>На покупки в игре</div>
           </li>
           <li className={`${cardsInfStyles['cards-inf__item']} ${cardsInfStyles['cards-inf__item--column']} ${cardsInfStyles['cards-inf__item--grey']}`}>
             <img className={cardsInfStyles['cards-inf__item-img']} src="donation-analytics/donation-analytics-4.png" alt="" aria-hidden={true} />
             <div className={`${cardsInfStyles['cards-inf__item-text']}`}>Остаток RC</div>
-            <h3 className={`${cardsInfStyles['cards-inf__item-subtitle']}`}>3.534.000 RC</h3>
+            <h3 className={`${cardsInfStyles['cards-inf__item-subtitle']}`}>{formatNumber(stats.rcBalance)} RC</h3>
             <div className={`${cardsInfStyles['cards-inf__item-text']}`}>У всех игроков</div>
           </li>
         </ul>
