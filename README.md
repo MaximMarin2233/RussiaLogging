@@ -32,7 +32,13 @@ npm install
 
 ---
 
-### 3. Запуск проекта в режиме разработки
+### 3. Переменные окружения, копировать .env.example в .env.local (.env.production для продакшена)
+
+```bash
+cp .env.example .env.local
+```
+
+### 4. Запуск проекта в режиме разработки
 
 ```bash
 npm run dev
