@@ -1,6 +1,116 @@
+'use client'
+
 import styles from './Dynamics.module.scss'
 
+import { useEffect, useState } from 'react'
+import { useServer } from '@/context/ServerContext'
+
+type Row = {
+  date: string
+  total: number
+}
+
+type MoneyData = {
+  server: number
+  cash: number
+  bank: number
+  business: number
+}
+
 export default function Dynamics() {
+  // donation-dynamics
+  const [period, setPeriod] = useState<'week' | 'month'>('week')
+  const [data, setData] = useState<Row[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+
+    fetch(`/api/donation-dynamics?period=${period}`)
+      .then(res => res.json())
+      .then(d => {
+        console.log(d);
+        setData(d)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error(err)
+        setLoading(false)
+      })
+  }, [period])
+
+  const format = (n: number) =>
+    Math.floor(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
+  const WEEK_DAYS = [
+    'Понедельник',
+    'Вторник',
+    'Среда',
+    'Четверг',
+    'Пятница',
+    'Суббота',
+    'Воскресенье',
+  ]
+
+  const getDayName = (index: number) =>
+    WEEK_DAYS[index % 7]
+
+  // const [periodMoney, setPeriodMoney] = useState<'day' | 'week' | 'month'>('month')
+  // const [income, setIncome] = useState<Row[]>([])
+  // const [spend, setSpend] = useState<Row[]>([])
+
+  // useEffect(() => {
+  //   fetch(`/api/money-flow?period=${periodMoney}`)
+  //     .then(r => r.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       setIncome(data.income)
+  //       setSpend(data.spend)
+  //     })
+  // }, [periodMoney])
+
+  // const merged = mergeByDate(income, spend)
+
+  // function mergeByDate(income: any[], spend: any[]) {
+  //   const map = new Map()
+
+  //   income.forEach(i => {
+  //     map.set(i.date, { date: i.date, income: i.total, spend: 0 })
+  //   })
+
+  //   spend.forEach(s => {
+  //     if (!map.has(s.date)) {
+  //       map.set(s.date, { date: s.date, income: 0, spend: s.total })
+  //     } else {
+  //       map.get(s.date).spend = s.total
+  //     }
+  //   })
+
+  //   return Array.from(map.values())
+  // }
+
+  // function formatDay(date: string) {
+  //   return new Date(date).toLocaleDateString('ru-RU', { weekday: 'long' })
+  // }
+
+  // money-overview
+  const { server } = useServer()
+  const [money, setMoney] = useState<MoneyData | null>(null)
+
+  useEffect(() => {
+    if (!server) return
+    setLoading(true)
+    fetch(`/api/money-overview?server=${server}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+
+        setMoney(data)
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [server])
+
   return (
     <section className={styles['dynamics']}>
       <div className="container">
@@ -38,86 +148,67 @@ export default function Dynamics() {
 
         <div className={styles['dynamics__content-wrapper']}>
           <div className={`${styles['dynamics__content']} ${styles['dynamics__content--column--full']}`}>
+
             <div className={styles['dynamics__content-title-wrapper']}>
-              <h3 className={styles['dynamics__content-title']}>График за неделю</h3>
+              <h3 className={styles['dynamics__content-title']}>
+                График за {period === 'week' ? 'неделю' : 'месяц'}
+              </h3>
+
               <div className={styles['dynamics__content-tabs']}>
-                <button className={`btn-reset ${styles['dynamics__content-tab']} ${styles['dynamics__content-tab--active']}`}>7 дней</button>
-                <button className={`btn-reset ${styles['dynamics__content-tab']}`}>30 дней</button>
+
+                <button
+                  className={`btn-reset ${styles['dynamics__content-tab']} ${period === 'week' ? styles['dynamics__content-tab--active'] : ''
+                    }`}
+                  onClick={() => setPeriod('week')}
+                >
+                  7 дней
+                </button>
+
+                <button
+                  className={`btn-reset ${styles['dynamics__content-tab']} ${period === 'month' ? styles['dynamics__content-tab--active'] : ''
+                    }`}
+                  onClick={() => setPeriod('month')}
+                >
+                  30 дней
+                </button>
+
               </div>
             </div>
+
             <div className={styles['dynamics__content-list-wrapper']}>
               <div className={styles['dynamics__content-list-inf']}>
                 День
                 <span>₽</span>
               </div>
               <ul className={`list-reset ${styles['dynamics__content-list']}`}>
-                <li className={styles['dynamics__content-item']}>
-                  <div className={styles['dynamics__content-item-title']}>
-                    Понедельник
-                  </div>
-                  <div className={styles['dynamics__content-item-val']}>
-                    + 134.000 ₽
-                  </div>
-                </li>
-                <li className={styles['dynamics__content-item']}>
-                  <div className={styles['dynamics__content-item-title']}>
-                    Вторник
-                  </div>
-                  <div className={styles['dynamics__content-item-val']}>
-                    + 134.000 ₽
-                  </div>
-                </li>
-                <li className={styles['dynamics__content-item']}>
-                  <div className={styles['dynamics__content-item-title']}>
-                    Среда
-                  </div>
-                  <div className={styles['dynamics__content-item-val']}>
-                    + 134.000 ₽
-                  </div>
-                </li>
-                <li className={styles['dynamics__content-item']}>
-                  <div className={styles['dynamics__content-item-title']}>
-                    Четверг
-                  </div>
-                  <div className={styles['dynamics__content-item-val']}>
-                    + 134.000 ₽
-                  </div>
-                </li>
-                <li className={styles['dynamics__content-item']}>
-                  <div className={styles['dynamics__content-item-title']}>
-                    Пятница
-                  </div>
-                  <div className={styles['dynamics__content-item-val']}>
-                    + 134.000 ₽
-                  </div>
-                </li>
-                <li className={styles['dynamics__content-item']}>
-                  <div className={styles['dynamics__content-item-title']}>
-                    Суббота
-                  </div>
-                  <div className={styles['dynamics__content-item-val']}>
-                    + 134.000 ₽
-                  </div>
-                </li>
-                <li className={styles['dynamics__content-item']}>
-                  <div className={styles['dynamics__content-item-title']}>
-                    Воскресенье
-                  </div>
-                  <div className={styles['dynamics__content-item-val']}>
-                    + 134.000 ₽
-                  </div>
-                </li>
+                {data.slice(0, data.length - 1).map((item, index) => (
+                  <li key={item.date} className={styles['dynamics__content-item']}>
+                    <div className={styles['dynamics__content-item-title']}>
+                      {getDayName(index)}
+                    </div>
+                    <div className={styles['dynamics__content-item-val']}>
+                      + {format(item.total)} ₽
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
           <div className={`${styles['dynamics__content']} ${styles['dynamics__content--column']}`}>
             <div className={styles['dynamics__content-title-wrapper']}>
               <h3 className={styles['dynamics__content-title']}>Денежный поток</h3>
-              <div className={styles['dynamics__content-tabs']}>
-                <button className={`btn-reset ${styles['dynamics__content-tab']} ${styles['dynamics__content-tab--active']}`}>День</button>
-                <button className={`btn-reset ${styles['dynamics__content-tab']}`}>Неделя</button>
-                <button className={`btn-reset ${styles['dynamics__content-tab']}`}>Месяц</button>
-              </div>
+              {/* <div className={styles['dynamics__content-tabs']}>
+                {['day', 'week', 'month'].map(p => (
+                  <button
+                    key={p}
+                    onClick={() => setPeriodMoney(p as any)}
+                    className={`btn-reset ${styles['dynamics__content-tab']} ${periodMoney === p ? styles['dynamics__content-tab--active'] : ''
+                      }`}
+                  >
+                    {p === 'day' ? 'День' : p === 'week' ? 'Неделя' : 'Месяц'}
+                  </button>
+                ))}
+              </div> */}
             </div>
             <img src="dynamics/dynamics-stat.png" alt="" />
           </div>

@@ -20,8 +20,6 @@ export default function DonationAnalytics() {
     fetch('/api/donation-analytics')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-
         setStats(data)
         setLoading(false)
       })
