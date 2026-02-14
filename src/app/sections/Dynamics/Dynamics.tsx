@@ -112,7 +112,7 @@ export default function Dynamics() {
           </div>
           <div className={`${styles['dynamics__content']} ${styles['dynamics__content--column']}`}>
             <div className={styles['dynamics__content-title-wrapper']}>
-              <h3 className={styles['dynamics__content-title']}>График за неделю</h3>
+              <h3 className={styles['dynamics__content-title']}>Денежный поток</h3>
               <div className={styles['dynamics__content-tabs']}>
                 <button className={`btn-reset ${styles['dynamics__content-tab']} ${styles['dynamics__content-tab--active']}`}>День</button>
                 <button className={`btn-reset ${styles['dynamics__content-tab']}`}>Неделя</button>

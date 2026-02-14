@@ -13,29 +13,29 @@ type Stats = {
 }
 
 export default function DonationAnalytics() {
-  const { server } = useServer()
   const [stats, setStats] = useState<Stats | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`/api/donation-analytics?server=${server}`)
+    fetch('/api/donation-analytics')
       .then(res => res.json())
       .then(data => {
-        setStats({
-          rub: Number(data.rub) || 0,
-          rcGiven: Number(data.rcGiven) || 0,
-          rcSpent: Number(data.rcSpent) || 0,
-          rcBalance: Number(data.rcBalance) || 0,
-        })
-      })
-      .catch(err => console.error(err))
-  }, [server])
+        console.log(data);
 
-  if (!stats) return <div>Загрузка...</div>
+        setStats(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error(err)
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) return <div className="container">Загрузка...</div>
+  if (!stats) return <div className="container">Нет данных</div>
 
   const formatNumber = (n: number) =>
-    Math.floor(n)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    Math.floor(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
   return (
     <section className={cardsInfStyles['cards-inf']}>
