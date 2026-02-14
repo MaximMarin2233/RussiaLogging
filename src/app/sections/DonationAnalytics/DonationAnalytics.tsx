@@ -1,27 +1,41 @@
+'use client'
+
 import styles from './DonationAnalytics.module.scss'
 import cardsInfStyles from '@/components/CardsInf/CardsInf.module.scss'
+import { useEffect, useState } from 'react'
+import { useServer } from '@/context/ServerContext'
 
 type Stats = {
   rub: number
-  usd: number
   rcGiven: number
   rcSpent: number
   rcBalance: number
 }
 
-export default async function MainInf() {
-  const res = await fetch('http://localhost:3000/api/donation-analytics', {
-    cache: 'no-store'
-  })
+export default function DonationAnalytics() {
+  const { server } = useServer()
+  const [stats, setStats] = useState<Stats | null>(null)
 
-  const stats: Stats = await res.json()
+  useEffect(() => {
+    fetch(`/api/donation-analytics?server=${server}`)
+      .then(res => res.json())
+      .then(data => {
+        setStats({
+          rub: Number(data.rub) || 0,
+          rcGiven: Number(data.rcGiven) || 0,
+          rcSpent: Number(data.rcSpent) || 0,
+          rcBalance: Number(data.rcBalance) || 0,
+        })
+      })
+      .catch(err => console.error(err))
+  }, [server])
 
-  const formatNumber = (num: number | string) => {
-    const n = typeof num === 'string' ? parseFloat(num) : num
-    return Math.floor(n)
+  if (!stats) return <div>Загрузка...</div>
+
+  const formatNumber = (n: number) =>
+    Math.floor(n)
       .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-  }
+      .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
   return (
     <section className={cardsInfStyles['cards-inf']}>

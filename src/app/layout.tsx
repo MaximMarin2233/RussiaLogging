@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 
+import { ServerProvider } from '@/context/ServerContext'
+
 export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
@@ -18,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <ServerProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ServerProvider>
       </body>
     </html>
   )

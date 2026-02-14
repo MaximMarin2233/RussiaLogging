@@ -1,4 +1,8 @@
+'use client'
+
 import cardsInfStyles from '@/components/CardsInf/CardsInf.module.scss'
+import { useEffect, useState } from 'react'
+import { useServer } from '@/context/ServerContext'
 
 type Stats = {
   totalMoney: number
@@ -6,12 +10,18 @@ type Stats = {
   onlineAdmins: number
 }
 
-export default async function MainInf() {
-  const res = await fetch('http://localhost:3000/api/stats', {
-    cache: 'no-store'
-  })
+export default function MainInf() {
+  const { server } = useServer()
+  const [stats, setStats] = useState<Stats | null>(null)
 
-  const stats: Stats = await res.json()
+  useEffect(() => {
+    fetch(`/api/stats?server=${server}`)
+      .then(res => res.json())
+      .then(data => setStats(data))
+      .catch(err => console.error(err))
+  }, [server])
+
+  if (!stats) return <div>Загрузка...</div>
 
   function formatAmount(n: number) {
     if (n >= 1_000_000_000) {
