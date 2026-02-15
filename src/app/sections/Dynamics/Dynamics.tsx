@@ -17,6 +17,26 @@ type MoneyData = {
   business: number
 }
 
+type ServerActivity = {
+  id: number
+  online_players: number
+}
+
+type AdminOnline = {
+  date: string
+  name: string
+  rank: string
+}
+
+type ActivityResponse = {
+  servers: {
+    id: number
+    online_players: number
+  }[]
+  admins: AdminOnline[]
+}
+
+
 export default function Dynamics() {
   // donation-dynamics
   const [period, setPeriod] = useState<'week' | 'month'>('week')
@@ -111,7 +131,23 @@ export default function Dynamics() {
       .finally(() => setLoading(false))
   }, [server])
 
-  if (!money) return <div className="container">Загрузка...</div>
+  // activity
+  const [activity, setActivity] = useState<ActivityResponse | null>(null)
+
+  useEffect(() => {
+    fetch('/api/activity')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setActivity(data)
+      })
+      .catch(console.error)
+  }, [])
+
+
+  if (!money || !activity) {
+    return <div className="container">Загрузка...</div>
+  }
 
   const { cash, bank, business } = money
   const total = cash + bank + business
@@ -313,8 +349,8 @@ export default function Dynamics() {
                     <rect width="16" height="16" rx="5" fill="url(#paint0_linear_387_1722)" />
                     <defs>
                       <linearGradient id="paint0_linear_387_1722" x1="-2.56772e-06" y1="-4.5" x2="19.1298" y2="-12.4746" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#EAABF0" />
-                        <stop offset="1" stop-color="#4623E9" />
+                        <stop stopColor="#EAABF0" />
+                        <stop offset="1" stopColor="#4623E9" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -332,8 +368,8 @@ export default function Dynamics() {
                     <rect width="16" height="16" rx="5" fill="url(#paint0_linear_387_1734)" />
                     <defs>
                       <linearGradient id="paint0_linear_387_1734" x1="-2.56772e-06" y1="-4.5" x2="19.1298" y2="-12.4746" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#D3F0AB" />
-                        <stop offset="1" stop-color="#44E923" />
+                        <stop stopColor="#D3F0AB" />
+                        <stop offset="1" stopColor="#44E923" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -351,8 +387,8 @@ export default function Dynamics() {
                     <rect width="16" height="16" rx="5" fill="url(#paint0_linear_387_1740)" />
                     <defs>
                       <linearGradient id="paint0_linear_387_1740" x1="-2.56772e-06" y1="-4.5" x2="19.1298" y2="-12.4746" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#F0C3AB" />
-                        <stop offset="1" stop-color="#E9A323" />
+                        <stop stopColor="#F0C3AB" />
+                        <stop offset="1" stopColor="#E9A323" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -373,102 +409,63 @@ export default function Dynamics() {
               <h3 className={styles['dynamics__content-title']}>Активность серверов</h3>
             </div>
             <ul className={`list-reset ${styles['dynamics__content-servers']}`}>
-              <li className={styles['dynamics__content-server']}>
-                <div className={styles['dynamics__content-server-inf-wrapper']}>
-                  <div className={styles['dynamics__content-server-inf']}>Сервер #1</div>
-                  <div className={styles['dynamics__content-server-val']}>
-                    843
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear_391_1790)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_391_1790" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
-                          <stop offset="0.44698" stopColor="#A8A8A8" />
-                          <stop offset="1" stopColor="#3C3C3C" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                </div>
-                <div className={styles['dynamics__content-server-progress']}></div>
-              </li>
-              <li className={styles['dynamics__content-server']}>
-                <div className={styles['dynamics__content-server-inf-wrapper']}>
-                  <div className={styles['dynamics__content-server-inf']}>Сервер #2</div>
-                  <div className={styles['dynamics__content-server-val']}>
-                    843
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear_391_1790)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_391_1790" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
-                          <stop offset="0.44698" stopColor="#A8A8A8" />
-                          <stop offset="1" stopColor="#3C3C3C" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                </div>
-                <div className={styles['dynamics__content-server-progress']}></div>
-              </li>
-              <li className={styles['dynamics__content-server']}>
-                <div className={styles['dynamics__content-server-inf-wrapper']}>
-                  <div className={styles['dynamics__content-server-inf']}>Сервер #3</div>
-                  <div className={styles['dynamics__content-server-val']}>
-                    843
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear_391_1790)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_391_1790" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
-                          <stop offset="0.44698" stopColor="#A8A8A8" />
-                          <stop offset="1" stopColor="#3C3C3C" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                </div>
-                <div className={styles['dynamics__content-server-progress']}></div>
-              </li>
-              <li className={styles['dynamics__content-server']}>
-                <div className={styles['dynamics__content-server-inf-wrapper']}>
-                  <div className={styles['dynamics__content-server-inf']}>Сервер #4</div>
-                  <div className={styles['dynamics__content-server-val']}>
-                    843
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear_391_1790)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_391_1790" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
-                          <stop offset="0.44698" stopColor="#A8A8A8" />
-                          <stop offset="1" stopColor="#3C3C3C" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                </div>
-                <div className={styles['dynamics__content-server-progress']}></div>
-              </li>
-              <li className={styles['dynamics__content-server']}>
-                <div className={styles['dynamics__content-server-inf-wrapper']}>
-                  <div className={styles['dynamics__content-server-inf']}>Сервер #5</div>
-                  <div className={styles['dynamics__content-server-val']}>
-                    843
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
-                      <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear_391_1790)" />
-                      <defs>
-                        <linearGradient id="paint0_linear_391_1790" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
-                          <stop offset="0.44698" stopColor="#A8A8A8" />
-                          <stop offset="1" stopColor="#3C3C3C" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                </div>
-                <div className={styles['dynamics__content-server-progress']}></div>
-              </li>
+              {activity.servers.slice(0, activity.servers.length - 1).map(server => {
+                const percent = Math.min((server.online_players / 1000) * 100, 100)
+
+                return (
+                  <li key={server.id} className={styles['dynamics__content-server']}>
+                    <div className={styles['dynamics__content-server-inf-wrapper']}>
+                      <div className={styles['dynamics__content-server-inf']}>
+                        Сервер #{server.id}
+                      </div>
+
+                      <div className={styles['dynamics__content-server-val']}>
+                        {server.online_players}
+
+                        <svg
+                          width="16"
+                          height="17"
+                          viewBox="0 0 16 17"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z"
+                            fill="#FECC0A"
+                          />
+                          <path
+                            d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z"
+                            fill="url(#paint0_linear_391_1790)"
+                          />
+                          <defs>
+                            <linearGradient
+                              id="paint0_linear_391_1790"
+                              x1="8.22748"
+                              y1="-22.6213"
+                              x2="17.2942"
+                              y2="19.7507"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop offset="0.44698" stopColor="#A8A8A8" />
+                              <stop offset="1" stopColor="#3C3C3C" />
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <div className={styles['dynamics__content-server-progress']}>
+                      <span
+                        style={{
+                          width: `${percent}%`
+                        }}
+                      />
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
+
           </div>
           <div className={`${styles['dynamics__content']} ${styles['dynamics__content--stat']}`}>
             <div className={styles['dynamics__content-title-wrapper']}>
@@ -619,175 +616,80 @@ export default function Dynamics() {
               </button>
             </div>
             <ul className={`list-reset ${styles['dynamics__content-admins']}`}>
-              <li className={styles['dynamics__content-admin']}>
-                <svg className={styles['dynamics__content-admin-icon']} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clipPath="url(#clip0_2009_1656)">
-                    <g filter="url(#filter0_d_2009_1656)">
-                      <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                      <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                      <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                    </g>
-                  </g>
-                  <defs>
-                    <filter id="filter0_d_2009_1656" x="-40.3447" y="-40.3447" width="104.689" height="104.689" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                      <feOffset />
-                      <feGaussianBlur stdDeviation="20.1724" />
-                      <feColorMatrix type="matrix" values="0 0 0 0 0.373386 0 0 0 0 0.600962 0 0 0 0 0.199357 0 0 0 0.15 0" />
-                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2009_1656" />
-                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2009_1656" result="shape" />
-                    </filter>
-                    <clipPath id="clip0_2009_1656">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <div className={styles['dynamics__content-admin-text']}>
-                  Denny Walker
-                  <span>Сервер #1</span>
-                </div>
-                <div className={styles['dynamics__content-admin-val']}>
-                  4ч 23м
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
-                    <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear_392_3090)" />
-                    <defs>
-                      <linearGradient id="paint0_linear_392_3090" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
-                        <stop offset="0.44698" stopColor="#A8A8A8" />
-                        <stop offset="1" stopColor="#3C3C3C" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-              </li>
-              <li className={styles['dynamics__content-admin']}>
-                <svg className={styles['dynamics__content-admin-icon']} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clipPath="url(#clip0_2009_1656)">
-                    <g filter="url(#filter0_d_2009_1656)">
-                      <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                      <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                      <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                    </g>
-                  </g>
-                  <defs>
-                    <filter id="filter0_d_2009_1656" x="-40.3447" y="-40.3447" width="104.689" height="104.689" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                      <feOffset />
-                      <feGaussianBlur stdDeviation="20.1724" />
-                      <feColorMatrix type="matrix" values="0 0 0 0 0.373386 0 0 0 0 0.600962 0 0 0 0 0.199357 0 0 0 0.15 0" />
-                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2009_1656" />
-                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2009_1656" result="shape" />
-                    </filter>
-                    <clipPath id="clip0_2009_1656">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <div className={styles['dynamics__content-admin-text']}>
-                  Denny Walker
-                  <span>Сервер #1</span>
-                </div>
-                <div className={styles['dynamics__content-admin-val']}>
-                  4ч 23м
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
-                    <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear_392_3090)" />
-                    <defs>
-                      <linearGradient id="paint0_linear_392_3090" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
-                        <stop offset="0.44698" stopColor="#A8A8A8" />
-                        <stop offset="1" stopColor="#3C3C3C" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-              </li>
-              <li className={styles['dynamics__content-admin']}>
-                <svg className={styles['dynamics__content-admin-icon']} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clipPath="url(#clip0_2009_1656)">
-                    <g filter="url(#filter0_d_2009_1656)">
-                      <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                      <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                      <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                    </g>
-                  </g>
-                  <defs>
-                    <filter id="filter0_d_2009_1656" x="-40.3447" y="-40.3447" width="104.689" height="104.689" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                      <feOffset />
-                      <feGaussianBlur stdDeviation="20.1724" />
-                      <feColorMatrix type="matrix" values="0 0 0 0 0.373386 0 0 0 0 0.600962 0 0 0 0 0.199357 0 0 0 0.15 0" />
-                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2009_1656" />
-                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2009_1656" result="shape" />
-                    </filter>
-                    <clipPath id="clip0_2009_1656">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <div className={styles['dynamics__content-admin-text']}>
-                  Denny Walker
-                  <span>Сервер #1</span>
-                </div>
-                <div className={styles['dynamics__content-admin-val']}>
-                  4ч 23м
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
-                    <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear_392_3090)" />
-                    <defs>
-                      <linearGradient id="paint0_linear_392_3090" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
-                        <stop offset="0.44698" stopColor="#A8A8A8" />
-                        <stop offset="1" stopColor="#3C3C3C" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-              </li>
-              <li className={styles['dynamics__content-admin']}>
-                <svg className={styles['dynamics__content-admin-icon']} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clipPath="url(#clip0_2009_1656)">
-                    <g filter="url(#filter0_d_2009_1656)">
-                      <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                      <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                      <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                    </g>
-                  </g>
-                  <defs>
-                    <filter id="filter0_d_2009_1656" x="-40.3447" y="-40.3447" width="104.689" height="104.689" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                      <feOffset />
-                      <feGaussianBlur stdDeviation="20.1724" />
-                      <feColorMatrix type="matrix" values="0 0 0 0 0.373386 0 0 0 0 0.600962 0 0 0 0 0.199357 0 0 0 0.15 0" />
-                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2009_1656" />
-                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2009_1656" result="shape" />
-                    </filter>
-                    <clipPath id="clip0_2009_1656">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <div className={styles['dynamics__content-admin-text']}>
-                  Denny Walker
-                  <span>Сервер #1</span>
-                </div>
-                <div className={styles['dynamics__content-admin-val']}>
-                  4ч 23м
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
-                    <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear_392_3090)" />
-                    <defs>
-                      <linearGradient id="paint0_linear_392_3090" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
-                        <stop offset="0.44698" stopColor="#A8A8A8" />
-                        <stop offset="1" stopColor="#3C3C3C" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-              </li>
+              {activity.admins.map((admin, index) => {
+                const now = new Date()
+                const adminDate = new Date(admin.date)
+                const diffMs = now.getTime() - adminDate.getTime()
+
+                const diffHours = Math.floor(diffMs / 1000 / 60 / 60)
+                const diffMinutes = Math.floor((diffMs / 1000 / 60) % 60)
+
+                const formattedTime = `${diffHours}ч ${diffMinutes}м`
+
+                return (
+                  <li key={index} className={styles['dynamics__content-admin']}>
+                    <svg
+                      className={styles['dynamics__content-admin-icon']}
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clipPath="url(#clip0)">
+                        <g filter="url(#filter0)">
+                          <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
+                          <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
+                          <circle cx="12" cy="12" r="5" fill="#80FF46" />
+                        </g>
+                      </g>
+                      <defs>
+                        <filter
+                          id="filter0"
+                          x="-40"
+                          y="-40"
+                          width="104"
+                          height="104"
+                          filterUnits="userSpaceOnUse"
+                          colorInterpolationFilters="sRGB"
+                        >
+                          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                          <feOffset />
+                          <feGaussianBlur stdDeviation="20" />
+                          <feColorMatrix type="matrix" values="0 0 0 0 0.373386 0 0 0 0 0.600962 0 0 0 0 0.199357 0 0 0 0.15 0" />
+                          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                        </filter>
+                        <clipPath id="clip0">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                    <div className={styles['dynamics__content-admin-text']}>
+                      {admin.name}
+                      <span>Сервер #{admin.rank}</span>
+                    </div>
+
+                    <div className={styles['dynamics__content-admin-val']}>
+                      {formattedTime}
+                      <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="#FECC0A" />
+                        <path d="M12.6188 8.7V0.5H3.38121V8.7H0L8 16.5L16 8.7H12.6188Z" fill="url(#paint0_linear)" />
+                        <defs>
+                          <linearGradient id="paint0_linear" x1="8.22748" y1="-22.6213" x2="17.2942" y2="19.7507" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.44698" stopColor="#A8A8A8" />
+                            <stop offset="1" stopColor="#3C3C3C" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
+
           </div>
         </div>
       </div>
