@@ -409,7 +409,7 @@ export default function Dynamics() {
               <h3 className={styles['dynamics__content-title']}>Активность серверов</h3>
             </div>
             <ul className={`list-reset ${styles['dynamics__content-servers']}`}>
-              {activity.servers.slice(0, activity.servers.length - 1).map(server => {
+              {activity.servers.map(server => {
                 const percent = Math.min((server.online_players / 1000) * 100, 100)
 
                 return (

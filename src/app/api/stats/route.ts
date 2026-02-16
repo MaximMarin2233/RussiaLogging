@@ -6,7 +6,7 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url)
     const server = Number(searchParams.get('server') || 1)
 
-    if (server < 1 || server > 5) {
+    if (server < 1 || server > 6) {
       return NextResponse.json({ error: 'Invalid server' }, { status: 400 })
     }
 

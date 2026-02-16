@@ -8,6 +8,7 @@ const options = [
   { value: '3', label: 'Сервер №3' },
   { value: '4', label: 'Сервер №4' },
   { value: '5', label: 'Сервер №5' },
+  { value: '6', label: 'Сервер №6' },
 ]
 
 export default function ServerSelect() {
