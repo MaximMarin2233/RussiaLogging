@@ -1,6 +1,38 @@
+'use client'
+
 import styles from './General.module.scss'
 
+import { useEffect, useState } from 'react'
+import { useServer } from '@/context/ServerContext'
+
+type Character = {
+  char_id: number
+  char_name: string
+  char_skin: number
+  char_level: number
+  char_game_for_hour: number
+  char_reg_time: string
+  char_is_online: number
+}
+
 export default function General() {
+  const { server } = useServer()
+  const [characters, setCharacters] = useState<Character[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(`/api/characters?server=${server}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log('CHARACTERS DATA:', data)
+        setCharacters(data.characters)
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [server])
+
+  if (loading) return <div>Загрузка...</div>
+
   return (
     <section className={styles['general']}>
       <div className="container">

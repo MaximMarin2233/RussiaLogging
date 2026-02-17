@@ -1,32 +1,34 @@
-import { db } from '@/lib/db'
 import { NextResponse } from 'next/server'
+import { dbConnections } from '@/lib/db'
 
 export async function GET() {
   try {
+    const db = dbConnections[1]
+
     const [rubRows] = await db.query<any[]>(`
       SELECT SUM(amount) AS total
-      FROM payments
+      FROM launcher.payments
       WHERE paid_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH)
-      AND currency = 'RUB'
+        AND currency = 'RUB'
     `)
 
     const [rcGivenRows] = await db.query<any[]>(`
       SELECT SUM(
-        JSON_EXTRACT(description, '$.amount_rc')
+        JSON_UNQUOTE(JSON_EXTRACT(description, '$.amount_rc'))
       ) AS total
-      FROM payments
+      FROM launcher.payments
       WHERE paid_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH)
     `)
 
     const [rcSpentRows] = await db.query<any[]>(`
       SELECT SUM(amount) * -1 AS total
-      FROM log_donate
+      FROM launcher.log_donate
       WHERE date >= DATE_SUB(NOW(), INTERVAL 1 MONTH)
     `)
 
     const [rcBalanceRows] = await db.query<any[]>(`
       SELECT SUM(donation_balance) AS total
-      FROM user_donation_balance
+      FROM launcher.user_donation_balance
     `)
 
     return NextResponse.json({
