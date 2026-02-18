@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   const interval = PERIODS[period] || '1 MONTH'
 
   try {
-    const db = dbConnections[0] // launcher хост
+    const db = dbConnections[0]
 
     const [income] = await db.query<any[]>(`
       SELECT 

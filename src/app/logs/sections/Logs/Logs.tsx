@@ -129,7 +129,10 @@ export default function Logs() {
 
         {pages > 1 && (
           <div className={styles['logs__filters-pagination']}>
-            <button disabled={page === 1} onClick={() => setPage(p => p - 1)}>
+            <button
+              disabled={page === 1}
+              className={`btn-reset ${styles['logs__filters-pagination-btn']} ${styles['logs__filters-pagination-btn--nav']} ${page === 1 ? styles['logs__filters-pagination-btn--inactive'] : ''}`}
+              onClick={() => setPage(p => p - 1)}>
               Предыдущая
             </button>
 
@@ -137,17 +140,22 @@ export default function Logs() {
               <button
                 key={i}
                 onClick={() => setPage(i + 1)}
-                style={{ fontWeight: page === i + 1 ? 'bold' : 'normal' }}
+                className={`btn-reset ${styles['logs__filters-pagination-btn']} ${page === i + 1 ? styles['logs__filters-pagination-btn--inactive'] : ''}`}
               >
                 {i + 1}
               </button>
             ))}
 
-            <button disabled={page === pages} onClick={() => setPage(p => p + 1)}>
+            <button
+              disabled={page === pages}
+              className={`btn-reset ${styles['logs__filters-pagination-btn']} ${styles['logs__filters-pagination-btn--nav']} ${page === pages ? styles['logs__filters-pagination-btn--inactive'] : ''}`}
+              onClick={() => setPage(p => p + 1)}>
               Следующая
             </button>
           </div>
         )}
+
+
 
       </div>
     </section>

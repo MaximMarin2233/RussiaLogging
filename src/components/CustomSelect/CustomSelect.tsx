@@ -11,7 +11,7 @@ interface CustomSelectProps {
   options: Option[]
   value?: string
   onChange?: (value: string) => void
-  className?: string // ← добавили
+  className?: string
 }
 
 export default function CustomSelect({
