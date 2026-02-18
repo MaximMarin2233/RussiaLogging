@@ -3,7 +3,7 @@ import { dbConnections } from '@/lib/db'
 
 export async function GET() {
   try {
-    const db = dbConnections[1]
+    const db = dbConnections[0]
 
     const [rubRows] = await db.query<any[]>(`
       SELECT SUM(amount) AS total

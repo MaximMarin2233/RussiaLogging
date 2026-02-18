@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     const period = searchParams.get('period') || 'month'
     const days = period === 'week' ? 7 : 30
 
-    const db = dbConnections[1]
+    const db = dbConnections[0]
 
     const [rows] = await db.query<any[]>(`
       SELECT

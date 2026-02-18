@@ -1,13 +1,14 @@
 'use client'
 
 import styles from './Logs.module.scss'
-import { useMemo, useEffect, useState } from 'react'
-import { useServer } from '@/context/ServerContext'
+import { useEffect, useMemo, useState } from 'react'
 
-type LogItem = {
+const PER_PAGE = 10
+
+type Log = {
   id: number
   time: string
-  server: number
+  server?: number
   type: string
   player: string
   playerId: number
@@ -16,268 +17,137 @@ type LogItem = {
   balance?: number
 }
 
-const MOCK_LOGS: LogItem[] = Array.from({ length: 47 }).map((_, i) => ({
-  id: i,
-  time: `2025-12-${String((i % 28) + 1).padStart(2, '0')} 14:34:22`,
-  server: (i % 5) + 1,
-  type: ['money', 'admin', 'punish', 'chat', 'org', 'family'][i % 6],
-  player: ['Denny Walker', 'Ivan Petrov', 'Alex Snow'][i % 3],
-  playerId: 300000 + i,
-  action: 'Передал деньги игроку Ivan_Petrov через банк',
-  amount: i % 2 === 0 ? -1250000 : 250000,
-  balance: 25000000 - i * 10000
-}))
-
-const PAGE_SIZE = 10
-
 export default function Logs() {
-  const [servers, setServers] = useState<number[]>([])
-  const [types, setTypes] = useState<string[]>([])
-  const [nickname, setNickname] = useState('')
-  const [amountFrom, setAmountFrom] = useState('')
-  const [amountTo, setAmountTo] = useState('')
+  const [name, setName] = useState('')
+  const [logs, setLogs] = useState<Log[]>([])
   const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(false)
 
-  const toggleValue = <T,>(value: T, list: T[], setter: (v: T[]) => void) => {
-    setter(list.includes(value) ? list.filter(v => v !== value) : [...list, value])
+  const loadLogs = async () => {
+    if (!name) return
+    setLoading(true)
+
+    try {
+      const res = await fetch(`/api/logs?name=${encodeURIComponent(name)}`)
+      const data = await res.json()
+
+      const mappedLogs: Log[] = (data.logs || []).map((log: any) => ({
+        id: log.id,
+        time: new Date(log.date).toLocaleString('ru-RU', { hour12: false }),
+        server: log.server || null,
+        type: log.category_name || 'unknown',
+        player: log.player_name || name,
+        playerId: log.char_id,
+        action: log.reason_name || log.action || '',
+        amount: log.cash_value ?? log.bank_value ?? log.donate_value ?? 0,
+        balance: log.cash_after ?? log.bank_after ?? log.donate_after ?? 0
+      }))
+
+      setLogs(mappedLogs)
+      setPage(1)
+    } catch (err) {
+      console.error(err)
+      setLogs([])
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const filteredLogs = useMemo(() => {
-    return MOCK_LOGS.filter(log => {
-      if (servers.length && !servers.includes(log.server)) return false
-      if (types.length && !types.includes(log.type)) return false
-      if (nickname && !log.player.toLowerCase().includes(nickname.toLowerCase())) return false
-
-      const from = Number(amountFrom) || null
-      const to = Number(amountTo) || null
-
-      if (from !== null && (log.amount ?? 0) < from) return false
-      if (to !== null && (log.amount ?? 0) > to) return false
-
-      return true
-    })
-  }, [servers, types, nickname, amountFrom, amountTo])
-
-  const pages = Math.ceil(filteredLogs.length / PAGE_SIZE)
+  const pages = Math.ceil(logs.length / PER_PAGE)
 
   const paginatedLogs = useMemo(() => {
-    const start = (page - 1) * PAGE_SIZE
-    return filteredLogs.slice(start, start + PAGE_SIZE)
-  }, [filteredLogs, page])
-
-  const resetFilters = () => {
-    setServers([])
-    setTypes([])
-    setNickname('')
-    setAmountFrom('')
-    setAmountTo('')
-    setPage(1)
-  }
-
-  const { server } = useServer()
-  const [logs, setLogs] = useState<any>(null)
-
-  useEffect(() => {
-    fetch(`/api/logs?server=${server}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log('LOGS DATA:', data)
-        setLogs(data)
-      })
-      .catch(err => console.error(err))
-  }, [server])
-
+    const start = (page - 1) * PER_PAGE
+    return logs.slice(start, start + PER_PAGE)
+  }, [logs, page])
 
   return (
     <section className={styles.logs}>
       <div className="container">
 
-        {/* FILTERS */}
-
         <div className={styles['logs__filters-wrapper']}>
-
-          <div className={styles['logs__filters-nav']}>
-
-            {/* SERVERS */}
-
-            <div className={styles['logs__filters-nav-block']}>
-              <div className={styles['logs__filters-nav-title']}>Серверы</div>
-
-              <div className={styles['logs__filters-nav-content']}>
-                {[1, 2, 3, 4, 5].map(s => (
-                  <label key={s} className={styles['logs__filters-nav-label']}>
-                    <input
-                      type="checkbox"
-                      checked={servers.includes(s)}
-                      onChange={() => toggleValue(s, servers, setServers)}
-                    />
-                    <div className={styles['logs__filters-nav-label-square']}><span /></div>
-                    <div className={styles['logs__filters-nav-label-text']}>Сервер №{s}</div>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* TYPES */}
-
-            <div className={styles['logs__filters-nav-block']}>
-              <div className={styles['logs__filters-nav-title']}>Тип операции</div>
-
-              <div className={styles['logs__filters-nav-content']}>
-
-                {[
-                  ['money', 'Денежные операции'],
-                  ['admin', 'Админ-действия'],
-                  ['punish', 'Наказания'],
-                  ['chat', 'Чаты'],
-                  ['org', 'Организации'],
-                  ['family', 'Семьи']
-                ].map(([key, label]) => (
-                  <label key={key} className={styles['logs__filters-nav-label']}>
-                    <input
-                      type="checkbox"
-                      checked={types.includes(key)}
-                      onChange={() => toggleValue(key, types, setTypes)}
-                    />
-                    <div className={styles['logs__filters-nav-label-square']}><span /></div>
-                    <div className={styles['logs__filters-nav-label-text']}>{label}</div>
-                  </label>
-                ))}
-
-              </div>
-            </div>
-
-          </div>
-
-          {/* FORM */}
-
           <div className={styles['logs__filters-form']}>
-
             <div className={styles['logs__filters-form-blocks']}>
-
               <div className={styles['logs__filters-form-block']}>
-                <div className={styles['logs__filters-nav-title']}>Поиск по нику</div>
-                <input
-                  className={styles['logs__filters-form-input']}
-                  value={nickname}
-                  onChange={e => setNickname(e.target.value)}
-                  placeholder="Введите ник игрока..."
+                <div className={styles['logs__filters-nav-title']}>
+                  Поиск по нику
+                </div>
+                <input className={styles['logs__filters-form-input']} placeholder='Введите ник игрока...'
+                  value={name}
+                  onChange={e => setName(e.target.value)}
                 />
               </div>
-
-              <div className={styles['logs__filters-form-block']}>
-                <div className={styles['logs__filters-nav-title']}>Сумма от</div>
-                <input
-                  className={styles['logs__filters-form-input']}
-                  value={amountFrom}
-                  onChange={e => setAmountFrom(e.target.value)}
-                />
-              </div>
-
-              <div className={styles['logs__filters-form-block']}>
-                <div className={styles['logs__filters-nav-title']}>Сумма до</div>
-                <input
-                  className={styles['logs__filters-form-input']}
-                  value={amountTo}
-                  onChange={e => setAmountTo(e.target.value)}
-                />
-              </div>
-
             </div>
-
             <div className={styles['logs__filters-form-btns']}>
-              <button className={`btn-reset ${styles['logs__filters-form-btn']}`} onClick={() => setPage(1)}>
-                Применить фильтры
-              </button>
-
-              <button className={`btn-reset ${styles['logs__filters-form-btn']}`} onClick={resetFilters}>
-                Сбросить
+              <button className={`btn-reset ${styles['logs__filters-form-btn']}`} onClick={loadLogs}>
+                Найти
               </button>
             </div>
-
           </div>
         </div>
-
-        {/* TABLE */}
 
         <div className={styles['logs__filters-table']}>
-
           <div className={styles['logs__filters-table-header']}>
-            <div className={styles['logs__filters-table-header-column']}>Время</div>
-            <div className={`${styles['logs__filters-table-header-column']} ${styles['logs__column-center']}`}>Сервер</div>
-            <div className={styles['logs__filters-table-header-column']}>Тип</div>
-            <div className={styles['logs__filters-table-header-column']}>Игрок</div>
-            <div className={styles['logs__filters-table-header-column']}>Действие</div>
-            <div className={`${styles['logs__filters-table-header-column']} ${styles['logs__column-center']}`}>Сумма</div>
-            <div className={`${styles['logs__filters-table-header-column']} ${styles['logs__column-end']}`}>Баланс</div>
+            <div>Время</div>
+            <div className={styles['logs__column-center']}>Сервер</div>
+            <div>Тип</div>
+            <div>Игрок</div>
+            <div>Действие</div>
+            <div className={styles['logs__column-center']}>Сумма</div>
+            <div className={styles['logs__column-end']}>Баланс</div>
           </div>
 
-          {paginatedLogs.map(log => (
+          {loading && <div>Загрузка...</div>}
+
+          {!loading && paginatedLogs.map(log => (
             <div key={log.id} className={styles['logs__filters-table-row']}>
 
-              <div className={styles['logs__filters-table-column']}>{log.time}</div>
+              <div>{log.time}</div>
 
-              <div className={`${styles['logs__filters-table-column']} ${styles['logs__column-center']}`}>
-                Сервер {log.server}
+              <div className={styles['logs__column-center']}>
+                {log.server ?? '-'}
               </div>
 
-              <div className={styles['logs__filters-table-column']}>
-                {log.type}
+              <div>{log.type}</div>
+
+              <div>
+                {log.player} <span>ID: {log.playerId}</span>
               </div>
 
-              <div className={styles['logs__filters-table-column']}>
-                <div className={styles['logs__filters-table-column-inf']}>
-                  {log.player}
-                  <span>ID: {log.playerId}</span>
-                </div>
+              <div>{log.action}</div>
+
+              <div className={styles['logs__column-center']}>
+                {log.amount ? log.amount.toLocaleString('ru-RU') + ' ₽' : '-'}
               </div>
 
-              <div className={styles['logs__filters-table-column']}>{log.action}</div>
-
-              <div className={`${styles['logs__filters-table-column']} ${styles['logs__column-center']}`}>
-                {log.amount?.toLocaleString('ru-RU')} ₽
-              </div>
-
-              <div className={`${styles['logs__filters-table-column']} ${styles['logs__column-end']}`}>
-                {log.balance?.toLocaleString('ru-RU')} ₽
+              <div className={styles['logs__column-end']}>
+                {log.balance ? log.balance.toLocaleString('ru-RU') + ' ₽' : '-'}
               </div>
 
             </div>
           ))}
-
         </div>
 
-        {/* PAGINATION */}
-
-        <div className={styles['logs__filters-pagination']}>
-
-          <button
-            className={`btn-reset ${styles['logs__filters-pagination-btn']} ${styles['logs__filters-pagination-btn--nav']}`}
-            disabled={page === 1}
-            onClick={() => setPage(p => p - 1)}
-          >
-            Предыдущая
-          </button>
-
-          {Array.from({ length: pages }).map((_, i) => (
-            <button
-              key={i}
-              className={`btn-reset ${styles['logs__filters-pagination-btn']} ${page === i + 1 ? styles['logs__filters-pagination-btn--active'] : ''}`}
-              onClick={() => setPage(i + 1)}
-            >
-              {i + 1}
+        {pages > 1 && (
+          <div className={styles['logs__filters-pagination']}>
+            <button disabled={page === 1} onClick={() => setPage(p => p - 1)}>
+              Предыдущая
             </button>
-          ))}
 
-          <button
-            className={`btn-reset ${styles['logs__filters-pagination-btn']} ${styles['logs__filters-pagination-btn--nav']}`}
-            disabled={page === pages}
-            onClick={() => setPage(p => p + 1)}
-          >
-            Следующая
-          </button>
+            {Array.from({ length: pages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setPage(i + 1)}
+                style={{ fontWeight: page === i + 1 ? 'bold' : 'normal' }}
+              >
+                {i + 1}
+              </button>
+            ))}
 
-        </div>
+            <button disabled={page === pages} onClick={() => setPage(p => p + 1)}>
+              Следующая
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

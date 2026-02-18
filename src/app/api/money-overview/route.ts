@@ -10,7 +10,7 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: 'Invalid server' }, { status: 400 })
     }
 
-    const db = dbConnections[1]
+    const db = dbConnections[0]
 
     const [moneyRows] = await db.query<any[]>(`
       SELECT cash, bank, business
