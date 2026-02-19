@@ -21,6 +21,28 @@
     gap: 15px;
     background-color: #060606;
     border-radius: 14.75px;
+
+    &--empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-left: 21px;
+      gap: 8px;
+    }
+  }
+
+  &__character-empty-title {
+    font-weight: 500;
+    font-size: 22px;
+    color: #9D9D9D;
+  }
+
+  &__character-empty-descr {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.54);
   }
 
   &__character-img-wrapper {
@@ -93,8 +115,17 @@
   &__character-inf {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 15px;
+  }
+
+  &__character-online-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    color: #FFFFFF;
   }
 
   &__character-current {
