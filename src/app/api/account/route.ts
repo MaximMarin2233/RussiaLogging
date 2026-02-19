@@ -3,7 +3,7 @@ import { dbConnections } from '@/lib/db'
 
 export async function GET() {
   try {
-    const db = dbConnections[1] // db1.russia-game.ru
+    const db = dbConnections[1]
 
     const [characters]: any = await db.query(
       `
@@ -21,8 +21,28 @@ export async function GET() {
       [380144]
     )
 
+    const charactersWithTime = await Promise.all(
+      characters.map(async (char: any) => {
+
+        const [rows]: any = await db.query(
+          `
+          SELECT seconds_for_day
+          FROM server1.game_per_day
+          WHERE char_id = ?
+          AND date = CURDATE()
+          `,
+          [char.char_id]
+        )
+
+        return {
+          ...char,
+          seconds_for_day: rows[0]?.seconds_for_day || 0
+        }
+      })
+    )
+
     return NextResponse.json({
-      characters
+      characters: charactersWithTime
     })
 
   } catch (err: any) {

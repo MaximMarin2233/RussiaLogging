@@ -12,6 +12,7 @@ type Character = {
   char_game_for_hour: string
   char_reg_time: number
   char_is_online: number
+  seconds_for_day: number
 }
 
 export default function General() {
@@ -21,6 +22,7 @@ export default function General() {
     fetch('/api/account')
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         setCharacters(data.characters || [])
       })
       .catch(console.error)
@@ -57,11 +59,7 @@ export default function General() {
             const regDate = new Date(char.char_reg_time * 1000)
               .toLocaleDateString('ru-RU')
 
-            let hours = 0
-            try {
-              const parsed = JSON.parse(char.char_game_for_hour)
-              hours = parsed?.game_for_hour?.length || 0
-            } catch { }
+            let hours = Math.floor(char.seconds_for_day / 3600)
 
             return (
               <div key={char.char_id} className={styles['general__character']}>
