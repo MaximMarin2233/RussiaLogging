@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import navStyles from './sections/Nav/Nav.module.scss'
 
@@ -10,6 +10,20 @@ import Money from '@/app/account/sections/Money/Money'
 import Activity from '@/app/account/sections/Activity/Activity'
 import Inventory from '@/app/account/sections/Inventory/Inventory'
 import Cars from '@/app/account/sections/Cars/Cars'
+
+type CurrentCharacter = {
+  char_id: number
+  char_bank_money: number
+  char_exp: number
+  char_is_online: number
+  char_last_ip: string
+  char_level: number
+  char_money: number
+  char_name: string
+  char_reg_time: number
+  char_sex: number
+  char_skin: number
+}
 
 enum Tabs {
   GENERAL = 'general',
@@ -22,6 +36,31 @@ enum Tabs {
 
 export default function Account() {
   const [activeTab, setActiveTab] = useState<Tabs>(Tabs.GENERAL)
+
+  const defaultCharacter: CurrentCharacter = {
+    char_id: 0,
+    char_bank_money: 0,
+    char_exp: 0,
+    char_is_online: 0,
+    char_last_ip: '-',
+    char_level: 1,
+    char_money: 0,
+    char_name: '-',
+    char_reg_time: Date.now(),
+    char_sex: 0,
+    char_skin: 0
+  }
+
+  const [character, setCharacter] = useState<CurrentCharacter>(defaultCharacter)
+
+  useEffect(() => {
+    fetch('/api/account')
+      .then(res => res.json())
+      .then(data => {
+        setCharacter(data.character)
+      })
+      .catch(console.error)
+  }, [])
 
   return (
     <div>
@@ -59,26 +98,44 @@ export default function Account() {
             <div className={navStyles['nav__profile']}>
               <div className={navStyles['nav__profile-img-wrapper']}>
                 <img src="account-nav/account-nav-img.png" alt="" width={213} height={251} />
-                <div className={navStyles['nav__profile-img-label']}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                    <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                    <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                  </svg>
-                  Онлайн
-                </div>
+
+
+                {character.char_is_online === 1 ? (
+                  <div className={navStyles['nav__profile-img-label']}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
+                      <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
+                      <circle cx="12" cy="12" r="5" fill="#80FF46" />
+                    </svg>
+                    Онлайн
+                  </div>
+                ) : (
+                  <div className={navStyles['nav__profile-img-label']}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="12" fill="#FE0A0A" fill-opacity="0.1" />
+                      <circle cx="12.2458" cy="12.2477" r="7.68525" fill="#FF4646" fill-opacity="0.1" />
+                      <circle cx="12.2481" cy="12.2471" r="4.26958" fill="#FF4646" />
+                    </svg>
+                    Оффлайн
+                  </div>
+                )}
+
+
+
               </div>
+
               <ul className={`list-reset ${navStyles['nav__profile-list']}`}>
                 <li className={navStyles['nav__profile-item']}>
                   <div className={navStyles['nav__profile-item-block']}>
                     Игровое имя
-                    <span>Denny Walker</span>
+                    <span>{character.char_name}</span>
                   </div>
                   <div className={navStyles['nav__profile-item-block']}>
                     ID игрока
-                    <span>8348294</span>
+                    <span>{character.char_id}</span>
                   </div>
                 </li>
+
                 <li className={navStyles['nav__profile-item']}>
                   <div className={navStyles['nav__profile-item-block']}>
                     Сеанс
@@ -86,17 +143,18 @@ export default function Account() {
                   </div>
                   <div className={navStyles['nav__profile-item-block']}>
                     Регистрация
-                    <span>12/05/2025</span>
+                    <span>{new Date(character.char_reg_time).toLocaleDateString('ru-RU')}</span>
                   </div>
                 </li>
+
                 <li className={navStyles['nav__profile-item']}>
                   <div className={navStyles['nav__profile-item-block']}>
                     IP адрес
-                    <span>94.180.130.179</span>
+                    <span>{character.char_last_ip}</span>
                   </div>
                   <div className={navStyles['nav__profile-item-block']}>
                     Уровень
-                    <span>10 ( опыт: 33 )</span>
+                    <span>{character.char_level} (опыт: {character.char_exp})</span>
                   </div>
                 </li>
               </ul>

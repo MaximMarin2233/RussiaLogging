@@ -22,7 +22,6 @@ export default function General() {
     fetch('/api/account')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setCharacters(data.characters || [])
       })
       .catch(console.error)
