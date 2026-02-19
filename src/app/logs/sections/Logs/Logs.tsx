@@ -85,46 +85,58 @@ export default function Logs() {
           </div>
         </div>
 
-        <div className={styles['logs__filters-table']}>
-          <div className={styles['logs__filters-table-header']}>
-            <div>Время</div>
-            <div className={styles['logs__column-center']}>Сервер</div>
-            <div>Тип</div>
-            <div>Игрок</div>
-            <div>Действие</div>
-            <div className={styles['logs__column-center']}>Сумма</div>
-            <div className={styles['logs__column-end']}>Баланс</div>
-          </div>
-
-          {loading && <div>Загрузка...</div>}
-
-          {!loading && paginatedLogs.map(log => (
-            <div key={log.id} className={styles['logs__filters-table-row']}>
-
-              <div>{log.time}</div>
-
-              <div className={styles['logs__column-center']}>
-                {log.server ?? '-'}
-              </div>
-
-              <div>{log.type}</div>
-
-              <div>
-                {log.player} <span>ID: {log.playerId}</span>
-              </div>
-
-              <div>{log.action}</div>
-
-              <div className={styles['logs__column-center']}>
-                {log.amount ? log.amount.toLocaleString('ru-RU') + ' ₽' : '-'}
-              </div>
-
-              <div className={styles['logs__column-end']}>
-                {log.balance ? log.balance.toLocaleString('ru-RU') + ' ₽' : '-'}
-              </div>
-
+        <div className={styles['logs__filters-table-wrapper']}>
+          <div className={`${styles['logs__filters-table']} ${styles['logs__filters-table--logs']}`}>
+            <div className={styles['logs__filters-table-header']}>
+              <div>Время</div>
+              <div className={styles['logs__column-center']}>Сервер</div>
+              <div>Тип</div>
+              <div>Игрок</div>
+              <div>Действие</div>
+              <div className={styles['logs__column-center']}>Сумма</div>
+              <div className={styles['logs__column-end']}>Баланс</div>
             </div>
-          ))}
+
+            {loading && <div>Загрузка...</div>}
+
+            {!loading && paginatedLogs.map(log => (
+              <div key={log.id} className={styles['logs__filters-table-row']}>
+
+                <div>{log.time}</div>
+
+                <div
+                  className={`
+                  ${styles['logs__column-center']}
+                  ${styles['logs__filters-table-server']}
+                  ${log.server === 1 ? styles['logs__filters-table-server--orange'] : ''}
+                  ${log.server === 2 ? styles['logs__filters-table-server--blue'] : ''}
+                  ${log.server === 3 ? styles['logs__filters-table-server--green'] : ''}
+                  ${log.server === 4 ? styles['logs__filters-table-server--red'] : ''}
+                  ${log.server === 5 ? styles['logs__filters-table-server--sky'] : ''}
+                `}
+                >
+                  {log.server ?? '-'}
+                </div>
+
+                <div>{log.type}</div>
+
+                <div>
+                  {log.player} <span>ID: {log.playerId}</span>
+                </div>
+
+                <div>{log.action}</div>
+
+                <div className={styles['logs__column-center']}>
+                  {log.amount ? log.amount.toLocaleString('ru-RU') + ' ₽' : '-'}
+                </div>
+
+                <div className={styles['logs__column-end']}>
+                  {log.balance ? log.balance.toLocaleString('ru-RU') + ' ₽' : '-'}
+                </div>
+
+              </div>
+            ))}
+          </div>
         </div>
 
         {pages > 1 && (

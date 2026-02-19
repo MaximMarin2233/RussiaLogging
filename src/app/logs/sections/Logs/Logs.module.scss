@@ -1,7 +1,7 @@
 .logs {
   padding: 37px 0 227px;
 
-  --row-val: 1fr 0.4fr 1fr 1fr 1.6fr 1fr 1fr;
+  --row-val: 150px 66px 290px 146px 270px 116px 123px;
 
   &__filters-wrapper {
     display: flex;
@@ -158,13 +158,13 @@
     font-weight: 700;
     font-size: 14px;
     color: #FFFFFF;
-    padding: 25px 15px;
+    padding: 25px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
+  }
 
-    &:last-child {
-      margin-left: auto;
-    }
+  &__filters-table-wrapper {
+    overflow-x: auto;
   }
 
   &__filters-table {
@@ -172,6 +172,10 @@
     flex-direction: column;
     gap: 15px;
     margin-bottom: 34px;
+
+    &--logs {
+      width: 1440px;
+    }
   }
 
   &__filters-table-header {
@@ -195,6 +199,11 @@
     padding: 17px 20px;
     align-items: center;
     gap: 40px;
+
+    >* {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   &__filters-table-column {
@@ -235,6 +244,36 @@
     &--active {
       color: #000000;
       background-color: #FFFFFF;
+    }
+  }
+
+  &__filters-table-server {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 41px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &--orange {
+      background: linear-gradient(141.28deg, #F6BC82 5.93%, #C94718 91.7%);
+    }
+
+    &--blue {
+      background: linear-gradient(141.28deg, #9C82F6 5.93%, #3F18C9 91.7%);
+    }
+
+    &--green {
+      background: linear-gradient(141.28deg, #53D58E 5.93%, #00713C 91.7%);
+    }
+
+    &--red {
+      background: linear-gradient(141.28deg, #F68282 5.93%, #C91818 91.7%);
+    }
+
+    &--sky {
+      background: linear-gradient(141.28deg, #3CBEFF 5.93%, #187FC9 91.7%);
     }
   }
 
