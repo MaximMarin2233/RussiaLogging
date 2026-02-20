@@ -23,7 +23,23 @@ type CurrentCharacter = {
   char_reg_time: number
   char_sex: number
   char_skin: number
+  char_family_name: string
+  char_fraction_name: string
+  char_phone_number: string
+  char_business_info: string
 }
+
+type Character = {
+  char_id: number
+  char_name: string
+  char_skin: number
+  char_level: number
+  char_game_for_hour: string
+  char_reg_time: number
+  char_is_online: number
+  seconds_for_day: number
+}
+
 
 enum Tabs {
   GENERAL = 'general',
@@ -48,16 +64,22 @@ export default function Account() {
     char_name: '-',
     char_reg_time: Date.now(),
     char_sex: 0,
-    char_skin: 0
+    char_skin: 0,
+    char_family_name: '-',
+    char_fraction_name: '-',
+    char_phone_number: '-',
+    char_business_info: '-',
   }
 
   const [character, setCharacter] = useState<CurrentCharacter>(defaultCharacter)
+  const [characters, setCharacters] = useState<Character[]>([])
 
   useEffect(() => {
     fetch('/api/account')
       .then(res => res.json())
       .then(data => {
         setCharacter(data.character)
+        setCharacters(data.characters || [])
       })
       .catch(console.error)
   }, [])
@@ -242,7 +264,9 @@ export default function Account() {
         </div>
       </section>
 
-      {activeTab === Tabs.GENERAL && <General />}
+      {activeTab === Tabs.GENERAL && (
+        <General character={character} characters={characters} />
+      )}
       {activeTab === Tabs.PUNISHMENTS && <Punishments />}
       {activeTab === Tabs.MONEY && <Money />}
       {activeTab === Tabs.ACTIVITY && <Activity />}

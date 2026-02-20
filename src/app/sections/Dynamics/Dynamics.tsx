@@ -49,7 +49,6 @@ export default function Dynamics() {
     fetch(`/api/donation-dynamics?period=${period}`)
       .then(res => res.json())
       .then(d => {
-        console.log(d);
         setData(d)
         setLoading(false)
       })
@@ -123,8 +122,6 @@ export default function Dynamics() {
     fetch(`/api/money-overview?server=${server}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-
         setMoney(data)
       })
       .catch(console.error)
@@ -138,7 +135,6 @@ export default function Dynamics() {
     fetch('/api/activity')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setActivity(data)
       })
       .catch(console.error)

@@ -2,8 +2,6 @@
 
 import styles from './General.module.scss'
 
-import { useEffect, useState } from 'react'
-
 type CurrentCharacter = {
   char_id: number
   char_bank_money: number
@@ -33,49 +31,19 @@ type Character = {
   seconds_for_day: number
 }
 
-export default function General() {
-  const defaultCharacter: CurrentCharacter = {
-    char_id: 0,
-    char_bank_money: 0,
-    char_exp: 0,
-    char_is_online: 0,
-    char_last_ip: '-',
-    char_level: 1,
-    char_money: 0,
-    char_name: '-',
-    char_reg_time: Date.now(),
-    char_sex: 0,
-    char_skin: 0,
-    char_family_name: '-',
-    char_fraction_name: '-',
-    char_phone_number: '-',
-    char_business_info: '-',
-  }
-  const [character, setCharacter] = useState<CurrentCharacter>(defaultCharacter)
-  const [characters, setCharacters] = useState<Character[]>([])
+type Props = {
+  character: CurrentCharacter
+  characters: Character[]
+}
 
-  useEffect(() => {
-    fetch('/api/account')
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-
-        setCharacter(data.character)
-        setCharacters(data.characters || [])
-      })
-      .catch(console.error)
-  }, [])
-
+export default function General({ character, characters }: Props) {
   const filledSlots = [...characters]
-
   while (filledSlots.length < 3) {
     filledSlots.push(null as any)
   }
 
   function formatMoney(value: number) {
-    return value
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    return value.toLocaleString('ru-RU')
   }
 
   return (
