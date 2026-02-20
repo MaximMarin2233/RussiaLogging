@@ -112,8 +112,8 @@ export default function Account() {
                 ) : (
                   <div className={navStyles['nav__profile-img-label']}>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="24" height="24" rx="12" fill="#FE0A0A" fill-opacity="0.1" />
-                      <circle cx="12.2458" cy="12.2477" r="7.68525" fill="#FF4646" fill-opacity="0.1" />
+                      <rect width="24" height="24" rx="12" fill="#FE0A0A" fillOpacity="0.1" />
+                      <circle cx="12.2458" cy="12.2477" r="7.68525" fill="#FF4646" fillOpacity="0.1" />
                       <circle cx="12.2481" cy="12.2471" r="4.26958" fill="#FF4646" />
                     </svg>
                     Оффлайн

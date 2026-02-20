@@ -4,6 +4,24 @@ import styles from './General.module.scss'
 
 import { useEffect, useState } from 'react'
 
+type CurrentCharacter = {
+  char_id: number
+  char_bank_money: number
+  char_exp: number
+  char_is_online: number
+  char_last_ip: string
+  char_level: number
+  char_money: number
+  char_name: string
+  char_reg_time: number
+  char_sex: number
+  char_skin: number
+  char_family_name: string
+  char_fraction_name: string
+  char_phone_number: string
+  char_business_info: string
+}
+
 type Character = {
   char_id: number
   char_name: string
@@ -16,12 +34,33 @@ type Character = {
 }
 
 export default function General() {
+  const defaultCharacter: CurrentCharacter = {
+    char_id: 0,
+    char_bank_money: 0,
+    char_exp: 0,
+    char_is_online: 0,
+    char_last_ip: '-',
+    char_level: 1,
+    char_money: 0,
+    char_name: '-',
+    char_reg_time: Date.now(),
+    char_sex: 0,
+    char_skin: 0,
+    char_family_name: '-',
+    char_fraction_name: '-',
+    char_phone_number: '-',
+    char_business_info: '-',
+  }
+  const [character, setCharacter] = useState<CurrentCharacter>(defaultCharacter)
   const [characters, setCharacters] = useState<Character[]>([])
 
   useEffect(() => {
     fetch('/api/account')
       .then(res => res.json())
       .then(data => {
+        console.log(data);
+
+        setCharacter(data.character)
         setCharacters(data.characters || [])
       })
       .catch(console.error)
@@ -31,6 +70,12 @@ export default function General() {
 
   while (filledSlots.length < 3) {
     filledSlots.push(null as any)
+  }
+
+  function formatMoney(value: number) {
+    return value
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
 
   return (
@@ -141,17 +186,21 @@ export default function General() {
               <li className={styles['general__finance-item']}>
                 <img src="general/general-finance-1.png" alt="" />
                 Наличные
-                <span>3.534.000 ₽</span>
+                <span>{formatMoney(character.char_money)} ₽</span>
               </li>
+
               <li className={styles['general__finance-item']}>
                 <img src="general/general-finance-2.png" alt="" />
                 Банк
-                <span>3.534.000 ₽</span>
+                <span>{formatMoney(character.char_bank_money)} ₽</span>
               </li>
+
               <li className={`${styles['general__finance-item']} ${styles['general__finance-item--column']}`}>
                 <img src="general/general-finance-3.png" alt="" />
                 Всего
-                <span>33.534.000 ₽</span>
+                <span>
+                  {formatMoney(character.char_money + character.char_bank_money)} ₽
+                </span>
               </li>
             </ul>
           </div>
@@ -161,34 +210,34 @@ export default function General() {
               <li className={`${styles['general__finance-item']} ${styles['general__finance-item--grey']}`}>
                 <img src="general/general-finance-4.png" alt="" />
                 Семья
-                <span>1</span>
+                <span>{character.char_family_name}</span>
               </li>
               <li className={`${styles['general__finance-item']} ${styles['general__finance-item--grey']}`}>
                 <img src="general/general-finance-5.png" alt="" />
                 Телефон
-                <span>5300731</span>
-                <button className={`btn-reset ${styles['general__finance-item-btn']}`}>
+                <span>{character.char_phone_number}</span>
+                {/* <button className={`btn-reset ${styles['general__finance-item-btn']}`}>
                   <svg width="37" height="40" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="36.8513" height="40" rx="8" fill="white" fillOpacity="0.1" />
                     <path d="M14.5879 15.5251L19.3452 20L14.5879 24.4749L16.2092 26L22.5879 20L16.2092 14L14.5879 15.5251Z" fill="white" />
                   </svg>
-                </button>
+                </button> */}
               </li>
               <li className={`${styles['general__finance-item']} ${styles['general__finance-item--grey']} ${styles['general__finance-item--smaller']}`}>
                 <img src="general/general-finance-6.png" alt="" />
                 Фракция
-                <span>Городская поликлиника</span>
+                <span>{character.char_fraction_name}</span>
               </li>
               <li className={`${styles['general__finance-item']} ${styles['general__finance-item--grey']}`}>
                 <img src="general/general-finance-7.png" alt="" />
                 Бизнесы
-                <span>2</span>
-                <button className={`btn-reset ${styles['general__finance-item-btn']}`}>
+                <span>{character.char_business_info}</span>
+                {/* <button className={`btn-reset ${styles['general__finance-item-btn']}`}>
                   <svg width="37" height="40" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="36.8513" height="40" rx="8" fill="white" fillOpacity="0.1" />
                     <path d="M14.5879 15.5251L19.3452 20L14.5879 24.4749L16.2092 26L22.5879 20L16.2092 14L14.5879 15.5251Z" fill="white" />
                   </svg>
-                </button>
+                </button> */}
               </li>
             </ul>
           </div>

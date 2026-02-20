@@ -5,7 +5,8 @@ export async function GET() {
   try {
     const db = dbConnections[1]
 
-    // 1️⃣ Все персонажи аккаунта
+    const charId = 150644
+
     const [characters]: any = await db.query(
       `
       SELECT
@@ -22,10 +23,8 @@ export async function GET() {
       [380144]
     )
 
-    // 2️⃣ Добавляем seconds_for_day каждому персонажу
     const charactersWithTime = await Promise.all(
       characters.map(async (char: any) => {
-
         const [rows]: any = await db.query(
           `
           SELECT seconds_for_day
@@ -38,15 +37,12 @@ export async function GET() {
 
         return {
           ...char,
-          seconds_for_day: rows[0]?.seconds_for_day || 0
+          seconds_for_day: rows?.[0]?.seconds_for_day || 0
         }
       })
     )
 
-    const charId = 150644
-
-    // 3️⃣ Информация о выбранном персонаже (временно 150644)
-    const [character]: any = await db.query(
+    const [characterRows]: any = await db.query(
       `
       SELECT
         char_name,
@@ -65,16 +61,93 @@ export async function GET() {
       [charId]
     )
 
-    const dbCharacter = character[0] || {}
+    const dbCharacter = characterRows?.[0] || {}
 
-    const characterInf = {
-      char_id: charId, // добавляем вручную
-      ...dbCharacter
+    const [familyRows]: any = await db.query(
+      `
+      SELECT IFNULL
+      (
+          (
+              SELECT f.family_name
+              FROM server1.family_member fm
+              LEFT JOIN server1.family f ON fm.family_id = f.id
+              WHERE fm.char_id = ?
+              LIMIT 1
+          ),
+          'Отсутствует'
+      ) AS family_name
+      `,
+      [charId]
+    )
+
+    const [fractionRows]: any = await db.query(
+      `
+      SELECT IFNULL
+      (
+          (
+              SELECT f.name
+              FROM server1.fraction_members fm
+              LEFT JOIN server1.fraction f ON fm.fraction_member_fraction_id = f.id
+              WHERE fm.fraction_member_char_id = ?
+              LIMIT 1
+          ),
+          'Отсутствует'
+      ) AS fraction_name
+      `,
+      [charId]
+    )
+
+    const [phoneRows]: any = await db.query(
+      `
+      SELECT IFNULL
+      (
+          (
+              SELECT number
+              FROM server1.phone_number
+              WHERE char_id = ?
+              LIMIT 1
+          ),
+          'Нет активного'
+      ) AS phone_number
+      `,
+      [charId]
+    )
+
+    const [businessRows]: any = await db.query(
+      `
+      SELECT
+          CASE
+              WHEN count = 0 THEN 'Отсутствует'
+              WHEN count = 1 THEN (
+                  SELECT name
+                  FROM server1.business
+                  WHERE owner_char_id = ?
+                  LIMIT 1
+              )
+              ELSE CAST(count AS CHAR)
+          END AS business_info
+      FROM
+      (
+          SELECT COUNT(*) AS count
+          FROM server1.business
+          WHERE owner_char_id = ?
+      ) b
+      `,
+      [charId, charId]
+    )
+
+    const character = {
+      char_id: charId,
+      ...dbCharacter,
+      char_family_name: familyRows?.[0]?.family_name || 'Отсутствует',
+      char_fraction_name: fractionRows?.[0]?.fraction_name || 'Отсутствует',
+      char_phone_number: phoneRows?.[0]?.phone_number || 'Нет активного',
+      char_business_info: businessRows?.[0]?.business_info || 'Отсутствует'
     }
 
     return NextResponse.json({
       characters: charactersWithTime,
-      character: characterInf
+      character
     })
 
   } catch (err: any) {
