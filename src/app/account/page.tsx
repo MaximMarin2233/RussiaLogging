@@ -40,6 +40,20 @@ type Character = {
   seconds_for_day: number
 }
 
+type NicknameHistoryItem = {
+  char_id: number
+  old_name: string
+  new_name: string
+  time: string
+  type: number
+  admin_name: string
+}
+
+type IpHistoryItem = {
+  count: number
+  ip: string
+  last_date: string
+}
 
 enum Tabs {
   GENERAL = 'general',
@@ -73,6 +87,8 @@ export default function Account() {
 
   const [character, setCharacter] = useState<CurrentCharacter>(defaultCharacter)
   const [characters, setCharacters] = useState<Character[]>([])
+  const [nicknameHistory, setNicknameHistory] = useState<NicknameHistoryItem[]>([])
+  const [ipHistory, setIpHistory] = useState<IpHistoryItem[]>([])
 
   useEffect(() => {
     fetch('/api/account')
@@ -81,6 +97,8 @@ export default function Account() {
         console.log(data);
         setCharacter(data.character)
         setCharacters(data.characters || [])
+        setNicknameHistory(data.nicknameHistory || [])
+        setIpHistory(data.ipHistory || [])
       })
       .catch(console.error)
   }, [])
@@ -266,7 +284,12 @@ export default function Account() {
       </section>
 
       {activeTab === Tabs.GENERAL && (
-        <General character={character} characters={characters} />
+        <General
+          character={character}
+          characters={characters}
+          nicknameHistory={nicknameHistory}
+          ipHistory={ipHistory}
+        />
       )}
       {activeTab === Tabs.PUNISHMENTS && <Punishments />}
       {activeTab === Tabs.MONEY && <Money />}

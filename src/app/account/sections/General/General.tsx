@@ -31,12 +31,30 @@ type Character = {
   seconds_for_day: number
 }
 
+type NicknameHistoryItem = {
+  char_id: number
+  old_name: string
+  new_name: string
+  time: string
+  type: number
+  admin_name: string
+}
+
+type IpHistoryItem = {
+  count: number
+  ip: string
+  last_date: string
+}
+
 type Props = {
   character: CurrentCharacter
   characters: Character[]
+  nicknameHistory: NicknameHistoryItem[]
+  ipHistory: IpHistoryItem[]
 }
 
-export default function General({ character, characters }: Props) {
+
+export default function General({ character, characters, nicknameHistory, ipHistory }: Props) {
   const filledSlots = [...characters]
   while (filledSlots.length < 3) {
     filledSlots.push(null as any)
@@ -369,22 +387,41 @@ export default function General({ character, characters }: Props) {
         </div>
         <div className={styles['general__history']}>
           <h2 className={`main-title ${styles['general__title']}`}>История смены ников</h2>
-          <div className={styles['general__history-table']}>
-            <div className={styles['general__history-table-header']}>
-              <div className={styles['general__history-table-header-column']}>Старый ник</div>
-              <div className={styles['general__history-table-header-column']}>Новый ник</div>
-              <div className={styles['general__history-table-header-column']}>Дата смены</div>
-              <div className={styles['general__history-table-header-column']}>Способ</div>
-              <div className={styles['general__history-table-header-column']}>Кто сменил</div>
-            </div>
-            <div className={styles['general__history-table-row']}>
-              <div className={styles['general__history-table-column']}>Emmanuel Katanov</div>
-              <div className={styles['general__history-table-column']}>Denny Walker</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Донат</div>
+          <div className={styles['general__history-table-wrapper']}>
+            <div className={`${styles['general__history-table']} ${styles['general__history-table--width']}`}>
+              <div className={styles['general__history-table-header']}>
+                <div className={styles['general__history-table-header-column']}>Старый ник</div>
+                <div className={styles['general__history-table-header-column']}>Новый ник</div>
+                <div className={styles['general__history-table-header-column']}>Дата смены</div>
+                <div className={styles['general__history-table-header-column']}>Способ</div>
+                <div className={styles['general__history-table-header-column']}>Кто сменил</div>
               </div>
-              <div className={styles['general__history-table-column']}>Сам игрок</div>
+
+              {nicknameHistory.map((item) => (
+                <div className={styles['general__history-table-row']} key={item.time}>
+                  <div className={styles['general__history-table-column']}>{item.old_name}</div>
+                  <div className={styles['general__history-table-column']}>{item.new_name}</div>
+                  <div className={styles['general__history-table-column']}>
+                    {new Date(item.time).toLocaleString('ru-RU', { hour12: false })}
+                  </div>
+                  <div className={styles['general__history-table-column']}>
+                    {item.type === 1 ? (
+                      <div className={styles['general__history-table-column-label']}>
+                        Донат
+                      </div>
+                    ) : (
+                      <div className={`${styles['general__history-table-column-label']} ${styles['general__history-table-column-label--purple']}`}>
+                        Администратор
+                      </div>
+                    )}
+
+
+                  </div>
+                  <div className={styles['general__history-table-column']}>
+                    {item.admin_name}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
           <div className={styles['general__history-inf']}>
@@ -406,64 +443,24 @@ export default function General({ character, characters }: Props) {
           </div>
 
           <h2 className={`main-title ${styles['general__title']}`}>История IP адресов</h2>
-          <div className={styles['general__history-table']}>
-            <div className={`${styles['general__history-table-header']} ${styles['general__history-table-header--6']}`}>
-              <div className={styles['general__history-table-header-column']}>IP адрес</div>
-              <div className={styles['general__history-table-header-column']}>Новый ник</div>
-              <div className={styles['general__history-table-header-column']}>Дата смены</div>
-              <div className={styles['general__history-table-header-column']}>Кол-во входов</div>
-              <div className={styles['general__history-table-header-column']}>Кол-во входов</div>
-              <div className={styles['general__history-table-header-column']}>Статус</div>
-            </div>
-            <div className={`${styles['general__history-table-row']} ${styles['general__history-table-row--6']}`}>
-              <div className={styles['general__history-table-column']}>98.162.43.51</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>Сегодня 14:35</div>
-              <div className={styles['general__history-table-column']}>323</div>
-              <div className={styles['general__history-table-column']}>Москва, RU</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Активный</div>
+          <div className={styles['general__history-table-wrapper']}>
+            <div className={`${styles['general__history-table']} ${styles['general__history-table--width']}`}>
+              <div className={`${styles['general__history-table-header']} ${styles['general__history-table-header--3']}`}>
+                <div className={styles['general__history-table-header-column']}>IP адрес</div>
+                <div className={styles['general__history-table-header-column']}>Кол-во входов</div>
+                <div className={styles['general__history-table-header-column']}>Последний вход</div>
               </div>
-            </div>
-            <div className={`${styles['general__history-table-row']} ${styles['general__history-table-row--6']}`}>
-              <div className={styles['general__history-table-column']}>98.162.43.51</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>Сегодня 14:35</div>
-              <div className={styles['general__history-table-column']}>323</div>
-              <div className={styles['general__history-table-column']}>Москва, RU</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Активный</div>
-              </div>
-            </div>
-            <div className={`${styles['general__history-table-row']} ${styles['general__history-table-row--6']}`}>
-              <div className={styles['general__history-table-column']}>98.162.43.51</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>Сегодня 14:35</div>
-              <div className={styles['general__history-table-column']}>323</div>
-              <div className={styles['general__history-table-column']}>Москва, RU</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Активный</div>
-              </div>
-            </div>
-            <div className={`${styles['general__history-table-row']} ${styles['general__history-table-row--6']}`}>
-              <div className={styles['general__history-table-column']}>98.162.43.51</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>Сегодня 14:35</div>
-              <div className={styles['general__history-table-column']}>323</div>
-              <div className={styles['general__history-table-column']}>Москва, RU</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Активный</div>
-              </div>
-            </div>
-            <div className={`${styles['general__history-table-row']} ${styles['general__history-table-row--6']}`}>
-              <div className={styles['general__history-table-column']}>98.162.43.51</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>Сегодня 14:35</div>
-              <div className={styles['general__history-table-column']}>323</div>
-              <div className={styles['general__history-table-column']}>Москва, RU</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Активный</div>
-              </div>
+              {
+                ipHistory.map((item: any, index: number) => (
+                  <div key={index} className={`${styles['general__history-table-row']} ${styles['general__history-table-row--3']}`}>
+                    <div className={styles['general__history-table-column']}>{item.ip}</div>
+                    <div className={styles['general__history-table-column']}>{item.count}</div>
+                    <div className={styles['general__history-table-column']}>
+                      {new Date(item.last_date).toLocaleString('ru-RU', { hour12: false })}
+                    </div>
+                  </div>
+                ))
+              }
             </div>
           </div>
           <div className={styles['general__history-inf']}>
@@ -484,7 +481,7 @@ export default function General({ character, characters }: Props) {
             </div>
           </div>
 
-          <div className={styles['general__history-twin']}>
+          {/* <div className={styles['general__history-twin']}>
             <h3 className={styles['general__history-twin-title']}>
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M13.7801 29.1916C13.7441 29.1916 13.6961 29.2156 13.6601 29.2156C11.3321 28.0636 9.43607 26.1557 8.27207 23.8277C8.27207 23.7917 8.29607 23.7437 8.29607 23.7077C9.76007 24.1397 11.2721 24.4637 12.7721 24.7157C13.0361 26.2277 13.3481 27.7276 13.7801 29.1916Z" fill="white" />
@@ -524,7 +521,7 @@ export default function General({ character, characters }: Props) {
             <div className={styles['general__history-twin-descr']}>
               Найдено 2 аккаунта с совпадающим IP адресами. Рекомендуется провести дополнительную проверку
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
