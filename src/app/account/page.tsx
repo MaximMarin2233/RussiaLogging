@@ -78,6 +78,7 @@ export default function Account() {
     fetch('/api/account')
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         setCharacter(data.character)
         setCharacters(data.characters || [])
       })

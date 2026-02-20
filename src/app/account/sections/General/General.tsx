@@ -386,42 +386,6 @@ export default function General({ character, characters }: Props) {
               </div>
               <div className={styles['general__history-table-column']}>Сам игрок</div>
             </div>
-            <div className={styles['general__history-table-row']}>
-              <div className={styles['general__history-table-column']}>Emmanuel Katanov</div>
-              <div className={styles['general__history-table-column']}>Denny Walker</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Донат</div>
-              </div>
-              <div className={styles['general__history-table-column']}>Сам игрок</div>
-            </div>
-            <div className={styles['general__history-table-row']}>
-              <div className={styles['general__history-table-column']}>Emmanuel Katanov</div>
-              <div className={styles['general__history-table-column']}>Denny Walker</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Донат</div>
-              </div>
-              <div className={styles['general__history-table-column']}>Сам игрок</div>
-            </div>
-            <div className={styles['general__history-table-row']}>
-              <div className={styles['general__history-table-column']}>Emmanuel Katanov</div>
-              <div className={styles['general__history-table-column']}>Denny Walker</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Донат</div>
-              </div>
-              <div className={styles['general__history-table-column']}>Сам игрок</div>
-            </div>
-            <div className={styles['general__history-table-row']}>
-              <div className={styles['general__history-table-column']}>Emmanuel Katanov</div>
-              <div className={styles['general__history-table-column']}>Denny Walker</div>
-              <div className={styles['general__history-table-column']}>26.12.2025 19:40</div>
-              <div className={styles['general__history-table-column']}>
-                <div className={styles['general__history-table-column-label']}>Донат</div>
-              </div>
-              <div className={styles['general__history-table-column']}>Сам игрок</div>
-            </div>
           </div>
           <div className={styles['general__history-inf']}>
             <div className={styles['general__history-current']}>

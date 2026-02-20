@@ -4,7 +4,6 @@ import { dbConnections } from '@/lib/db'
 export async function GET() {
   try {
     const db = dbConnections[1]
-
     const charId = 150644
 
     const [characters]: any = await db.query(
@@ -145,9 +144,83 @@ export async function GET() {
       char_business_info: businessRows?.[0]?.business_info || 'Отсутствует'
     }
 
+    const [nicknameHistory]: any = await db.query(
+      `
+      SELECT
+          cnh.char_id,
+          cnh.old_name,
+          cnh.new_name,
+          cnh.time,
+          cnh.type,
+          IFNULL(c.char_name, 'Администратор') AS admin_name
+      FROM
+          server1.character_nickname_history cnh
+      LEFT JOIN 
+          server1.characters c ON cnh.admin_id = c.char_id
+      WHERE
+          cnh.char_id = ?
+      ORDER BY cnh.time DESC
+      `,
+      [charId]
+    )
+
+    const [ipHistory]: any = await db.query(
+      `
+      SELECT
+          text AS ip,
+          COUNT(*) AS count,
+          MAX(date) AS last_date
+      FROM
+          server1.log_action
+      WHERE
+          char_id = ?
+      AND
+          reason_id = 1
+      GROUP BY
+          text
+      ORDER BY
+          last_date DESC
+      `,
+      [charId]
+    )
+
+    const [ipTwinks]: any = await db.query(
+      `
+      SELECT DISTINCT
+          c.char_name,
+          la.text AS ip
+      FROM
+          server1.log_action la
+      LEFT JOIN
+          server1.characters c ON la.char_id = c.char_id
+      WHERE
+          la.reason_id = 1
+      AND
+          la.text IN
+          (
+              SELECT DISTINCT
+                  text
+              FROM
+                  server1.log_action
+              WHERE
+                  char_id = ?
+              AND 
+                  reason_id = 1
+          )
+      AND
+          la.char_id != ?
+      ORDER BY
+          c.char_name
+      `,
+      [charId, charId]
+    )
+
     return NextResponse.json({
       characters: charactersWithTime,
-      character
+      character,
+      nicknameHistory,
+      ipHistory,
+      ipTwinks
     })
 
   } catch (err: any) {
