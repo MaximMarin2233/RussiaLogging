@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import styles from './Money.module.scss'
+import activityStyles from '@/app/account/sections/Activity/Activity.module.scss'
 
 type BalanceItem = {
   date: string
@@ -42,6 +43,28 @@ export default function Money() {
     return date.toLocaleString('ru-RU')
   }
 
+  const weekDays = [
+    'Понедельник',
+    'Вторник',
+    'Среда',
+    'Четверг',
+    'Пятница',
+    'Суббота',
+    'Воскресенье',
+  ]
+
+  const mapped = weekDays.map((dayName, index) => {
+    const dayData = balanceWeek.find(d => new Date(d.date).getDay() === index)
+    const amount = Number(dayData?.total_amount || 0)
+
+    return {
+      dayName,
+      amount
+    }
+  })
+
+  const totalAmount = mapped.reduce((sum, d) => sum + d.amount, 0)
+
   return (
     <section className={styles['money']}>
       <div className="container">
@@ -50,19 +73,32 @@ export default function Money() {
             График баланса за неделю
           </h2>
 
-          {balanceWeek.length > 0 ? (
-            <div className={styles['money__graph']}>
-              {balanceWeek.map((item, index) => (
-                <div key={index}>
-                  {formatDate(item.date)} — {formatMoney(item.total_amount)} ₽
-                </div>
-              ))}
+          <div className={activityStyles['activity__chart-wrapper']}>
+            <div className={activityStyles['activity__chart']}>
+
+              {mapped.map((day, index) => {
+                const percent = totalAmount > 0
+                  ? (day.amount / totalAmount) * 100
+                  : 0
+
+                return (
+                  <div key={index} className={activityStyles['activity__chart-block']}>
+                    <div
+                      className={activityStyles['activity__chart-block-progress']}
+                      style={{ height: `${percent}%` }}
+                    >
+                      <span>{formatMoney(day.amount)} ₽</span>
+                    </div>
+
+                    <div className={activityStyles['activity__chart-block-text']}>
+                      {day.dayName}
+                    </div>
+                  </div>
+                )
+              })}
+
             </div>
-          ) : (
-            <div className={styles['money__empty']}>
-              Нет данных за последние 7 дней
-            </div>
-          )}
+          </div>
         </div>
 
         <h2 className={`main-title ${styles['money__operations-title']}`}>
