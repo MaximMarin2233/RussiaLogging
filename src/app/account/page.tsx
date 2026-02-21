@@ -184,7 +184,7 @@ export default function Account() {
                   </div>
                   <div className={navStyles['nav__profile-item-block']}>
                     Регистрация
-                    <span>{new Date(character.char_reg_time).toLocaleDateString('ru-RU')}</span>
+                    <span>{new Date(character.char_reg_time * 1000).toLocaleDateString('ru-RU')}</span>
                   </div>
                 </li>
 
@@ -293,7 +293,9 @@ export default function Account() {
       )}
       {activeTab === Tabs.PUNISHMENTS && <Punishments />}
       {activeTab === Tabs.MONEY && <Money />}
-      {activeTab === Tabs.ACTIVITY && <Activity />}
+      {activeTab === Tabs.ACTIVITY && <Activity
+        character={character}
+      />}
       {activeTab === Tabs.INVENTORY && <Inventory />}
       {activeTab === Tabs.CARS && <Cars />}
     </div>
