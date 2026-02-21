@@ -109,7 +109,6 @@ export default function Admins() {
               ))}
             </div>
           </div>
-          {/* Пагинация */}
           {pages > 1 && (
             <div className={logsStyles['logs__filters-pagination']}>
               <button

@@ -3,9 +3,8 @@ import { dbConnections } from '@/lib/db'
 
 export async function GET() {
   try {
-    const db = dbConnections[1] // используем сервер 1, поменяй при необходимости
+    const db = dbConnections[1]
 
-    // Получаем всех админов с их персонажами
     const [rows]: any = await db.query(`
       SELECT
           c.char_id,
