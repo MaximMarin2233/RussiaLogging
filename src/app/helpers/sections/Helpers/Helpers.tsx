@@ -1,20 +1,20 @@
 import styles from './Helpers.module.scss'
 import adminsStyles from '@/app/admins/sections/Admins/Admins.module.scss'
 
-import CustomSelect from '@/components/CustomSelect/CustomSelect'
+// import CustomSelect from '@/components/CustomSelect/CustomSelect'
 
 export default function Helpers() {
-  const serverOptions = [
-    { value: '1', label: 'Все серверы' },
-    { value: '2', label: 'Опция 2' },
-    { value: '3', label: 'Опция 3' },
-  ]
+  // const serverOptions = [
+  //   { value: '1', label: 'Все серверы' },
+  //   { value: '2', label: 'Опция 2' },
+  //   { value: '3', label: 'Опция 3' },
+  // ]
 
-  const statusOptions = [
-    { value: '1', label: 'Все статусы' },
-    { value: '2', label: 'Опция 2' },
-    { value: '3', label: 'Опция 3' },
-  ]
+  // const statusOptions = [
+  //   { value: '1', label: 'Все статусы' },
+  //   { value: '2', label: 'Опция 2' },
+  //   { value: '3', label: 'Опция 3' },
+  // ]
   return (
     <section className={styles['helpers']}>
       <div className="container">
@@ -55,7 +55,7 @@ export default function Helpers() {
               <span>1.543</span>
             </div>
           </div>
-
+          {/* 
           <div className={`${adminsStyles['admins__filters']} ${styles['helpers__filters']}`}>
             <div className={`${adminsStyles['admins__filters-title']} ${styles['helpers__filters-title']} ${styles['helpers__filters-title--center']}`}>
               Фильтры
@@ -65,7 +65,7 @@ export default function Helpers() {
               <CustomSelect options={serverOptions} className={adminsStyles['admins__filters-select']} />
               <CustomSelect options={statusOptions} className={adminsStyles['admins__filters-select']} />
             </div>
-          </div>
+          </div> */}
 
           <div className={adminsStyles['admins__table']}>
             <div className={`${adminsStyles['admins__table-header']} ${styles['helpers__table-header']}`}>

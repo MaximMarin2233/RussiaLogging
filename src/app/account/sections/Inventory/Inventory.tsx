@@ -37,7 +37,6 @@ export default function Inventory() {
   const progress =
     (inventory.total_items / inventory.max_slots) * 100
 
-  // создаём полный список слотов (с предметами и пустыми)
   const slots = Array.from(
     { length: inventory.max_slots },
     (_, index) => inventory.items[index] || null
@@ -73,7 +72,6 @@ export default function Inventory() {
 
               {slots.map((item, index) => {
 
-                // ПУСТОЙ СЛОТ
                 if (!item) {
                   return (
                     <div
@@ -87,7 +85,6 @@ export default function Inventory() {
                   )
                 }
 
-                // СЛОТ С ПРЕДМЕТОМ
                 return (
                   <div
                     key={index}

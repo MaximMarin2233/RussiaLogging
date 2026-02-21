@@ -42,7 +42,7 @@ export default function Cars() {
 
   const getFuelPercent = (fuel: number) => {
 
-    return Math.round(fuel) // fuel already 0–100
+    return Math.round(fuel)
 
   }
 
@@ -136,7 +136,6 @@ export default function Cars() {
 
                       <div className={styles['cars__item-inf']}>
 
-                        {/* Fuel */}
 
                         <div className={styles['cars__item-inf-block']}>
 
@@ -157,7 +156,6 @@ export default function Cars() {
                         </div>
 
 
-                        {/* Health */}
 
                         <div className={styles['cars__item-inf-block']}>
 

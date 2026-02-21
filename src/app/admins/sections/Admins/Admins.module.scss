@@ -72,15 +72,23 @@
     border: none;
   }
 
+  &__table-wrapper {
+    overflow-x: auto;
+  }
+
   &__table {
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    &--width {
+      width: 1440px;
+    }
   }
 
   &__table-header {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     padding: 0 28px 9px;
   }
 
@@ -92,7 +100,7 @@
 
   &__table-row {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     justify-items: start;
     align-items: center;
     padding: 18px 17px 18px 28px;

@@ -3,10 +3,9 @@ import { dbConnections } from '@/lib/db'
 
 export async function GET() {
   try {
-    const db = dbConnections[1] // server1
+    const db = dbConnections[1]
     const charId = 150644
 
-    // Максимальное количество слотов
     const [maxSlotsRows]: any = await db.query(
       `
       SELECT
@@ -19,7 +18,6 @@ export async function GET() {
 
     const maxSlots = maxSlotsRows?.[0]?.max_slots || 0
 
-    // Общее количество предметов
     const [totalItemsRows]: any = await db.query(
       `
       SELECT 
@@ -32,7 +30,6 @@ export async function GET() {
 
     const totalItems = totalItemsRows?.[0]?.total_amount || 0
 
-    // Предметы инвентаря
     const [itemsRows]: any = await db.query(
       `
       SELECT

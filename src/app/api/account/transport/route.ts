@@ -5,7 +5,7 @@ export async function GET() {
 
   try {
 
-    const db = dbConnections[1] // server1
+    const db = dbConnections[1]
     const charId = 150644
 
     const [rows]: any = await db.query(
@@ -40,9 +40,9 @@ export async function GET() {
 
       mileage: car.own_car_mileage,
 
-      health: car.own_car_health, // 0–1000
+      health: car.own_car_health,
 
-      fuel: car.own_car_fuel, // 0–100
+      fuel: car.own_car_fuel,
 
       licence_plate: {
         country: car.licence_plate_country,

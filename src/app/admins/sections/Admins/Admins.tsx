@@ -1,20 +1,54 @@
-import styles from './Admins.module.scss'
+'use client'
 
-import CustomSelect from '@/components/CustomSelect/CustomSelect'
+import { useEffect, useState } from 'react'
+
+import styles from './Admins.module.scss'
+import logsStyles from '@/app/logs/sections/Logs/Logs.module.scss'
+
+// import CustomSelect from '@/components/CustomSelect/CustomSelect'
+
+type Admin = {
+  char_id: number | null
+  char_act_id: number | null
+  char_name: string | null
+  is_online: number | null
+  admin_level: string
+  admin_ans: number
+  admin_kicks: number
+}
 
 export default function Admins() {
-  const serverOptions = [
-    { value: '1', label: 'Все серверы' },
-    { value: '2', label: 'Опция 2' },
-    { value: '3', label: 'Опция 3' },
-  ]
+  // const serverOptions = [
+  //   { value: '1', label: 'Все серверы' },
+  //   { value: '2', label: 'Опция 2' },
+  //   { value: '3', label: 'Опция 3' },
+  // ]
 
-  const statusOptions = [
-    { value: '1', label: 'Все статусы' },
-    { value: '2', label: 'Опция 2' },
-    { value: '3', label: 'Опция 3' },
-  ]
+  // const statusOptions = [
+  //   { value: '1', label: 'Все статусы' },
+  //   { value: '2', label: 'Опция 2' },
+  //   { value: '3', label: 'Опция 3' },
+  // ]
 
+
+  const [admins, setAdmins] = useState<Admin[]>([])
+  const [page, setPage] = useState(1)
+  const perPage = 10
+
+  useEffect(() => {
+    fetch('/api/admins')
+      .then(res => res.json())
+      .then(data => {
+        console.log('ADMINS:', data)
+        setAdmins(data.admins || [])
+      })
+      .catch(err => {
+        console.error('ADMINS ERROR:', err)
+      })
+  }, [])
+
+  const pages = Math.ceil(admins.length / perPage)
+  const paginatedAdmins = admins.slice((page - 1) * perPage, page * perPage)
   return (
     <section className={styles['admins']}>
       <div className="container">
@@ -32,7 +66,7 @@ export default function Admins() {
               Добавить администратора
             </button>
           </div>
-          <div className={styles['admins__filters']}>
+          {/* <div className={styles['admins__filters']}>
             <div className={styles['admins__filters-title']}>
               Фильтры
             </div>
@@ -40,203 +74,71 @@ export default function Admins() {
               <CustomSelect options={serverOptions} className={styles['admins__filters-select']} />
               <CustomSelect options={statusOptions} className={styles['admins__filters-select']} />
             </div>
-          </div>
-          <div className={styles['admins__table']}>
-            <div className={styles['admins__table-header']}>
-              <div className={styles['admins__table-header-column']}>
-                Ник
+          </div> */}
+          <div className={styles['admins__table-wrapper']}>
+            <div className={`${styles['admins__table']} ${styles['admins__table--width']}`}>
+              <div className={styles['admins__table-header']}>
+                <div className={styles['admins__table-header-column']}>Ник</div>
+                <div className={styles['admins__table-header-column']}>Роль</div>
+                <div className={styles['admins__table-header-column']}>Репорты</div>
+                <div className={styles['admins__table-header-column']}>Кики</div>
+                <div className={styles['admins__table-header-column']}>Онлайн</div>
               </div>
-              <div className={styles['admins__table-header-column']}>
-                Сервер
-              </div>
-              <div className={styles['admins__table-header-column']}>
-                Роль
-              </div>
-              <div className={styles['admins__table-header-column']}>
-                Репорты
-              </div>
-              <div className={styles['admins__table-header-column']}>
-                Кики
-              </div>
-              <div className={styles['admins__table-header-column']}>
-                Онлайн
-              </div>
-              <div className={styles['admins__table-header-column']}>
-                Статус
-              </div>
-            </div>
-            <div className={styles['admins__table-row']}>
-              <div className={styles['admins__table-column']}>
-                Denny Walker
-              </div>
-              <div className={styles['admins__table-column']}>
-                <div className={styles['admins__table-column-label']}>
-                  #1
-                </div>
-              </div>
-              <div className={styles['admins__table-column']}>
-                Гл.админ
-              </div>
-              <div className={styles['admins__table-column']}>
-                1.483
-              </div>
-              <div className={styles['admins__table-column']}>
-                4ч 23м
-              </div>
-              <div className={styles['admins__table-column']}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                </svg>
-              </div>
-              <div className={styles['admins__table-column']}>
-                <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  <span>Подробнее</span>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div className={styles['admins__table-row']}>
-              <div className={styles['admins__table-column']}>
-                Denny Walker
-              </div>
-              <div className={styles['admins__table-column']}>
-                <div className={styles['admins__table-column-label']}>
-                  #1
-                </div>
-              </div>
-              <div className={styles['admins__table-column']}>
-                Гл.админ
-              </div>
-              <div className={styles['admins__table-column']}>
-                1.483
-              </div>
-              <div className={styles['admins__table-column']}>
-                4ч 23м
-              </div>
-              <div className={styles['admins__table-column']}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                </svg>
-              </div>
-              <div className={styles['admins__table-column']}>
-                <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  <span>Подробнее</span>
 
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div className={styles['admins__table-row']}>
-              <div className={styles['admins__table-column']}>
-                Denny Walker
-              </div>
-              <div className={styles['admins__table-column']}>
-                <div className={styles['admins__table-column-label']}>
-                  #1
+              {paginatedAdmins.map((admin, i) => (
+                <div key={i} className={styles['admins__table-row']}>
+                  <div className={styles['admins__table-column']}>{admin.char_name || '—'}</div>
+                  <div className={styles['admins__table-column']}>{admin.admin_level}</div>
+                  <div className={styles['admins__table-column']}>{admin.admin_ans}</div>
+                  <div className={styles['admins__table-column']}>{admin.admin_kicks}</div>
+                  <div className={styles['admins__table-column']}>
+                    {admin.is_online ? (
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
+                        <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
+                        <circle cx="12" cy="12" r="5" fill="#80FF46" />
+                      </svg>
+                    ) : (
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="9" fill="#FF4E4E" fillOpacity="0.2" />
+                        <circle cx="12" cy="12" r="5" fill="#FF4E4E" />
+                      </svg>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className={styles['admins__table-column']}>
-                Гл.админ
-              </div>
-              <div className={styles['admins__table-column']}>
-                1.483
-              </div>
-              <div className={styles['admins__table-column']}>
-                4ч 23м
-              </div>
-              <div className={styles['admins__table-column']}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                </svg>
-              </div>
-              <div className={styles['admins__table-column']}>
-                <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  <span>Подробнее</span>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div className={styles['admins__table-row']}>
-              <div className={styles['admins__table-column']}>
-                Denny Walker
-              </div>
-              <div className={styles['admins__table-column']}>
-                <div className={styles['admins__table-column-label']}>
-                  #1
-                </div>
-              </div>
-              <div className={styles['admins__table-column']}>
-                Гл.админ
-              </div>
-              <div className={styles['admins__table-column']}>
-                1.483
-              </div>
-              <div className={styles['admins__table-column']}>
-                4ч 23м
-              </div>
-              <div className={styles['admins__table-column']}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                </svg>
-              </div>
-              <div className={styles['admins__table-column']}>
-                <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  <span>Подробнее</span>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div className={styles['admins__table-row']}>
-              <div className={styles['admins__table-column']}>
-                Denny Walker
-              </div>
-              <div className={styles['admins__table-column']}>
-                <div className={styles['admins__table-column-label']}>
-                  #1
-                </div>
-              </div>
-              <div className={styles['admins__table-column']}>
-                Гл.админ
-              </div>
-              <div className={styles['admins__table-column']}>
-                1.483
-              </div>
-              <div className={styles['admins__table-column']}>
-                4ч 23м
-              </div>
-              <div className={styles['admins__table-column']}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" rx="12" fill="#43FE0A" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="9" fill="#80FF46" fillOpacity="0.1" />
-                  <circle cx="12" cy="12" r="5" fill="#80FF46" />
-                </svg>
-              </div>
-              <div className={styles['admins__table-column']}>
-                <button className={`btn-reset ${styles['admins__table-column-btn']}`}>
-                  <span>Подробнее</span>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.33464 7.52462L12.6955 11.9995L8.33463 16.4744L9.82088 17.9995L15.668 11.9995L9.82088 5.99951L8.33464 7.52462Z" fill="white" />
-                  </svg>
-                </button>
-              </div>
+              ))}
             </div>
           </div>
+          {/* Пагинация */}
+          {pages > 1 && (
+            <div className={logsStyles['logs__filters-pagination']}>
+              <button
+                disabled={page === 1}
+                className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                onClick={() => setPage(p => p - 1)}
+              >
+                Предыдущая
+              </button>
+
+              {Array.from({ length: pages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPage(i + 1)}
+                  className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${page === i + 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+
+              <button
+                disabled={page === pages}
+                className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === pages ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                onClick={() => setPage(p => p + 1)}
+              >
+                Следующая
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
