@@ -20,16 +20,17 @@
     color: #FFFFFF;
     text-align: center;
     line-height: 85%;
+    transition: color 0.3s ease-in-out;
+
+    svg {
+      path {
+        fill: currentColor;
+      }
+    }
 
     &--active {
       background: rgba(254, 204, 10, 0.1);
       color: #FECC0A;
-
-      svg {
-        path {
-          fill: #FECC0A;
-        }
-      }
     }
   }
 
@@ -102,6 +103,16 @@
     span {
       font-weight: 700;
       font-size: 12px;
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header {
+    &__link {
+      &:hover {
+        color: #ffe375;
+      }
     }
   }
 }
