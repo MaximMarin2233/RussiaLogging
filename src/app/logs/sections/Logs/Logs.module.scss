@@ -161,6 +161,18 @@
     padding: 25px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition:
+      background-color 0.3s ease-in-out,
+      color 0.3s ease-in-out;
+
+    svg {
+      path {
+        fill: currentColor !important;
+      }
+    }
   }
 
   &__filters-table-wrapper {
@@ -287,6 +299,17 @@
   &__column-end {
     justify-self: end;
     text-align: right;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .logs {
+    &__filters-form-btn {
+      &:hover {
+        background-color: #FFBB20;
+        color: #321B00;
+      }
+    }
   }
 }
 

@@ -22,10 +22,12 @@ export default function Logs() {
   const [logs, setLogs] = useState<Log[]>([])
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
+  const [searched, setSearched] = useState(false)
 
   const loadLogs = async () => {
     if (!name) return
     setLoading(true)
+    setSearched(true)
 
     try {
       const res = await fetch(`/api/logs?name=${encodeURIComponent(name)}`)
@@ -79,7 +81,11 @@ export default function Logs() {
             </div>
             <div className={styles['logs__filters-form-btns']}>
               <button className={`btn-reset ${styles['logs__filters-form-btn']}`} onClick={loadLogs}>
-                Найти
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
+                  <path d="M7.52511 18.3333L12 13.9725L16.4749 18.3333L18 16.8471L12 11L6 16.8471L7.52511 18.3333Z" fill="white" />
+                </svg>
+                Применить фильтры
               </button>
             </div>
           </div>
@@ -87,19 +93,32 @@ export default function Logs() {
 
         <div className={styles['logs__filters-table-wrapper']}>
           <div className={`${styles['logs__filters-table']} ${styles['logs__filters-table--logs']}`}>
-            <div className={styles['logs__filters-table-header']}>
-              <div>Время</div>
-              <div className={styles['logs__column-center']}>Сервер</div>
-              <div>Тип</div>
-              <div>Игрок</div>
-              <div>Действие</div>
-              <div className={styles['logs__column-center']}>Сумма</div>
-              <div className={styles['logs__column-end']}>Баланс</div>
-            </div>
+
+
+            {!loading && paginatedLogs.length > 0 && (
+              <div className={styles['logs__filters-table-header']}>
+                <div>Время</div>
+                <div className={styles['logs__column-center']}>Сервер</div>
+                <div>Тип</div>
+                <div>Игрок</div>
+                <div>Действие</div>
+                <div className={styles['logs__column-center']}>Сумма</div>
+                <div className={styles['logs__column-end']}>Баланс</div>
+              </div>
+            )}
+
 
             {loading && <div>Загрузка...</div>}
 
-            {!loading && paginatedLogs.map(log => (
+            {!loading && !searched && (
+              <div>Введите имя игрока</div>
+            )}
+
+            {!loading && searched && logs.length === 0 && (
+              <div>Ничего не найдено</div>
+            )}
+
+            {!loading && paginatedLogs.length > 0 && paginatedLogs.map(log => (
               <div key={log.id} className={styles['logs__filters-table-row']}>
 
                 <div>{log.time}</div>
