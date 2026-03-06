@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { dbConnections } from '@/lib/db'
+import { cookies } from 'next/headers'
 
 export async function POST(req: Request) {
   try {
@@ -88,15 +89,25 @@ export async function POST(req: Request) {
 
     const admin_level = adminRows[0].admin_level
 
+    const user = {
+      user_id,
+      char_id,
+      char_name,
+      server,
+      admin_level
+    }
+
+    const cookieStore = await cookies()
+
+    cookieStore.set('auth', JSON.stringify(user), {
+      httpOnly: true,
+      path: '/',
+      maxAge: 60 * 60 * 24
+    })
+
     return NextResponse.json({
       success: true,
-      user: {
-        user_id,
-        char_id,
-        char_name,
-        server,
-        admin_level
-      }
+      user
     })
 
   } catch (err: any) {

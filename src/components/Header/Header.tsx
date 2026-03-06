@@ -6,7 +6,13 @@ import { usePathname } from 'next/navigation'
 
 import ServerSelect from '@/components/ServerSelect/ServerSelect'
 
-export default function Header() {
+interface HeaderProps {
+  user: any
+}
+
+export default function Header({ user }: HeaderProps) {
+  console.log(user)
+
   const pathname = usePathname()
 
   const options = [

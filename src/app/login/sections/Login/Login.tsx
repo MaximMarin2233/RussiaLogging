@@ -27,6 +27,10 @@ export default function Login() {
 
       console.log('LOGIN:', data)
 
+      if (data.success) {
+        window.location.href = '/'
+      }
+
     } catch (err) {
 
       console.error('LOGIN ERROR:', err)

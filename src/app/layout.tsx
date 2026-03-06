@@ -1,35 +1,16 @@
-'use client'
-
 import './normalize.css'
 import './globals.scss'
-import { usePathname } from 'next/navigation'
 
-import Header from '@/components/Header/Header'
-import Footer from '@/components/Footer/Footer'
-import { ServerProvider } from '@/context/ServerContext'
+import LayoutClient from './LayoutClient'
+import { getUser } from '@/lib/getUser'
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-
-  const pathname = usePathname()
-
-  const isAuthPage = pathname === '/login'
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const user = await getUser()
 
   return (
     <html lang="en">
       <body>
-        <ServerProvider>
-
-          {!isAuthPage && <Header />}
-
-          {children}
-
-          {!isAuthPage && <Footer />}
-
-        </ServerProvider>
+        <LayoutClient user={user}>{children}</LayoutClient>
       </body>
     </html>
   )
