@@ -1,6 +1,18 @@
+'use client'
+
+import { useEffect } from 'react'
+
 import styles from './Products.module.scss'
 
 export default function Products() {
+  useEffect(() => {
+    fetch('/api/top-items')
+      .then(res => res.json())
+      .then(data => {
+        console.log('TOP ITEMS:', data)
+      })
+      .catch(console.error)
+  }, [])
   return (
     <section className={styles['products']}>
       <div className="container">
