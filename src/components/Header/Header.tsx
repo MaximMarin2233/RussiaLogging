@@ -2,7 +2,7 @@
 import styles from './Header.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import ServerSelect from '@/components/ServerSelect/ServerSelect'
 
@@ -14,12 +14,16 @@ export default function Header({ user }: HeaderProps) {
   console.log(user)
 
   const pathname = usePathname()
+  const router = useRouter()
 
-  const options = [
-    { value: '1', label: 'Все серверы' },
-    { value: '2', label: 'Опция 2' },
-    { value: '3', label: 'Опция 3' },
-  ]
+  async function logout() {
+    await fetch('/api/logout', {
+      method: 'POST'
+    })
+
+    router.push('/login')
+    router.refresh()
+  }
 
   return (
     <header className={styles.header}>
@@ -281,14 +285,13 @@ export default function Header({ user }: HeaderProps) {
                   </defs>
                 </svg>
                 <div className={styles['header__profile-text']}>
-                  Denny Walker
-                  <span>Гл.Администратор</span>
+                  {user.char_name}
+                  <span>Admin Level: {user.admin_level}</span>
                 </div>
-                <button className="btn-reset">
-                  <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="30" cy="22" r="2" fill="white" fillOpacity="0.3" />
-                    <circle cx="30" cy="30" r="2" fill="white" fillOpacity="0.3" />
-                    <circle cx="30" cy="38" r="2" fill="white" fillOpacity="0.3" />
+                <button className="btn-reset" onClick={logout}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="#5E5E5E" />
+                    <path d="M7.52511 18.3333L12 13.9725L16.4749 18.3333L18 16.8471L12 11L6 16.8471L7.52511 18.3333Z" fill="#5E5E5E" />
                   </svg>
                 </button>
               </div>

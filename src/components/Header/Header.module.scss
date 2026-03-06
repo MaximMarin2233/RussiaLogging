@@ -85,10 +85,7 @@
   &__profile {
     display: flex;
     align-items: center;
-
-    >:first-child {
-      margin-right: 18px;
-    }
+    gap: 18px;
   }
 
   &__profile-text {
