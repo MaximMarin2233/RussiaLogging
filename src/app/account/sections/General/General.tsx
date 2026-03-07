@@ -47,6 +47,7 @@ type IpHistoryItem = {
 }
 
 type Props = {
+  user: any
   character: CurrentCharacter
   characters: Character[]
   nicknameHistory: NicknameHistoryItem[]
@@ -54,7 +55,7 @@ type Props = {
 }
 
 
-export default function General({ character, characters, nicknameHistory, ipHistory }: Props) {
+export default function General({ character, characters, nicknameHistory, ipHistory, user }: Props) {
   const filledSlots = [...characters]
   while (filledSlots.length < 3) {
     filledSlots.push(null as any)
@@ -427,16 +428,22 @@ export default function General({ character, characters, nicknameHistory, ipHist
           <div className={styles['general__history-inf']}>
             <div className={styles['general__history-current']}>
               Текущий ник:
-              <span></span>
+              <span>{user.char_name}</span>
             </div>
             <div className={styles['general__history-text']}>
               <div className={styles['general__history-label']}>
-                Всего 5 смен
+                Всего {nicknameHistory.length} смен
               </div>
               <div className={styles['general__history-label']}>
-                Последняя смена: 29 дней назад
+                Последняя смена:{' '}
+                {nicknameHistory.length > 0
+                  ? `${Math.floor(
+                    (Date.now() - new Date(nicknameHistory[0].time).getTime()) /
+                    (1000 * 60 * 60 * 24)
+                  )} дней назад`
+                  : 'нет данных'}
               </div>
-              <div className={styles['general__history-descr']}>
+              <div className={`${styles['general__history-descr']} inactive`}>
                 Следующая бесплатная смена доступна через 335 дней
               </div>
             </div>
@@ -463,7 +470,7 @@ export default function General({ character, characters, nicknameHistory, ipHist
               }
             </div>
           </div>
-          <div className={styles['general__history-inf']}>
+          <div className={`${styles['general__history-inf']} inactive`}>
             <div className={styles['general__history-current']}>
               Основной IP:
               <span>98.162.43.51</span>

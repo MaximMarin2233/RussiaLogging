@@ -58,13 +58,13 @@ export default function Admins() {
               Администрация
               <span>Управление администрацией и мониторинг активности</span>
             </div>
-            <button className={`btn-reset ${styles['admins__title-btn']}`}>
+            {/* <button className={`btn-reset ${styles['admins__title-btn']}`}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
                 <path d="M7.52511 18.3333L12 13.9725L16.4749 18.3333L18 16.8471L12 11L6 16.8471L7.52511 18.3333Z" fill="white" />
               </svg>
               Добавить администратора
-            </button>
+            </button> */}
           </div>
           {/* <div className={styles['admins__filters']}>
             <div className={styles['admins__filters-title']}>
