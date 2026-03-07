@@ -378,6 +378,7 @@ export default function Logs() {
                 onClick={() => {
                   setServers([])
                   setTypes([])
+                  setSelectedCategories([])
                   setAmountFrom('')
                   setAmountTo('')
                   setPage(1)
