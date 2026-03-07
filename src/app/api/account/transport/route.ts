@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server'
 import { dbConnections } from '@/lib/db'
+import { getUser } from '@/lib/getUser'
 
 export async function GET() {
-
   try {
+    const user = await getUser()
 
-    const db = dbConnections[1]
-    const charId = 150644
+    const db = dbConnections[user.server]
+    const charId = user.char_id
 
     const [rows]: any = await db.query(
       `

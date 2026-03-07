@@ -1,13 +1,22 @@
 import { NextResponse } from 'next/server'
 import { dbConnections } from '@/lib/db'
+import { getUser } from '@/lib/getUser'
 
 export async function GET() {
-  try {
-    const db = dbConnections[1]
-    const charId = 150644
+    try {
+        const user = await getUser()
 
-    const [characters]: any = await db.query(
-      `
+        if (!user?.char_id || !user?.user_id) {
+            return NextResponse.json({ error: 'Пользователь не авторизован' }, { status: 401 })
+        }
+
+        const charId = user.char_id
+        const charActId = user.user_id
+
+        const db = dbConnections[user.server]
+
+        const [characters]: any = await db.query(
+            `
       SELECT
         char_id,
         char_name,
@@ -19,30 +28,30 @@ export async function GET() {
       FROM server1.characters
       WHERE char_act_id = ?
       `,
-      [380144]
-    )
+            [charActId]
+        )
 
-    const charactersWithTime = await Promise.all(
-      characters.map(async (char: any) => {
-        const [rows]: any = await db.query(
-          `
+        const charactersWithTime = await Promise.all(
+            characters.map(async (char: any) => {
+                const [rows]: any = await db.query(
+                    `
           SELECT seconds_for_day
           FROM server1.game_per_day
           WHERE char_id = ?
           AND date = CURDATE()
           `,
-          [char.char_id]
+                    [char.char_id]
+                )
+
+                return {
+                    ...char,
+                    seconds_for_day: rows?.[0]?.seconds_for_day || 0
+                }
+            })
         )
 
-        return {
-          ...char,
-          seconds_for_day: rows?.[0]?.seconds_for_day || 0
-        }
-      })
-    )
-
-    const [characterRows]: any = await db.query(
-      `
+        const [characterRows]: any = await db.query(
+            `
       SELECT
         char_name,
         char_sex,
@@ -57,13 +66,13 @@ export async function GET() {
       FROM server1.characters
       WHERE char_id = ?
       `,
-      [charId]
-    )
+            [charId]
+        )
 
-    const dbCharacter = characterRows?.[0] || {}
+        const dbCharacter = characterRows?.[0] || {}
 
-    const [familyRows]: any = await db.query(
-      `
+        const [familyRows]: any = await db.query(
+            `
       SELECT IFNULL
       (
           (
@@ -76,11 +85,11 @@ export async function GET() {
           'Отсутствует'
       ) AS family_name
       `,
-      [charId]
-    )
+            [charId]
+        )
 
-    const [fractionRows]: any = await db.query(
-      `
+        const [fractionRows]: any = await db.query(
+            `
       SELECT IFNULL
       (
           (
@@ -93,11 +102,11 @@ export async function GET() {
           'Отсутствует'
       ) AS fraction_name
       `,
-      [charId]
-    )
+            [charId]
+        )
 
-    const [phoneRows]: any = await db.query(
-      `
+        const [phoneRows]: any = await db.query(
+            `
       SELECT IFNULL
       (
           (
@@ -109,11 +118,11 @@ export async function GET() {
           'Нет активного'
       ) AS phone_number
       `,
-      [charId]
-    )
+            [charId]
+        )
 
-    const [businessRows]: any = await db.query(
-      `
+        const [businessRows]: any = await db.query(
+            `
       SELECT
           CASE
               WHEN count = 0 THEN 'Отсутствует'
@@ -132,20 +141,20 @@ export async function GET() {
           WHERE owner_char_id = ?
       ) b
       `,
-      [charId, charId]
-    )
+            [charId, charId]
+        )
 
-    const character = {
-      char_id: charId,
-      ...dbCharacter,
-      char_family_name: familyRows?.[0]?.family_name || 'Отсутствует',
-      char_fraction_name: fractionRows?.[0]?.fraction_name || 'Отсутствует',
-      char_phone_number: phoneRows?.[0]?.phone_number || 'Нет активного',
-      char_business_info: businessRows?.[0]?.business_info || 'Отсутствует'
-    }
+        const character = {
+            char_id: charId,
+            ...dbCharacter,
+            char_family_name: familyRows?.[0]?.family_name || 'Отсутствует',
+            char_fraction_name: fractionRows?.[0]?.fraction_name || 'Отсутствует',
+            char_phone_number: phoneRows?.[0]?.phone_number || 'Нет активного',
+            char_business_info: businessRows?.[0]?.business_info || 'Отсутствует'
+        }
 
-    const [nicknameHistory]: any = await db.query(
-      `
+        const [nicknameHistory]: any = await db.query(
+            `
       SELECT
           cnh.char_id,
           cnh.old_name,
@@ -161,11 +170,11 @@ export async function GET() {
           cnh.char_id = ?
       ORDER BY cnh.time DESC
       `,
-      [charId]
-    )
+            [charId]
+        )
 
-    const [ipHistory]: any = await db.query(
-      `
+        const [ipHistory]: any = await db.query(
+            `
       SELECT
           text AS ip,
           COUNT(*) AS count,
@@ -181,11 +190,11 @@ export async function GET() {
       ORDER BY
           last_date DESC
       `,
-      [charId]
-    )
+            [charId]
+        )
 
-    const [ipTwinks]: any = await db.query(
-      `
+        const [ipTwinks]: any = await db.query(
+            `
       SELECT DISTINCT
           c.char_name,
           la.text AS ip
@@ -212,19 +221,19 @@ export async function GET() {
       ORDER BY
           c.char_name
       `,
-      [charId, charId]
-    )
+            [charId, charId]
+        )
 
-    return NextResponse.json({
-      characters: charactersWithTime,
-      character,
-      nicknameHistory,
-      ipHistory,
-      ipTwinks
-    })
+        return NextResponse.json({
+            characters: charactersWithTime,
+            character,
+            nicknameHistory,
+            ipHistory,
+            ipTwinks
+        })
 
-  } catch (err: any) {
-    console.error('ACCOUNT API ERROR:', err)
-    return NextResponse.json({ error: err.message }, { status: 500 })
-  }
+    } catch (err: any) {
+        console.error('ACCOUNT API ERROR:', err)
+        return NextResponse.json({ error: err.message }, { status: 500 })
+    }
 }

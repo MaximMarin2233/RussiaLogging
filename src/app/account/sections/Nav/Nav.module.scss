@@ -167,6 +167,7 @@
     background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10.2px);
     border-radius: 15px;
+    transition: background-color 0.3s ease-in-out;
   }
 
   &__tabs {
@@ -179,10 +180,29 @@
     color: #FFFFFF;
     padding: 16px 15px;
     border-radius: 15px;
+    transition: color 0.3s ease-in-out;
 
     &--active {
       color: #FECC0A;
       background-color: rgba(254, 204, 10, 0.1);
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav {
+    &__account-btn {
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    &__tab {
+      &:not(.nav__tab--active) {
+        &:hover {
+          color: #ffd83d;
+        }
+      }
     }
   }
 }

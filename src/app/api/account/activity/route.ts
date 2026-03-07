@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { dbConnections } from '@/lib/db'
+import { getUser } from '@/lib/getUser'
 
 function replacePlaceholders(text: string, row: any) {
   if (!text) return ''
@@ -12,8 +13,10 @@ function replacePlaceholders(text: string, row: any) {
 
 export async function GET() {
   try {
-    const db = dbConnections[1]
-    const charId = 150644
+    const user = await getUser()
+
+    const db = dbConnections[user.server]
+    const charId = user.char_id
 
     const [weekRows]: any = await db.query(
       `
