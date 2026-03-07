@@ -18,6 +18,35 @@ type InventoryData = {
 export default function Inventory() {
   const [inventory, setInventory] = useState<InventoryData | null>(null)
 
+  const [loading, setLoading] = useState(false)
+
+  const handleClearInventory = async () => {
+    if (loading) return
+
+    const confirmAction = confirm('Вы уверены, что хотите очистить инвентарь?')
+    if (!confirmAction) return
+
+    setLoading(true)
+
+    try {
+      const res = await fetch('/api/account/clear-inventory', {
+        method: 'POST'
+      })
+
+      const data = await res.json()
+
+      if (res.ok) {
+        alert('Инвентарь успешно очищен')
+      } else {
+        alert(`Ошибка: ${data.error}`)
+      }
+    } catch (err: any) {
+      alert(`Ошибка: ${err.message}`)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
 
     fetch('/api/account/inventory')
@@ -41,6 +70,8 @@ export default function Inventory() {
     { length: inventory.max_slots },
     (_, index) => inventory.items[index] || null
   )
+
+
 
   return (
     <section className={styles['inventory']}>
@@ -116,19 +147,22 @@ export default function Inventory() {
               Управление инвентарем
             </h2>
             <div className={styles['inventory__nav-btns']}>
-              <button className={`btn-reset ${styles['inventory__nav-btn']}`}>
+              {/* <button className={`btn-reset ${styles['inventory__nav-btn']}`}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
                   <path d="M7.52511 18.3333L12 13.9725L16.4749 18.3333L18 16.8471L12 11L6 16.8471L7.52511 18.3333Z" fill="white" />
                 </svg>
                 Выдать предмет
-              </button>
-              <button className={`btn-reset ${styles['inventory__nav-btn']}`}>
+              </button> */}
+              <button className={`btn-reset inactive ${styles['inventory__nav-btn']}`}
+                onClick={handleClearInventory}
+                disabled={loading}
+              >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
                   <path d="M7.52511 18.3333L12 13.9725L16.4749 18.3333L18 16.8471L12 11L6 16.8471L7.52511 18.3333Z" fill="white" />
                 </svg>
-                Очистить инвентарь
+                {loading ? 'Очистка...' : 'Очистить инвентарь'}
               </button>
             </div>
           </div>

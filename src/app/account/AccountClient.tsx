@@ -246,7 +246,7 @@ export default function AccountClient({ user }: { user: any }) {
             </button>
 
             <button
-              className={`btn-reset ${navStyles.nav__tab} ${activeTab === Tabs.PUNISHMENTS ? navStyles['nav__tab--active'] : ''
+              className={`btn-reset inactive ${navStyles.nav__tab} ${activeTab === Tabs.PUNISHMENTS ? navStyles['nav__tab--active'] : ''
                 }`}
               onClick={() => setActiveTab(Tabs.PUNISHMENTS)}
             >

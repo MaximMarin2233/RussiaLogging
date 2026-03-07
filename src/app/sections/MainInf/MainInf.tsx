@@ -21,7 +21,7 @@ export default function MainInf() {
       .catch(err => console.error(err))
   }, [server])
 
-  if (!stats) return <div className="container">Загрузка...</div>
+  if (!stats) return <div className="container" style={{ marginTop: '15px' }}>Загрузка...</div>
 
   function formatAmount(n: number) {
     if (n >= 1_000_000_000) {

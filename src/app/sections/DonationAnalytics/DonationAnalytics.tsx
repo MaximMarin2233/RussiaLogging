@@ -37,8 +37,8 @@ export default function DonationAnalytics() {
       .catch(console.error)
   }, [])
 
-  if (loading) return <div className="container">Загрузка...</div>
-  if (!stats) return <div className="container">Нет данных</div>
+  if (loading) return <div className="container" style={{ marginTop: '15px' }}>Загрузка...</div>
+  if (!stats) return <div className="container" style={{ marginTop: '15px' }}>Нет данных</div>
 
   const formatNumber = (n: number) =>
     Math.floor(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
