@@ -1,8 +1,20 @@
+'use client'
+import { useEffect } from 'react'
+
 import styles from './Leaders.module.scss'
 import adminsStyles from '@/app/admins/sections/Admins/Admins.module.scss'
 import helpersStyles from '@/app/helpers/sections/Helpers/Helpers.module.scss'
 
 export default function Leaders() {
+  useEffect(() => {
+    fetch('/api/leaders')
+      .then(res => res.json())
+      .then(data => {
+        console.log('LEADERS:', data)
+      })
+      .catch(err => console.error('LEADERS FETCH ERROR:', err))
+  }, [])
+
   return (
     <section className={styles['leaders']}>
       <div className="container">
