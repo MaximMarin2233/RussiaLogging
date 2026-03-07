@@ -15,6 +15,7 @@ type Product = {
 
 export default function Products() {
   const [items, setItems] = useState<Product[]>([])
+  const [activeTab, setActiveTab] = useState<'all' | 'transport' | 'estate'>('all')
   const [visible, setVisible] = useState(5)
 
   useEffect(() => {
@@ -31,11 +32,16 @@ export default function Products() {
     return Number(value).toLocaleString('en-US')
   }
 
+  const filteredItems = items.filter(item => {
+    if (activeTab === 'transport') return item.type === 2
+    if (activeTab === 'estate') return item.type !== 2
+    return true
+  })
+
   const maxSold = Math.max(...items.map(i => i.total_count), 0)
 
-  const visibleItems = items.slice(0, visible)
-
-  const remaining = items.length - visible
+  const visibleItems = filteredItems.slice(0, visible)
+  const remaining = filteredItems.length - visible
 
   function getRankClass(index: number) {
     if (index === 0) return styles['products__item-number--first']
@@ -67,9 +73,37 @@ export default function Products() {
             <h2 className={'main-title'}>ТОП-10 товаров за месяц</h2>
           </div>
           <div className={styles['products__tabs']}>
-            <button className={`btn-reset ${styles['products__tab']} ${styles['products__tab--active']}`}>Все категории</button>
-            <button className={`btn-reset ${styles['products__tab']}`}>Транспорт</button>
-            <button className={`btn-reset ${styles['products__tab']}`}>Недвижимость</button>
+
+            <button
+              className={`btn-reset ${styles['products__tab']} ${activeTab === 'all' ? styles['products__tab--active'] : ''}`}
+              onClick={() => {
+                setActiveTab('all')
+                setVisible(5)
+              }}
+            >
+              Все категории
+            </button>
+
+            <button
+              className={`btn-reset ${styles['products__tab']} ${activeTab === 'transport' ? styles['products__tab--active'] : ''}`}
+              onClick={() => {
+                setActiveTab('transport')
+                setVisible(5)
+              }}
+            >
+              Транспорт
+            </button>
+
+            <button
+              className={`btn-reset ${styles['products__tab']} ${activeTab === 'estate' ? styles['products__tab--active'] : ''}`}
+              onClick={() => {
+                setActiveTab('estate')
+                setVisible(5)
+              }}
+            >
+              Недвижимость
+            </button>
+
           </div>
         </div>
 
