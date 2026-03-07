@@ -47,6 +47,7 @@ export default function Logs() {
         time: new Date(log.date).toLocaleString('ru-RU', { hour12: false }),
         server: log.server || null,
         type: log.category_name || 'unknown',
+        category_id: log.category_id ?? null,
         player: log.player_name || name,
         playerId: log.char_id,
         action: log.reason_name || log.action || '',
