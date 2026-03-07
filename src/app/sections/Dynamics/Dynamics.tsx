@@ -4,6 +4,7 @@ import styles from './Dynamics.module.scss'
 
 import { useEffect, useState } from 'react'
 import { useServer } from '@/context/ServerContext'
+import Link from 'next/link'
 
 type Row = {
   date: string
@@ -463,7 +464,7 @@ export default function Dynamics() {
             </ul>
 
           </div>
-          <div className={`${styles['dynamics__content']} ${styles['dynamics__content--stat']}`}>
+          <div className={`${styles['dynamics__content']} ${styles['dynamics__content--stat']} inactive`}>
             <div className={styles['dynamics__content-title-wrapper']}>
               <div className={styles['dynamics__content-title-inner']}>
                 <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -604,12 +605,15 @@ export default function Dynamics() {
                 </svg>
                 <h3 className={styles['dynamics__content-title']}>Админы онлайн</h3>
               </div>
-              <button className={`btn-reset ${styles['dynamics__content-stat-btn']}`}>
+              <Link
+                href="/admins"
+                className={`btn-reset ${styles['dynamics__content-stat-btn']}`}
+              >
                 Все
                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4.35156 3.71456L9.10885 8.18945L4.35156 12.6643L5.97292 14.1895L12.3516 8.18945L5.97292 2.18945L4.35156 3.71456Z" fill="white" />
                 </svg>
-              </button>
+              </Link>
             </div>
             <ul className={`list-reset ${styles['dynamics__content-admins']}`}>
               {activity.admins.map((admin, index) => {

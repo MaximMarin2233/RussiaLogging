@@ -102,6 +102,10 @@
       font-size: 12px;
     }
   }
+
+  &__profile-logout {
+    transition: transform 0.3s ease-in-out;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -109,6 +113,12 @@
     &__link {
       &:hover {
         color: #ffe375;
+      }
+    }
+
+    &__profile-logout {
+      &:hover {
+        transform: scale(1.2);
       }
     }
   }

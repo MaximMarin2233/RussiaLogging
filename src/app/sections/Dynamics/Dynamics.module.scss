@@ -66,6 +66,7 @@
     color: #FFFFFF;
     padding: 14px 15px;
     background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease-in-out;
 
     &:first-child {
       border-radius: 10px 0 0 10px;
@@ -225,6 +226,7 @@
     padding: 12px 10px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
   }
 
   &__content-alerts {
@@ -378,6 +380,24 @@
     font-size: 15px;
     color: #FFFFFF;
     text-align: right;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dynamics {
+    &__content-tab {
+      &:not(.dynamics__content-tab--active) {
+        &:hover {
+          background-color: #393939;
+        }
+      }
+    }
+
+    &__content-stat-btn {
+      &:hover {
+        background-color: #393939;
+      }
+    }
   }
 }
 
