@@ -126,13 +126,13 @@ export default function Account() {
               <h2 className={'main-title'}>Управление</h2>
             </div>
 
-            <label className={navStyles['nav__label']}>
+            {/* <label className={navStyles['nav__label']}>
               <input className={navStyles['nav__input']} placeholder='Поиск по никнейму' />
               <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="33" height="33" rx="10" fill="white" fillOpacity="0.1" />
                 <path fillRule="evenodd" clipRule="evenodd" d="M16.9412 23.1176C15.4687 23.1176 14.1026 22.6685 12.9722 21.8995L11.2593 23.6123C10.7424 24.1292 9.90457 24.1292 9.38767 23.6123C8.87078 23.0954 8.87078 22.2576 9.38767 21.7407L11.1006 20.0278C10.3316 18.8973 9.88249 17.5312 9.88238 16.0588C9.88238 12.1557 13.0381 9 16.9412 9C20.8441 9.00019 24 12.1558 24 16.0588C23.9998 19.9616 20.844 23.1175 16.9412 23.1176ZM16.9412 11.6804C19.3638 11.6806 21.3196 13.6362 21.3196 16.0588C21.3194 18.4813 19.3637 20.437 16.9412 20.4372C14.5186 20.4372 12.5629 18.4814 12.5628 16.0588C12.5628 13.6361 14.5185 11.6804 16.9412 11.6804Z" fill="white" />
               </svg>
-            </label>
+            </label> */}
           </div>
 
           <div className={navStyles['nav__content']}>

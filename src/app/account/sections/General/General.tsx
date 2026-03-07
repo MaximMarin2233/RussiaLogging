@@ -228,7 +228,7 @@ export default function General({ character, characters, nicknameHistory, ipHist
             </ul>
           </div>
         </div>
-        <div className={styles['general__accounts']}>
+        <div className={`${styles['general__accounts']} inactive`}>
           <h2 className={`main-title ${styles['general__title']}`}>Привязанные аккаунты</h2>
           <ul className={`list-reset ${styles['general__accounts-list']}`}>
             <li className={`${styles['general__accounts-item']} ${styles['general__accounts-item--tg']}`}>
@@ -427,7 +427,7 @@ export default function General({ character, characters, nicknameHistory, ipHist
           <div className={styles['general__history-inf']}>
             <div className={styles['general__history-current']}>
               Текущий ник:
-              <span>Denny Walker</span>
+              <span></span>
             </div>
             <div className={styles['general__history-text']}>
               <div className={styles['general__history-label']}>
