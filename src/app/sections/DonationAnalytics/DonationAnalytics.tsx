@@ -14,6 +14,7 @@ type Stats = {
 
 export default function DonationAnalytics() {
   const [stats, setStats] = useState<Stats | null>(null)
+  const [donationRate, setDonationRate] = useState(1)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -27,6 +28,13 @@ export default function DonationAnalytics() {
         console.error(err)
         setLoading(false)
       })
+
+    fetch('/api/donation-rate')
+      .then(res => res.json())
+      .then(data => {
+        setDonationRate(data.multiplier)
+      })
+      .catch(console.error)
   }, [])
 
   if (loading) return <div className="container">Загрузка...</div>
@@ -118,17 +126,17 @@ export default function DonationAnalytics() {
             <ul className={`list-reset ${styles['donation-analytics__block-list']}`}>
               <li className={`list-reset ${styles['donation-analytics__block-item']}`}>
                 Базовый курс
-                <span>2 ₽ = 3 RC</span>
+                <span>1 ₽ = {1 * donationRate} RC</span>
               </li>
-              <li className={`list-reset ${styles['donation-analytics__block-item']} ${styles['donation-analytics__block-item--active']}`}>
+              <li className={`inactive list-reset ${styles['donation-analytics__block-item']} ${styles['donation-analytics__block-item--active']}`}>
                 Текущие акции
                 <span>1 ₽ = 3.4 RC</span>
               </li>
-              <li className={`list-reset ${styles['donation-analytics__block-item']}`}>
+              <li className={`inactive list-reset ${styles['donation-analytics__block-item']}`}>
                 Бонус выдано
                 <span>+750.000 RC</span>
               </li>
-              <li className={`list-reset ${styles['donation-analytics__block-item']}`}>
+              <li className={`inactive list-reset ${styles['donation-analytics__block-item']}`}>
                 Реальная стоимость
                 <span>= 1.854.000 ₽</span>
               </li>
