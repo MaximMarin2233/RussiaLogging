@@ -138,3 +138,9 @@ a {
   color: #FFFFFF;
   margin: 0;
 }
+
+.inactive {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: blur(2px);
+}

@@ -70,7 +70,7 @@ export default function DonationAnalytics() {
         </ul>
 
         <div className={styles['donation-analytics__content']}>
-          <div className={`${styles['donation-analytics__block']} ${styles['donation-analytics__block--1']}`}>
+          <div className={`${styles['donation-analytics__block']} ${styles['donation-analytics__block--1']} inactive`}>
             <h3 className={styles['donation-analytics__block-title']}>Донат по серверам</h3>
 
             <div className={styles['donation-analytics__block-inner']}>

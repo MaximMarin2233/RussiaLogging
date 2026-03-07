@@ -257,7 +257,7 @@ export default function Header({ user }: HeaderProps) {
           <div className={styles['header__profile-wrapper']}>
             <ServerSelect />
             <div className={styles['header__profile-content']}>
-              <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className='inactive' width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M37.8571 32.0639V29.641C37.8571 22.6674 32.0929 17 25 17C17.9071 17 12.1429 22.6674 12.1429 29.641V32.0639C12.1429 34.6342 11.5429 37.1624 10.3643 39.4589C10.1286 39.9224 10 40.4491 10 40.9758V41.3889C10 43.0457 11.3431 44.3889 13 44.3889H37C38.6569 44.3889 40 43.0457 40 41.3889V40.9758C40 40.4491 39.8714 39.9224 39.6357 39.4589C38.4571 37.1624 37.8571 34.6342 37.8571 32.0639Z" fill="url(#paint0_linear_355_524)" />
                 <path d="M30.625 47.2222C29.8271 49.4322 27.613 51 25 51C22.387 51 20.1729 49.4322 19.375 47.2222H30.625Z" fill="url(#paint1_linear_355_524)" />
                 <circle cx="40" cy="18" r="10" fill="#FF043D" />

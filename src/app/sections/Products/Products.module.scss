@@ -28,19 +28,63 @@
     }
   }
 
+  &__list-wrapper {
+    overflow-x: auto;
+    margin-bottom: 22px;
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 1440px;
   }
 
   &__item {
-    display: flex;
+    display: grid;
+    grid-template-columns: 360px repeat(3, 1fr);
     align-items: center;
-    justify-content: space-between;
     background: linear-gradient(0deg, #0A0A0A, #0A0A0A), rgba(38, 38, 38, 0.35);
     border-radius: 14.7484px;
     padding: 0 26px 0 22px;
+    gap: 23px;
+  }
+
+  &__btn-more {
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    color: #FFFFFF;
+    padding: 16px 18px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 0 auto;
+  }
+
+  &__item-number {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 6.85714px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--first {
+      background: linear-gradient(258.58deg, #F2C038 -1.92%, #70572F 100%);
+    }
+
+    &--second {
+      background: linear-gradient(258.58deg, #B5B5B5 -1.92%, #303030 100%), rgba(255, 255, 255, 0.15);
+    }
+
+    &--third {
+      background: linear-gradient(258.58deg, #B2753F -1.92%, #4E3317 100%), rgba(255, 255, 255, 0.15);
+    }
   }
 
   &__item-column {
@@ -67,12 +111,11 @@
       background-color: rgba(255, 255, 255, 0.15);
       border-radius: 20px;
 
-      &::after {
+      span {
         content: "";
         position: absolute;
         left: 0;
         top: 0;
-        width: 30%;
         height: 100%;
         background-color: #4FDD4A;
         border-radius: 20px;
@@ -112,52 +155,11 @@
   }
 }
 
-@media (max-width: 1199.98px) {
-  .products {
-    &__item {
-      padding: 0 10px;
-    }
-
-    &__item-column-inner {
-      gap: 15px;
-    }
-
-    &__item-column--progress {
-      width: 80px;
-    }
-  }
-}
-
 @media (max-width: 991.98px) {
   .products {
     &__inf {
       flex-direction: column;
       align-items: flex-start;
-    }
-
-    &__item-column {
-      font-size: 11px;
-
-      span {
-        font-size: 12px;
-      }
-    }
-
-    &__item-column-inner {
-      gap: 10px;
-
-      >svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      >img {
-        width: 70px;
-      }
-    }
-
-    &__item {
-      gap: 10px;
     }
   }
 }

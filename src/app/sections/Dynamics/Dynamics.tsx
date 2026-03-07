@@ -258,7 +258,7 @@ export default function Dynamics() {
               </ul>
             </div>
           </div>
-          <div className={`${styles['dynamics__content']} ${styles['dynamics__content--column']}`}>
+          <div className={`${styles['dynamics__content']} ${styles['dynamics__content--column']} inactive`}>
             <div className={styles['dynamics__content-title-wrapper']}>
               <h3 className={styles['dynamics__content-title']}>Денежный поток</h3>
               {/* <div className={styles['dynamics__content-tabs']}>
