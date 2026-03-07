@@ -125,37 +125,38 @@ export default function Helpers() {
                 </div>
               ))}
             </div>
+            {pages > 1 && (
+              <div className={logsStyles['logs__filters-pagination']} style={{ marginTop: '15px' }}>
+                <button
+                  disabled={page === 1}
+                  className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                  onClick={() => setPage(p => p - 1)}
+                >
+                  Предыдущая
+                </button>
+
+                {Array.from({ length: pages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setPage(i + 1)}
+                    className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${page === i + 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+
+                <button
+                  disabled={page === pages}
+                  className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === pages ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                  onClick={() => setPage(p => p + 1)}
+                >
+                  Следующая
+                </button>
+              </div>
+            )}
           </div>
 
-          {pages > 1 && (
-            <div className={logsStyles['logs__filters-pagination']}>
-              <button
-                disabled={page === 1}
-                className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
-                onClick={() => setPage(p => p - 1)}
-              >
-                Предыдущая
-              </button>
 
-              {Array.from({ length: pages }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setPage(i + 1)}
-                  className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${page === i + 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
-                >
-                  {i + 1}
-                </button>
-              ))}
-
-              <button
-                disabled={page === pages}
-                className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === pages ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
-                onClick={() => setPage(p => p + 1)}
-              >
-                Следующая
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </section>

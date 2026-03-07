@@ -108,36 +108,37 @@ export default function Admins() {
                 </div>
               ))}
             </div>
-          </div>
-          {pages > 1 && (
-            <div className={logsStyles['logs__filters-pagination']}>
-              <button
-                disabled={page === 1}
-                className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
-                onClick={() => setPage(p => p - 1)}
-              >
-                Предыдущая
-              </button>
-
-              {Array.from({ length: pages }).map((_, i) => (
+            {pages > 1 && (
+              <div className={logsStyles['logs__filters-pagination']} style={{ marginTop: '20px' }}>
                 <button
-                  key={i}
-                  onClick={() => setPage(i + 1)}
-                  className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${page === i + 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                  disabled={page === 1}
+                  className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                  onClick={() => setPage(p => p - 1)}
                 >
-                  {i + 1}
+                  Предыдущая
                 </button>
-              ))}
 
-              <button
-                disabled={page === pages}
-                className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === pages ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
-                onClick={() => setPage(p => p + 1)}
-              >
-                Следующая
-              </button>
-            </div>
-          )}
+                {Array.from({ length: pages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setPage(i + 1)}
+                    className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${page === i + 1 ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+
+                <button
+                  disabled={page === pages}
+                  className={`btn-reset ${logsStyles['logs__filters-pagination-btn']} ${logsStyles['logs__filters-pagination-btn--nav']} ${page === pages ? logsStyles['logs__filters-pagination-btn--inactive'] : ''}`}
+                  onClick={() => setPage(p => p + 1)}
+                >
+                  Следующая
+                </button>
+              </div>
+            )}
+          </div>
+
         </div>
       </div>
     </section>

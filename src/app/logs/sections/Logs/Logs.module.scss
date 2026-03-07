@@ -228,6 +228,7 @@
     display: flex;
     justify-content: center;
     gap: 15px;
+    width: 1440px;
   }
 
   &__filters-pagination-btn {
@@ -362,6 +363,18 @@
 
     &__filters-table-column {
       font-size: 10px;
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .logs {
+    &__filters-nav-content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__filters-form-blocks {
+      grid-template-columns: 1fr;
     }
   }
 }

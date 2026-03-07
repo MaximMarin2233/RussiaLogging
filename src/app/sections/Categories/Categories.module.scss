@@ -149,3 +149,11 @@
     }
   }
 }
+
+@media (max-width: 575.98px) {
+  .categories {
+    &__sell-list {
+      grid-template-columns: 1fr;
+    }
+  }
+}
