@@ -144,3 +144,7 @@ a {
   pointer-events: none;
   filter: blur(2px);
 }
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}
