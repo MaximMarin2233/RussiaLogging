@@ -7,6 +7,7 @@ import Modal from "react-modal";
 
 import styles from './AccountClient.module.scss'
 import navStyles from './sections/Nav/Nav.module.scss'
+import CustomSelect from '@/components/CustomSelect/CustomSelect'
 
 import General from '@/app/account/sections/General/General'
 import Punishments from '@/app/account/sections/Punishments/Punishments'
@@ -95,6 +96,12 @@ export default function AccountClient({ user }: { user: any }) {
   const [characters, setCharacters] = useState<Character[]>([])
   const [nicknameHistory, setNicknameHistory] = useState<NicknameHistoryItem[]>([])
   const [ipHistory, setIpHistory] = useState<IpHistoryItem[]>([])
+
+  const serverOptions = [
+    { value: '1', label: 'Все серверы' },
+    { value: '2', label: 'Опция 2' },
+    { value: '3', label: 'Опция 3' },
+  ]
 
   useEffect(() => {
     Modal.setAppElement("body");
@@ -214,8 +221,7 @@ export default function AccountClient({ user }: { user: any }) {
                 аккаунтом
               </h3>
               <div className={navStyles['nav__account-btns']}>
-                <button className={`btn-reset ${navStyles['nav__account-btn']}`}
-                  onClick={() => setBanModalOpen(true)}
+                <button className={`btn-reset inactive ${navStyles['nav__account-btn']}`}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
@@ -223,7 +229,7 @@ export default function AccountClient({ user }: { user: any }) {
                   </svg>
                   Забанить аккаунт
                 </button>
-                <button className={`btn-reset ${navStyles['nav__account-btn']}`}>
+                <button className={`btn-reset inactive ${navStyles['nav__account-btn']}`}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
                     <path d="M7.52511 18.3333L12 13.9725L16.4749 18.3333L18 16.8471L12 11L6 16.8471L7.52511 18.3333Z" fill="white" />
@@ -330,32 +336,38 @@ export default function AccountClient({ user }: { user: any }) {
             background: 'rgba(29, 29, 29, 0.5)',
             backdropFilter: 'blur(30px)',
             borderRadius: '20px',
-            margin: 'auto'
+            margin: 'auto',
+            border: 'none'
           }
         }}
       >
         <h2 className={styles['account__modal-title']}>Забанить игрока</h2>
 
-        <p>Игрок: {character.char_name}</p>
+        <div className={styles['account__modal-player']}>
+          Игрок
+          <span>{user.char_name}</span>
+        </div>
 
-        <input
-          placeholder="Причина"
-          style={{ width: "100%", marginTop: "10px" }}
-        />
-
-        <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-          <button onClick={() => setBanModalOpen(false)}>
-            Отмена
-          </button>
-
-          <button
-            onClick={() => {
-              alert("Игрок забанен");
-              setBanModalOpen(false);
-            }}
-          >
-            Забанить
-          </button>
+        <div className={styles['account__modal-form']}>
+          <div className={styles['account__modal-form-inputs']}>
+            <div className={styles['account__modal-form-label']}>
+              <span>Срок бана</span>
+              <CustomSelect options={serverOptions} className={styles['account__modal-select']} />
+            </div>
+            <div className={styles['account__modal-form-label']}>
+              <span>Причина</span>
+            </div>
+          </div>
+          <div className={styles['account__modal-form-btns']}>
+            <button className={`btn-reset ${styles['account__modal-form-btn']}`}>
+              Забанть
+            </button>
+            <button className={`btn-reset ${styles['account__modal-form-btn']} ${styles['account__modal-form-btn--close']}`}
+              onClick={() => setBanModalOpen(false)}
+            >
+              Отмена
+            </button>
+          </div>
         </div>
       </Modal>
     </div>
