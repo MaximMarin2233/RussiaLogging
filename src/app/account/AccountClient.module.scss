@@ -82,5 +82,10 @@
       min-width: 121px;
       flex-grow: initial;
     }
+
+    &--yellow {
+      color: #321B00;
+      background: linear-gradient(180deg, #FFD943 0%, #FFA100 100%), linear-gradient(180deg, #CA1C1C 0%, #AD0000 100%);
+    }
   }
 }
