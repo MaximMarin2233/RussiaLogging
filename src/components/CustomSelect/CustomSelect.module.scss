@@ -1,6 +1,10 @@
 .selectContainer {
   position: relative;
   width: 160px;
+
+  &--full-width {
+    width: initial;
+  }
 }
 
 .selectHeader {
@@ -27,6 +31,22 @@
     background-position: center;
     background-repeat: no-repeat;
     background-image: url("/header/header-select-arrow.svg");
+  }
+
+  &--modal {
+    background-color: rgba(5, 5, 5, 0.85);
+    border-radius: 15px;
+    border: none;
+
+    span {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    &::after {
+      background-image: url("/modal/select-arrow.svg");
+      width: 48px;
+      height: 48px;
+    }
   }
 }
 

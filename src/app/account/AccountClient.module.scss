@@ -1,1 +1,86 @@
-.account {}
+.account {
+  &__modal-title {
+    font-weight: 500;
+    font-size: 24px;
+    color: #FFFFFF;
+    margin: 0;
+    margin-bottom: 34px;
+  }
+
+  &__modal-player {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    background: linear-gradient(123.26deg, #4C4C4C 0.93%, #1F1F1F 53.21%), #0A0A0A;
+    border-radius: 15px;
+    padding: 31px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 29px;
+
+    span {
+      font-size: 16px;
+      color: #FFFFFF;
+    }
+  }
+
+  &__modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  &__modal-form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  &__modal-form-label {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__modal-form-textarea {
+    height: 136px;
+    background-color: rgba(5, 5, 5, 0.85);
+    border-radius: 15px;
+    resize: none;
+    border: none;
+    padding: 30px 28px;
+
+    &,
+    &::placeholder {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  &__modal-form-btns {
+    display: flex;
+    gap: 15px;
+  }
+
+  &__modal-form-btn {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    padding: 24px 15px;
+    background: linear-gradient(180deg, #CA1C1C 0%, #AD0000 100%);
+    border-radius: 15px;
+    flex-grow: 1;
+
+    &--close {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10.2px);
+      min-width: 121px;
+      flex-grow: initial;
+    }
+  }
+}

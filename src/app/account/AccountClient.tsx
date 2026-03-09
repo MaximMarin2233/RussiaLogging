@@ -7,7 +7,7 @@ import Modal from "react-modal";
 
 import styles from './AccountClient.module.scss'
 import navStyles from './sections/Nav/Nav.module.scss'
-import CustomSelect from '@/components/CustomSelect/CustomSelect'
+import selectStyles from '@/components/CustomSelect/CustomSelect.module.scss'
 
 import General from '@/app/account/sections/General/General'
 import Punishments from '@/app/account/sections/Punishments/Punishments'
@@ -97,11 +97,21 @@ export default function AccountClient({ user }: { user: any }) {
   const [nicknameHistory, setNicknameHistory] = useState<NicknameHistoryItem[]>([])
   const [ipHistory, setIpHistory] = useState<IpHistoryItem[]>([])
 
-  const serverOptions = [
-    { value: '1', label: 'Все серверы' },
-    { value: '2', label: 'Опция 2' },
-    { value: '3', label: 'Опция 3' },
+  const options = [
+    { value: '1', label: '1 час' },
+    { value: '2', label: '3 часа' },
+    { value: '3', label: '9 часов' },
   ]
+
+  const [isOpen, setIsOpen] = useState(false)
+  const [selected, setSelected] = useState<string>(options[0]?.value)
+
+  const toggleOpen = () => setIsOpen(!isOpen)
+
+  const handleSelect = (val: string) => {
+    setSelected(val)
+    setIsOpen(false)
+  }
 
   useEffect(() => {
     Modal.setAppElement("body");
@@ -221,7 +231,8 @@ export default function AccountClient({ user }: { user: any }) {
                 аккаунтом
               </h3>
               <div className={navStyles['nav__account-btns']}>
-                <button className={`btn-reset inactive ${navStyles['nav__account-btn']}`}
+                <button className={`btn-reset ${navStyles['nav__account-btn']}`}
+                  onClick={() => setBanModalOpen(true)}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16.4749 6.99967L12 11.3605L7.52511 6.99967L6 8.48592L12 14.333L18 8.48592L16.4749 6.99967Z" fill="white" />
@@ -333,11 +344,13 @@ export default function AccountClient({ user }: { user: any }) {
           },
           content: {
             width: '705px',
+            height: '680px',
             background: 'rgba(29, 29, 29, 0.5)',
             backdropFilter: 'blur(30px)',
             borderRadius: '20px',
             margin: 'auto',
-            border: 'none'
+            border: 'none',
+            padding: '33px 27px 50px'
           }
         }}
       >
@@ -352,15 +365,41 @@ export default function AccountClient({ user }: { user: any }) {
           <div className={styles['account__modal-form-inputs']}>
             <div className={styles['account__modal-form-label']}>
               <span>Срок бана</span>
-              <CustomSelect options={serverOptions} className={styles['account__modal-select']} />
+
+              <div className={`${selectStyles.selectContainer} ${selectStyles['selectContainer--full-width']}`}>
+                <div
+                  className={`${selectStyles.selectHeader} ${selectStyles['selectHeader--modal']}`}
+                  onClick={toggleOpen}
+                >
+                  <span>Период:</span> {options.find((o) => o.value === selected)?.label}
+                </div>
+
+                {isOpen && (
+                  <ul className={`${selectStyles.selectList} list-reset`}>
+                    {options.map((opt) => (
+                      <li
+                        key={opt.value}
+                        className={`${selectStyles.selectItem} ${selected === opt.value ? selectStyles.selected : ''
+                          }`}
+                        onClick={() => handleSelect(opt.value)}
+                      >
+                        {opt.label}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
             </div>
             <div className={styles['account__modal-form-label']}>
               <span>Причина</span>
+
+              <textarea className={styles['account__modal-form-textarea']} placeholder='Укажите причину бана...'></textarea>
             </div>
           </div>
           <div className={styles['account__modal-form-btns']}>
             <button className={`btn-reset ${styles['account__modal-form-btn']}`}>
-              Забанть
+              Забанить
             </button>
             <button className={`btn-reset ${styles['account__modal-form-btn']} ${styles['account__modal-form-btn--close']}`}
               onClick={() => setBanModalOpen(false)}
